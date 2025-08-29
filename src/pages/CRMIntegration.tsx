@@ -490,14 +490,14 @@ export const CRMIntegration: React.FC = () => {
             </a>
             
             <div className="flex items-center space-x-8 mb-8 md:mb-0">
-              <a href="/" className="nav-link text-sm footer-nav-link">Home</a>
-              <a href="/#services" className="nav-link text-sm footer-nav-link">Services</a>
-              <a href="/#about" className="nav-link text-sm footer-nav-link">About</a>
-              <a href="/#how-it-works" className="nav-link text-sm footer-nav-link">
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/'}>Home</a>
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#services'}>Services</a>
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#about'}>About</a>
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#how-it-works'}>
                 <span className="md:hidden">How It<br />Works</span>
                 <span className="hidden md:inline">How It Works</span>
               </a>
-              <a href="/#faq" className="nav-link text-sm footer-nav-link">FAQ</a>
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#faq'}>FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">
