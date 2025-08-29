@@ -59,6 +59,10 @@ function App() {
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   useEffect(() => {
     setIsVisible(true);
     
@@ -97,6 +101,16 @@ function App() {
         }
       }, 1);
     };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Only prevent default for same-page navigation (hash links)
     if (targetId.startsWith('#')) {
       e.preventDefault();
@@ -111,7 +125,7 @@ function App() {
       }
     }
     // For external links or different pages, let the browser handle navigation naturally
-  }
+  };
 
   const benefits = [
     {
