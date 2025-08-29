@@ -651,9 +651,11 @@
   /* Footer navigation specific styles */
   .footer-nav-link {
     @apply transition-all duration-300 ease-out;
-    /* Enhanced mobile touch handling */
+    /* Mobile touch handling */
     -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
     tap-highlight-color: rgba(6, 102, 255, 0.2);
+    touch-action: manipulation;
+    user-select: none;
   }
 
   .footer-nav-link:active {
@@ -661,11 +663,11 @@
     transition: all 0.1s ease-out;
   }
 
-  /* Mobile-specific navigation improvements */
+  /* Mobile navigation improvements */
   @media (max-width: 768px) {
     .nav-link, .footer-nav-link {
       @apply py-2 px-1;
-      min-height: 44px; /* iOS recommended touch target size */
+      min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;

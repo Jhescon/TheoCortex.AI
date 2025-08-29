@@ -35,12 +35,10 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
 
   const handleClick = async () => {
     if (onClick && !disabled && !loading && !isLoading) {
-      // Prevent multiple rapid clicks
       setIsLoading(true);
       try {
         await onClick();
       } finally {
-        // Add small delay to prevent double-click issues on mobile
         setTimeout(() => setIsLoading(false), 100);
       }
     }
@@ -109,10 +107,7 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
         target={target}
         className={buttonClasses}
         aria-disabled={isDisabled}
-        onClick={onClick ? (e) => {
-          e.preventDefault();
-          handleClick();
-        } : undefined}
+        onClick={handleClick}
       >
         {/* Animated background overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>

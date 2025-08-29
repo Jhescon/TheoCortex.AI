@@ -22,7 +22,6 @@ import {
   Sparkles, 
   Target, 
   Rocket, 
-  Star, 
   Award, 
   MessageSquare, 
   Calendar, 
@@ -207,27 +206,6 @@ function App() {
       icon: <Rocket className="w-8 h-8" />,
       title: "You Scale on Autopilot",
       description: "Save time, convert more, grow with less stress."
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Chen",
-      company: "Digital Marketing Agency",
-      text: "I doubled my calls booked in 30 days with TheoCortex. The AI agent handles everything while I focus on strategy.",
-      rating: 5
-    },
-    {
-      name: "Marcus Rodriguez",
-      company: "SaaS Founder",
-      text: "Our lead response time went from hours to seconds. Revenue increased 180% in the first quarter.",
-      rating: 5
-    },
-    {
-      name: "Emily Watson",
-      company: "Business Coach",
-      text: "Finally got my evenings back. The automation handles client onboarding perfectly—better than I could manually.",
-      rating: 5
     }
   ];
 
