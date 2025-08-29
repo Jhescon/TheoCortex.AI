@@ -97,15 +97,20 @@ function App() {
         }
       }, 1);
     };
-    
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
+    // Only prevent default for same-page navigation (hash links)
+    if (targetId.startsWith('#')) {
+      e.preventDefault();
+      
+      const elementId = targetId.substring(1);
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+    // For external links or different pages, let the browser handle navigation naturally
   };
 
   const benefits = [

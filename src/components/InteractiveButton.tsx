@@ -109,16 +109,10 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
         target={target}
         className={buttonClasses}
         aria-disabled={isDisabled}
-        onClick={(e) => {
-          // Prevent default if disabled
-          if (isDisabled) {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-          // Prevent double-click on mobile
-          e.stopPropagation();
-        }}
+        onClick={onClick ? (e) => {
+          e.preventDefault();
+          handleClick();
+        } : undefined}
       >
         {/* Animated background overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>

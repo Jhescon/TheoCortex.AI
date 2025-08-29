@@ -119,7 +119,7 @@ export const BookCall: React.FC = () => {
             
             <div className="flex items-center space-x-4 md:space-x-8 ml-4 md:ml-0">
               <InteractiveButton 
-                href="/" 
+                onClick={() => window.location.href = '/'} 
                 variant="secondary" 
                 className="flex items-center space-x-2 px-4 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0"
                 aria-label="Return to homepage"
@@ -366,13 +366,13 @@ export const BookCall: React.FC = () => {
             </a>
             
             <div className="flex items-center space-x-8 mb-8 md:mb-0">
-              <a href="/" className="nav-link text-sm footer-nav-link">Home</a>
-              <a href="/#services" className="nav-link text-sm footer-nav-link">Services</a>
-              <a href="/#how-it-works" className="nav-link text-sm footer-nav-link whitespace-nowrap">
+              <a href="/" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/'}>Home</a>
+              <a href="/#services" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#services'}>Services</a>
+              <a href="/#how-it-works" className="nav-link text-sm footer-nav-link whitespace-nowrap" onClick={() => window.location.href = '/#how-it-works'}>
                 <span className="md:hidden">How It<br />Works</span>
                 <span className="hidden md:inline">How It Works</span>
               </a>
-              <a href="/#faq" className="nav-link text-sm footer-nav-link">FAQ</a>
+              <a href="/#faq" className="nav-link text-sm footer-nav-link" onClick={() => window.location.href = '/#faq'}>FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">

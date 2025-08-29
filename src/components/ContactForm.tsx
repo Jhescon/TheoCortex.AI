@@ -241,6 +241,7 @@ export const ContactForm: React.FC = () => {
               </p>
             </div>
             <InteractiveButton href="/" variant="primary">
+            <InteractiveButton onClick={() => window.location.href = '/'} variant="primary">
               Return to Home
             </InteractiveButton>
           </div>
@@ -267,7 +268,7 @@ export const ContactForm: React.FC = () => {
             
             <div className="flex items-center space-x-4 md:space-x-8 ml-4 md:ml-0">
               <InteractiveButton 
-                href="/" 
+                onClick={() => window.location.href = '/'} 
                 variant="secondary" 
                 className="flex items-center space-x-2 px-4 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0"
                 aria-label="Return to homepage"
