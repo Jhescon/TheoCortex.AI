@@ -240,7 +240,6 @@ export const ContactForm: React.FC = () => {
                 <span>We'll contact you to schedule your strategy call</span>
               </p>
             </div>
-            <InteractiveButton href="/" variant="primary">
             <InteractiveButton onClick={() => window.location.href = '/'} variant="primary">
               Return to Home
             </InteractiveButton>
