@@ -60,19 +60,21 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Mobile-specific navigation handler for immediate single-tap response
+  // Dedicated mobile navigation handler to prevent double-tap issues
   const handleMobileNavClick = (targetId: string) => {
-    // Close menu immediately for instant visual feedback
+    // Immediately close menu for instant visual feedback
     setIsMobileMenuOpen(false);
     
-    // Navigate immediately without delay
-    const element = document.getElementById(targetId.replace('#', ''));
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    // Navigate after a brief delay to ensure menu closes properly
+    setTimeout(() => {
+      const element = document.getElementById(targetId.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
   };
 
   const toggleFaq = (index: number) => {
@@ -138,6 +140,23 @@ function App() {
     }
     // For cross-page navigation, let the browser handle it naturally (no preventDefault)
     // For external links or different pages, let the browser handle navigation naturally
+  };
+
+  // Dedicated mobile navigation handler to prevent double-click issues
+  const handleMobileNavClick = (targetId: string) => {
+    // Immediately close menu for instant visual feedback
+    setIsMobileMenuOpen(false);
+    
+    // Small delay to allow menu animation, then navigate
+    setTimeout(() => {
+      const element = document.getElementById(targetId.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 150);
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -368,34 +387,22 @@ function App() {
                   About
                 </button>
                 <button
-                  onClick={() => handleMobileNavClick('#services')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#about')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  About
-                </button>
-                <button
                   onClick={() => handleMobileNavClick('#how-it-works')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
                 >
                   How It Works
                 </button>
                 <button
                   onClick={() => handleMobileNavClick('#faq')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
                 >
                   FAQ
                 </button>
+                
                 <div className="pt-4 border-t border-dark-700">
-                  <InteractiveButton 
-                    onClick={() => handleMobileNavClick('/contact')}
-                    size="lg"
-                    className="mobile-nav-button"
+                  <InteractiveButton
+                    onClick={() => handleMobileNavClick('#book-call')}
+                    className="w-full justify-center"
                   >
                     Book Free Call
                   </InteractiveButton>
