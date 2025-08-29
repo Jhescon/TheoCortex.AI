@@ -859,3 +859,58 @@ html {
   background: linear-gradient(180deg, #3399FF, #9933FF);
 }
 /* Mobile Book Call Button Styles */
+
+/* Mobile Navigation Button Optimizations */
+.mobile-nav-button {
+  /* Prevent double-tap zoom and improve touch responsiveness */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
+  -webkit-touch-callout: none;
+  user-select: none;
+  
+  /* Ensure proper touch target size for accessibility */
+  min-height: 48px;
+  min-width: 48px;
+  
+  /* Immediate visual feedback on touch */
+  transition: all 0.1s ease-out;
+}
+
+.mobile-nav-button:active {
+  transform: scale(0.98);
+  background-color: rgba(6, 102, 255, 0.15);
+}
+
+/* Prevent hover states on touch devices to avoid conflicts */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-nav-button:hover {
+    background-color: transparent;
+    transform: none;
+  }
+  
+  .mobile-nav-button:active {
+    background-color: rgba(6, 102, 255, 0.15);
+    transform: scale(0.98);
+  }
+}
+
+/* Enhanced mobile touch handling for navigation links */
+@media (max-width: 768px) {
+  .nav-link.mobile-nav-button {
+    padding: 16px 24px;
+    border-radius: 12px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .nav-link.mobile-nav-button:focus {
+    outline: 2px solid rgba(6, 102, 255, 0.5);
+    outline-offset: 2px;
+  }
+}

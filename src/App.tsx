@@ -60,6 +60,21 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
+  // Mobile-specific navigation handler for immediate single-tap response
+  const handleMobileNavClick = (targetId: string) => {
+    // Close menu immediately for instant visual feedback
+    setIsMobileMenuOpen(false);
+    
+    // Navigate immediately without delay
+    const element = document.getElementById(targetId.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   // Dedicated mobile navigation handler to prevent double-tap issues
   const handleMobileNavClick = (targetId: string) => {
     // Immediately close menu for instant visual feedback
@@ -383,26 +398,35 @@ function App() {
                 <button
                   onClick={() => handleMobileNavClick('#about')}
                   className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
+                <button
+                  onClick={() => handleMobileNavClick('#services')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  Services
+                </button>
+                <button
+                  onClick={() => handleMobileNavClick('#about')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
                 >
                   About
                 </button>
                 <button
                   onClick={() => handleMobileNavClick('#how-it-works')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
                 >
                   How It Works
                 </button>
                 <button
                   onClick={() => handleMobileNavClick('#faq')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
                 >
                   FAQ
                 </button>
-                
                 <div className="pt-4 border-t border-dark-700">
-                  <InteractiveButton
-                    onClick={() => handleMobileNavClick('#book-call')}
-                    className="w-full justify-center"
+                  <InteractiveButton 
+                    onClick={() => handleMobileNavClick('/contact')}
+                    size="lg"
+                    className="mobile-nav-button"
                   >
                     Book Free Call
                   </InteractiveButton>
