@@ -123,6 +123,23 @@ function App() {
     // For external links or different pages, let the browser handle navigation naturally
   };
 
+  // Dedicated mobile navigation handler to prevent double-click issues
+  const handleMobileNavClick = (targetId: string) => {
+    // Immediately close menu for instant visual feedback
+    setIsMobileMenuOpen(false);
+    
+    // Small delay to allow menu animation, then navigate
+    setTimeout(() => {
+      const element = document.getElementById(targetId.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 150);
+  };
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId.substring(1));

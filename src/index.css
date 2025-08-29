@@ -678,6 +678,21 @@
     }
   }
 
+  /* Mobile navigation button specific styles */
+  .mobile-nav-button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
+    -webkit-touch-callout: none;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .mobile-nav-button:active {
+    transform: scale(0.98);
+    background-color: rgba(6, 102, 255, 0.1);
+    transition: all 0.1s ease-out;
+  }
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
