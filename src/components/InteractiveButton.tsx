@@ -34,19 +34,12 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
-    if (onClick && !disabled && !loading && !isLoading && !href) {
+    if (onClick && !disabled && !loading && !isLoading) {
       setIsLoading(true);
       try {
         await onClick();
       } finally {
         setTimeout(() => setIsLoading(false), 100);
-      }
-    } else if (onClick && href) {
-      // For href links, execute onClick but don't prevent navigation
-      try {
-        await onClick();
-      } catch (error) {
-        console.error('Click handler error:', error);
       }
     }
   };
