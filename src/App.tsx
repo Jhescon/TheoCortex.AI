@@ -75,23 +75,6 @@ function App() {
     }
   };
 
-  // Dedicated mobile navigation handler to prevent double-tap issues
-  const handleMobileNavClick = (targetId: string) => {
-    // Immediately close menu for instant visual feedback
-    setIsMobileMenuOpen(false);
-    
-    // Navigate after a brief delay to ensure menu closes properly
-    setTimeout(() => {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 100);
-  };
-
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
@@ -155,23 +138,6 @@ function App() {
     }
     // For cross-page navigation, let the browser handle it naturally (no preventDefault)
     // For external links or different pages, let the browser handle navigation naturally
-  };
-
-  // Dedicated mobile navigation handler to prevent double-click issues
-  const handleMobileNavClick = (targetId: string) => {
-    // Immediately close menu for instant visual feedback
-    setIsMobileMenuOpen(false);
-    
-    // Small delay to allow menu animation, then navigate
-    setTimeout(() => {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 150);
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -398,6 +364,9 @@ function App() {
                 <button
                   onClick={() => handleMobileNavClick('#about')}
                   className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
+                >
+                  About
+                </button>
                 <button
                   onClick={() => handleMobileNavClick('#services')}
                   className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
