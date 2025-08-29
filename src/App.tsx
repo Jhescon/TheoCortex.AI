@@ -84,28 +84,6 @@ function App() {
     }
   };
 
-  // Mobile-specific navigation handler with auto-close
-  const handleMobileNavClick = (targetId: string) => {
-    // Close menu immediately for instant visual feedback
-    setIsMobileMenuOpen(false);
-    
-    // Navigate immediately without delay
-    if (targetId === '#home') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }
-  };
-
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
@@ -282,6 +260,10 @@ function App() {
     },
     {
       question: "How much do your services cost?",
+      answer: "Pricing varies based on your specific needs and goals. We'll discuss this during your free strategy call and create a custom solution that fits your budget."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
       {/* Animated Background */}
@@ -330,10 +312,6 @@ function App() {
               <button onClick={() => handleNavClick('#about')} className="nav-link">About</button>
               <button onClick={() => handleNavClick('#how-it-works')} className="nav-link">How It Works</button>
               <button onClick={() => handleNavClick('#faq')} className="nav-link">FAQ</button>
-                <span className="md:hidden">How It<br />Works</span>
-                <span className="hidden md:inline">How It Works</span>
-              </a>
-              <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton 
                 onClick={() => window.location.href = '/book-call'} 
                 icon={Calendar}
@@ -358,16 +336,10 @@ function App() {
             <div className="md:hidden py-4 border-t border-dark-800/50">
               <div className="flex flex-col space-y-4 p-6">
                 <button
-                  onClick={() => handleMobileNavClick('#services')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
+                  onClick={() => handleMobileNavClick('#home')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
                 >
-                  Services
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#about')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
-                >
-                  About
+                  Home
                 </button>
                 <button
                   onClick={() => handleMobileNavClick('#services')}
@@ -395,11 +367,15 @@ function App() {
                 </button>
                 <div className="pt-4 border-t border-dark-700">
                   <InteractiveButton 
-                    onClick={() => handleMobileNavClick('/contact')}
-                    size="lg"
-                    className="mobile-nav-button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.location.href = '/book-call';
+                    }} 
+                    icon={Calendar} 
+                    size="lg" 
+                    className="mt-8"
                   >
-                    Book Free Call
+                    BOOK YOUR FREE STRATEGY CALL
                   </InteractiveButton>
                 </div>
               </div>
@@ -916,47 +892,23 @@ function App() {
 
           {/* What's Next */}
           <ScrollReveal delay={1000}>
-                <button
-                  onClick={() => handleMobileNavClick('#home')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#services')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#about')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#how-it-works')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  How It Works
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#faq')}
-                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
-                >
-                  FAQ
-                </button>
-                <InteractiveButton 
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    window.location.href = '/book-call';
-                  }} 
-                  icon={Calendar} 
-                  size="lg" 
-                  className="mt-8"
-                >
-                  BOOK YOUR FREE STRATEGY CALL
-                </InteractiveButton>
+            <div className="text-center">
+              <div className="max-w-4xl mx-auto">
+                <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
+                  READY TO <span className="text-gradient">TRANSFORM</span> YOUR BUSINESS?
+                </h3>
+                <div className="glass-card group cursor-pointer mb-8">
+                  <p className="text-lg md:text-xl text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300 mb-6">
+                    Let's build your custom AI automation system and give you back your time.
+                  </p>
+                  <InteractiveButton 
+                    size="lg" 
+                    icon={Calendar} 
+                    href="#book-call"
+                  >
+                    BOOK YOUR FREE STRATEGY CALL
+                  </InteractiveButton>
+                </div>
               </div>
             </div>
           </ScrollReveal>
@@ -982,7 +934,7 @@ function App() {
               </div>
             </div>
           </ScrollReveal>
-          </div>
+        </div>
       </section>
 
       {/* FAQ Section */}
