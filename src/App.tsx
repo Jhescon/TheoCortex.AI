@@ -111,7 +111,7 @@ function App() {
       }
     }
     // For external links or different pages, let the browser handle navigation naturally
-  };
+  }
 
   const benefits = [
     {
