@@ -131,26 +131,6 @@ function App() {
     }
   };
 
-  // Dedicated mobile navigation handler with touch optimization
-  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Immediately close mobile menu for instant feedback
-    setMobileMenuOpen(false);
-    
-    // Small delay to allow menu animation to start before scrolling
-    setTimeout(() => {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 150);
-  };
-
   const benefits = [
     {
       icon: <Clock className="w-6 h-6" />,
@@ -1028,4 +1008,29 @@ function App() {
             </div>
             
             <div className="flex items-center space-x-8">
-              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener
+              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="LinkedIn">
+                <Linkedin className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+          
+          <div className="border-t border-dark-800/30 pt-10 text-center">
+            <p className="text-dark-400 font-light font-inter">
+              © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;

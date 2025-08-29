@@ -671,32 +671,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* Optimize for touch events */
-      -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
-      tap-highlight-color: rgba(6, 102, 255, 0.3);
-      /* Prevent double-tap zoom */
-      touch-action: manipulation;
-      /* Prevent text selection on touch */
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
     }
     
-    /* Enhanced active states for better touch feedback */
     .nav-link:active, .footer-nav-link:active {
-      @apply bg-primary-500/20 rounded-lg scale-95;
-      transition: all 0.1s ease-out;
-    }
-    
-    /* Prevent iOS double-tap zoom on buttons */
-    button, .nav-link, .footer-nav-link {
-      touch-action: manipulation;
-    }
-    
-    /* Improve touch target size for better accessibility */
-    .nav-link {
-      min-width: 44px;
-      padding: 12px 16px;
+      @apply bg-primary-500/10 rounded-lg;
     }
   }
 
