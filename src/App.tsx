@@ -282,25 +282,6 @@ function App() {
     },
     {
       question: "How much do your services cost?",
-      answer: "We don't list prices publicly because every business has different needs. We'll go over everything in your free strategy call and give you a clear recommendation."
-    },
-    {
-      question: "How do I get started?",
-      answer: "Click \"Book a Free Strategy Call,\" choose a time, and we'll meet on Zoom to explore how TheoCortex.AI can help you grow."
-    }
-  ];
-
-  // Render different pages based on current route
-  if (currentPage === 'book-call') {
-    return <ContactForm />;
-  } else if (currentPage === 'website-design-and-funnels') {
-    return <WebsiteDesignFunnels />;
-  } else if (currentPage === 'smart-ai-agents') {
-    return <SmartAIAgents />;
-  } else if (currentPage === 'crm-integration-and-appointments') {
-    return <CRMIntegration />;
-  }
-
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
       {/* Animated Background */}
