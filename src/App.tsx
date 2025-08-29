@@ -864,14 +864,53 @@ function App() {
                 </h3>
                 <div className="glass-card group cursor-pointer mb-12">
                   <p className="text-xl text-dark-300 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
-                    We don't use generic packages or cookie-cutter solutions. Everything is tailored to your business needs.
-                  </p>
-                  <div className="flex items-center justify-center space-x-3 text-primary-400">
-                    <Calendar className="w-6 h-6" />
+              <a 
+                href="#services" 
+                onClick={(e) => {
+                  handleNavClick(e, '#services');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="nav-link text-lg py-2"
+              >
+                Services
+              </a>
+              <a 
+                href="#about" 
+                onClick={(e) => {
+                  handleNavClick(e, '#about');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="nav-link text-lg py-2"
+              >
+                About
+              </a>
+              <a 
+                href="#how-it-works" 
+                onClick={(e) => {
+                  handleNavClick(e, '#how-it-works');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="nav-link text-lg py-2"
+              >
+                How It Works
+              </a>
+              <a 
+                href="#faq" 
+                onClick={(e) => {
+                  handleNavClick(e, '#faq');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="nav-link text-lg py-2"
+              >
+                FAQ
+              </a>
                     <span className="font-montserrat font-semibold text-lg">
                       Book a Free Strategy Call and see how TheoCortex.AI can automate your growth without adding complexity
                     </span>
-                  </div>
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    // Let the href handle navigation naturally
+                  }}
                 </div>
                 <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
                   BOOK YOUR FREE STRATEGY CALL
