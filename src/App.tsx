@@ -57,6 +57,32 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+
+  // Mobile-specific navigation handler for immediate single-tap response
+  const handleMobileNavClick = (targetId: string) => {
+    // Close menu immediately for instant visual feedback
+    setIsMobileMenuOpen(false);
+    
+    // Navigate immediately without delay
+    if (targetId === '#home') {
+      // Scroll to top for home
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      // Navigate to specific section
+      const element = document.getElementById(targetId.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  };
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -108,38 +134,6 @@ function App() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
-
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    // Only prevent default for same-page navigation (hash links)
-    // Only prevent default for same-page hash navigation
-    if (targetId.startsWith('#')) {
-      e.preventDefault();
-      const element = document.getElementById(targetId.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    // For cross-page navigation, let the browser handle it naturally (no preventDefault)
-    // For external links or different pages, let the browser handle navigation naturally
-  };
-
-  // Dedicated mobile navigation handler to prevent double-click issues
-  const handleMobileNavClick = (targetId: string) => {
-    // Immediately close menu for instant visual feedback
-    setIsMobileMenuOpen(false);
-    
-    // Small delay to allow menu animation, then navigate
-    setTimeout(() => {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 150);
-  };
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId.substring(1));
@@ -266,24 +260,9 @@ function App() {
     },
     {
       question: "How much do your services cost?",
-      answer: "We don't list prices publicly because every business has different needs. We'll go over everything in your free strategy call and give you a clear recommendation."
-    },
-    {
-      question: "How do I get started?",
-      answer: "Click \"Book a Free Strategy Call,\" choose a time, and we'll meet on Zoom to explore how TheoCortex.AI can help you grow."
+      answer: "Pricing varies based on your specific needs and goals. We'll discuss this during your free strategy call and create a custom solution that fits your budget."
     }
   ];
-
-  // Render different pages based on current route
-  if (currentPage === 'book-call') {
-    return <ContactForm />;
-  } else if (currentPage === 'website-design-and-funnels') {
-    return <WebsiteDesignFunnels />;
-  } else if (currentPage === 'smart-ai-agents') {
-    return <SmartAIAgents />;
-  } else if (currentPage === 'crm-integration-and-appointments') {
-    return <CRMIntegration />;
-  }
 
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
@@ -328,15 +307,16 @@ function App() {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="nav-link">Home</a>
-              <a href="#services" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
-              <a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
-              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>
-                <span className="md:hidden">How It<br />Works</span>
-                <span className="hidden md:inline">How It Works</span>
-              </a>
-              <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
-              <InteractiveButton icon={ExternalLink} href="#book-call">
+              <button onClick={() => handleNavClick('#home')} className="nav-link">Home</button>
+              <button onClick={() => handleNavClick('#services')} className="nav-link">Services</button>
+              <button onClick={() => handleNavClick('#about')} className="nav-link">About</button>
+              <button onClick={() => handleNavClick('#how-it-works')} className="nav-link">How It Works</button>
+              <button onClick={() => handleNavClick('#faq')} className="nav-link">FAQ</button>
+              <InteractiveButton 
+                onClick={() => window.location.href = '/book-call'} 
+                icon={Calendar}
+                className="ml-4"
+              >
                 Book Free Call
               </InteractiveButton>
             </div>
@@ -354,12 +334,46 @@ function App() {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-dark-800/50">
-              <div className="flex flex-col space-y-4">
-                <a href="#home" className="nav-link py-2">Home</a>
-                <a href="#services" className="nav-link py-2">Services</a>
-                <a href="#about" className="nav-link py-2">About</a>
-                <a href="#how-it-works" className="nav-link py-2">How It Works</a>
-                <a href="#faq" className="nav-link py-2">FAQ</a>
+              <div className="flex flex-col space-y-4 p-6">
+                <button
+                  onClick={() => handleMobileNavClick('#home')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => handleMobileNavClick('#services')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  Services
+                </button>
+                <button
+                  onClick={() => handleMobileNavClick('#about')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => handleMobileNavClick('#how-it-works')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  How It Works
+                </button>
+                <button
+                  onClick={() => handleMobileNavClick('#faq')}
+                  className="nav-link text-2xl font-montserrat font-semibold tracking-wide mobile-nav-button"
+                >
+                  FAQ
+                </button>
+                <div className="pt-4 border-t border-dark-700">
+                  <InteractiveButton 
+                    onClick={() => handleMobileNavClick('/contact')}
+                    size="lg"
+                    className="mobile-nav-button"
+                  >
+                    Book Free Call
+                  </InteractiveButton>
+                </div>
               </div>
             </div>
           )}
@@ -875,25 +889,17 @@ function App() {
           {/* What's Next */}
           <ScrollReveal delay={1000}>
             <div className="text-center">
-              <div className="max-w-4xl mx-auto">
-                <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
-                  WHAT'S <span className="text-gradient">NEXT</span>
-                </h3>
-                <div className="glass-card group cursor-pointer mb-12">
-                  <p className="text-xl text-dark-300 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
-                    We don't use generic packages or cookie-cutter solutions. Everything is tailored to your business needs.
-                  </p>
-                  <div className="flex items-center justify-center space-x-3 text-primary-400">
-                    <Calendar className="w-6 h-6" />
-                    <span className="font-montserrat font-semibold text-lg">
-                      Book a Free Strategy Call and see how TheoCortex.AI can automate your growth without adding complexity
-                    </span>
-                  </div>
-                </div>
-                <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                  BOOK YOUR FREE STRATEGY CALL
-                </InteractiveButton>
-              </div>
+              <InteractiveButton 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.location.href = '/book-call';
+                }} 
+                icon={Calendar} 
+                size="lg" 
+                className="mt-8"
+              >
+                BOOK YOUR FREE STRATEGY CALL
+              </InteractiveButton>
             </div>
           </ScrollReveal>
         </div>
@@ -918,7 +924,7 @@ function App() {
               </div>
             </div>
           </ScrollReveal>
-          </div>
+        </div>
       </section>
 
       {/* FAQ Section */}
