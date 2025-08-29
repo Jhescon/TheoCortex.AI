@@ -123,6 +123,14 @@ function App() {
     // For external links or different pages, let the browser handle navigation naturally
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId.substring(1));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const benefits = [
     {
       icon: <Clock className="w-6 h-6" />,
@@ -994,13 +1002,13 @@ function App() {
             
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8 mb-8 md:mb-0 text-center">
               <a href="#home" className="nav-link text-sm">Home</a>
-              <a href="#services" className="nav-link text-sm">Services</a>
-              <a href="#about" className="nav-link text-sm">About</a>
-              <a href="#how-it-works" className="nav-link text-sm text-center">
+              <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#services')}>Services</a>
+              <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
+              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>
                 <span className="hidden xs:inline">How It Works</span>
                 <span className="xs:hidden leading-tight">How It<br />Works</span>
               </a>
-              <a href="#faq" className="nav-link text-sm">FAQ</a>
+              <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#faq')}>FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">
