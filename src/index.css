@@ -627,9 +627,15 @@
 
   .nav-link {
     @apply text-dark-300 hover:text-primary-400 transition-all duration-300 font-inter font-medium relative cursor-pointer select-none;
-    /* Ensure proper click handling */
+    /* Enhanced click handling for both desktop and mobile */
     pointer-events: auto;
     touch-action: manipulation;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 0.5rem 0;
   }
 
   .nav-link::after {
@@ -681,45 +687,43 @@
   /* Mobile navigation button specific styles */
   .mobile-nav-button {
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
+    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
     -webkit-touch-callout: none;
     user-select: none;
-    cursor: pointer;
-    /* Prevent iOS double-tap zoom */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    /* Ensure proper button behavior */
+    cursor: pointer;    
+    /* Ensure proper mobile button behavior */
     background: none;
     border: none;
     font-family: inherit;
     font-size: inherit;
     color: inherit;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-out;
+    /* Enhanced touch target for accessibility */
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-nav-button:active {
     transform: scale(0.98);
-    background-color: rgba(6, 102, 255, 0.15) !important;
-    transition: all 0.1s ease-out;
+    background-color: rgba(6, 102, 255, 0.2);
   }
 
   /* Prevent hover states on touch devices */
   @media (hover: none) and (pointer: coarse) {
     .mobile-nav-button:hover {
       background-color: transparent;
+      transform: none;
     }
     
     .mobile-nav-button:active {
-      background-color: rgba(6, 102, 255, 0.15) !important;
+      background-color: rgba(6, 102, 255, 0.2);
     }
-  }
-
-  /* Enhanced touch target size for better accessibility */
-  .mobile-nav-button {
-    min-height: 48px;
-    min-width: 48px;
-    display: flex;
-    align-items: center;
   }
 
   .section-container {
