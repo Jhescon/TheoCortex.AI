@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { LoadingSpinner } from './LoadingSpinner';
+import { supabase, type ConsultationRequestInsert } from '../lib/supabase';
 
 interface FormData {
   fullName: string;
@@ -144,25 +145,29 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Generate CSRF token
-      const csrfToken = generateCSRFToken();
-      
-      // Simulate API call with security measures
-      const submissionData = {
-        ...formData,
-        csrfToken,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        referrer: document.referrer
+      // Prepare data for Supabase
+      const consultationData: ConsultationRequestInsert = {
+        full_name: formData.fullName.trim(),
+        email: formData.email.trim().toLowerCase(),
+        company_name: formData.companyName.trim(),
+        service_selection: formData.serviceSelection,
+        problems: formData.problems.trim(),
+        additional_info: formData.additionalInfo.trim()
       };
 
-      // In a real implementation, you would send this to your backend
-      console.log('Form submission data:', submissionData);
-      
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulate successful submission
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('consultation_requests')
+        .insert([consultationData])
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw new Error(`Database error: ${error.message}`);
+      }
+
+      console.log('Consultation request submitted successfully:', data);
       setIsSubmitted(true);
       
       // Reset form
@@ -176,8 +181,19 @@ export const ContactForm: React.FC = () => {
       });
 
     } catch (error) {
-      setSubmitError('There was an error submitting your form. Please try again.');
       console.error('Form submission error:', error);
+      
+      if (error instanceof Error) {
+        if (error.message.includes('Database error')) {
+          setSubmitError('There was a database error. Please try again or contact support.');
+        } else if (error.message.includes('network')) {
+          setSubmitError('Network error. Please check your connection and try again.');
+        } else {
+          setSubmitError('There was an error submitting your form. Please try again.');
+        }
+      } else {
+        setSubmitError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -197,6 +213,23 @@ export const ContactForm: React.FC = () => {
             <p className="text-xl text-dark-300 mb-8 leading-relaxed">
               Your consultation request has been successfully submitted. We'll review your information and get back to you within 24 hours.
             </p>
+            <div className="bg-dark-800/30 rounded-xl p-6 mb-8 border border-primary-500/30">
+              <h3 className="font-montserrat font-bold text-lg mb-4 text-primary-400">What happens next?</h3>
+              <div className="space-y-3 text-dark-300">
+                <p className="flex items-start space-x-3">
+                  <span className="w-6 h-6 bg-primary-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">1</span>
+                  <span>We'll review your submission and prepare a custom strategy</span>
+                </p>
+                <p className="flex items-start space-x-3">
+                  <span className="w-6 h-6 bg-primary-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">2</span>
+                  <span>Our team will contact you within 24 hours to schedule your call</span>
+                </p>
+                <p className="flex items-start space-x-3">
+                  <span className="w-6 h-6 bg-primary-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">3</span>
+                  <span>We'll discuss your specific needs and create an action plan</span>
+                </p>
+              </div>
+            </div>
             <div className="space-y-4 text-dark-400 mb-8">
               <p className="flex items-center justify-center space-x-2">
                 <Mail className="w-5 h-5 text-primary-400" />
@@ -451,6 +484,12 @@ export const ContactForm: React.FC = () => {
                   <p className="text-red-400 flex items-center">
                     <AlertCircle className="w-5 h-5 mr-2" />
                     {submitError}
+                  </p>
+                  <p className="text-red-300 text-sm mt-2">
+                    If the problem persists, please contact us directly at{' '}
+                    <a href="mailto:theocortex.ai@gmail.com" className="underline hover:text-red-200">
+                      theocortex.ai@gmail.com
+                    </a>
                   </p>
                 </div>
               )}
