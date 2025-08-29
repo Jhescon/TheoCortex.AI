@@ -111,18 +111,15 @@ function App() {
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Only prevent default for same-page navigation (hash links)
+    // Only prevent default for same-page hash navigation
     if (targetId.startsWith('#')) {
       e.preventDefault();
-      
-      const elementId = targetId.substring(1);
-      const element = document.getElementById(elementId);
+      const element = document.getElementById(targetId.substring(1));
       if (element) {
-        element.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+    // For cross-page navigation, let the browser handle it naturally (no preventDefault)
     // For external links or different pages, let the browser handle navigation naturally
   };
 
