@@ -681,45 +681,16 @@
   /* Mobile navigation button specific styles */
   .mobile-nav-button {
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
+    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
     -webkit-touch-callout: none;
     user-select: none;
     cursor: pointer;
-    /* Prevent iOS double-tap zoom */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    /* Ensure proper button behavior */
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
   }
 
   .mobile-nav-button:active {
     transform: scale(0.98);
-    background-color: rgba(6, 102, 255, 0.15) !important;
+    background-color: rgba(6, 102, 255, 0.1);
     transition: all 0.1s ease-out;
-  }
-
-  /* Prevent hover states on touch devices */
-  @media (hover: none) and (pointer: coarse) {
-    .mobile-nav-button:hover {
-      background-color: transparent;
-    }
-    
-    .mobile-nav-button:active {
-      background-color: rgba(6, 102, 255, 0.15) !important;
-    }
-  }
-
-  /* Enhanced touch target size for better accessibility */
-  .mobile-nav-button {
-    min-height: 48px;
-    min-width: 48px;
-    display: flex;
-    align-items: center;
   }
 
   .section-container {

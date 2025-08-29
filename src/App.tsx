@@ -57,25 +57,6 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
-
-  // Dedicated mobile navigation handler to prevent double-tap issues
-  const handleMobileNavClick = (targetId: string) => {
-    // Immediately close menu for instant visual feedback
-    setIsMobileMenuOpen(false);
-    
-    // Navigate after a brief delay to ensure menu closes properly
-    setTimeout(() => {
-      const element = document.getElementById(targetId.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 100);
-  };
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -373,40 +354,12 @@ function App() {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-dark-800/50">
-              <div className="flex flex-col space-y-4 p-6">
-                <button
-                  onClick={() => handleMobileNavClick('#services')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#about')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#how-it-works')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
-                >
-                  How It Works
-                </button>
-                <button
-                  onClick={() => handleMobileNavClick('#faq')}
-                  className="w-full text-left nav-link text-lg py-3 px-4 rounded-lg hover:bg-dark-800/50 transition-all duration-200 mobile-nav-button"
-                >
-                  FAQ
-                </button>
-                
-                <div className="pt-4 border-t border-dark-700">
-                  <InteractiveButton
-                    onClick={() => handleMobileNavClick('#book-call')}
-                    className="w-full justify-center"
-                  >
-                    Book Free Call
-                  </InteractiveButton>
-                </div>
+              <div className="flex flex-col space-y-4">
+                <a href="#home" className="nav-link py-2">Home</a>
+                <a href="#services" className="nav-link py-2">Services</a>
+                <a href="#about" className="nav-link py-2">About</a>
+                <a href="#how-it-works" className="nav-link py-2">How It Works</a>
+                <a href="#faq" className="nav-link py-2">FAQ</a>
               </div>
             </div>
           )}
