@@ -627,15 +627,9 @@
 
   .nav-link {
     @apply text-dark-300 hover:text-primary-400 transition-all duration-300 font-inter font-medium relative cursor-pointer select-none;
-    /* Enhanced click handling for both desktop and mobile */
+    /* Ensure proper click handling */
     pointer-events: auto;
     touch-action: manipulation;
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    padding: 0.5rem 0;
   }
 
   .nav-link::after {
@@ -681,48 +675,6 @@
     
     .nav-link:active, .footer-nav-link:active {
       @apply bg-primary-500/10 rounded-lg;
-    }
-  }
-
-  /* Mobile navigation button specific styles */
-  .mobile-nav-button {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
-    -webkit-touch-callout: none;
-    user-select: none;
-    cursor: pointer;    
-    /* Ensure proper mobile button behavior */
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    width: 100%;
-    text-align: center;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    transition: all 0.2s ease-out;
-    /* Enhanced touch target for accessibility */
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mobile-nav-button:active {
-    transform: scale(0.98);
-    background-color: rgba(6, 102, 255, 0.2);
-  }
-
-  /* Prevent hover states on touch devices */
-  @media (hover: none) and (pointer: coarse) {
-    .mobile-nav-button:hover {
-      background-color: transparent;
-      transform: none;
-    }
-    
-    .mobile-nav-button:active {
-      background-color: rgba(6, 102, 255, 0.2);
     }
   }
 
@@ -863,58 +815,3 @@ html {
   background: linear-gradient(180deg, #3399FF, #9933FF);
 }
 /* Mobile Book Call Button Styles */
-
-/* Mobile Navigation Button Optimizations */
-.mobile-nav-button {
-  /* Prevent double-tap zoom and improve touch responsiveness */
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
-  -webkit-touch-callout: none;
-  user-select: none;
-  
-  /* Ensure proper touch target size for accessibility */
-  min-height: 48px;
-  min-width: 48px;
-  
-  /* Immediate visual feedback on touch */
-  transition: all 0.1s ease-out;
-}
-
-.mobile-nav-button:active {
-  transform: scale(0.98);
-  background-color: rgba(6, 102, 255, 0.15);
-}
-
-/* Prevent hover states on touch devices to avoid conflicts */
-@media (hover: none) and (pointer: coarse) {
-  .mobile-nav-button:hover {
-    background-color: transparent;
-    transform: none;
-  }
-  
-  .mobile-nav-button:active {
-    background-color: rgba(6, 102, 255, 0.15);
-    transform: scale(0.98);
-  }
-}
-
-/* Enhanced mobile touch handling for navigation links */
-@media (max-width: 768px) {
-  .nav-link.mobile-nav-button {
-    padding: 16px 24px;
-    border-radius: 12px;
-    background: transparent;
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .nav-link.mobile-nav-button:focus {
-    outline: 2px solid rgba(6, 102, 255, 0.5);
-    outline-offset: 2px;
-  }
-}
