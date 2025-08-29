@@ -40,6 +40,18 @@ import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
 import { SmartAIAgents } from './pages/SmartAIAgents';
 import { CRMIntegration } from './pages/CRMIntegration';
 
+// Smooth scroll navigation handler
+const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  e.preventDefault();
+  const element = document.getElementById(targetId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
+
 function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -298,10 +310,10 @@ function App() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#home" className="nav-link">Home</a>
-              <a href="#services" className="nav-link">Services</a>
-              <a href="#about" className="nav-link">About</a>
-              <a href="#how-it-works" className="nav-link">How It Works</a>
-              <a href="#faq" className="nav-link">FAQ</a>
+              <a href="#services" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
+              <a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
+              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>How It Works</a>
+              <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton icon={ExternalLink} href="#book-call">
                 Book Free Call
               </InteractiveButton>

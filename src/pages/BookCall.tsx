@@ -123,6 +123,10 @@ export const BookCall: React.FC = () => {
                 variant="secondary" 
                 className="flex items-center space-x-2 px-4 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0"
                 aria-label="Return to homepage"
+                onClick={(e) => {
+                  // Ensure single click navigation
+                  e.stopPropagation();
+                }}
               >
                 <span>←</span>
                 <span className="hidden md:inline">Back to Homepage</span>

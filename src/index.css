@@ -626,7 +626,10 @@
   }
 
   .nav-link {
-    @apply text-dark-300 hover:text-primary-400 transition-all duration-300 font-inter font-medium relative;
+    @apply text-dark-300 hover:text-primary-400 transition-all duration-300 font-inter font-medium relative cursor-pointer select-none;
+    /* Ensure proper click handling */
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .nav-link::after {
