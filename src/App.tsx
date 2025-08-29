@@ -312,7 +312,10 @@ function App() {
               <a href="#home" className="nav-link">Home</a>
               <a href="#services" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
               <a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
-              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>How It Works</a>
+              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>
+                <span className="md:hidden">How It<br />Works</span>
+                <span className="hidden md:inline">How It Works</span>
+              </a>
               <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton icon={ExternalLink} href="#book-call">
                 Book Free Call

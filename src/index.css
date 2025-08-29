@@ -648,6 +648,34 @@
     width: 100%;
   }
 
+  /* Footer navigation specific styles */
+  .footer-nav-link {
+    @apply transition-all duration-300 ease-out;
+    /* Enhanced mobile touch handling */
+    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
+    tap-highlight-color: rgba(6, 102, 255, 0.2);
+  }
+
+  .footer-nav-link:active {
+    @apply text-primary-300 scale-95;
+    transition: all 0.1s ease-out;
+  }
+
+  /* Mobile-specific navigation improvements */
+  @media (max-width: 768px) {
+    .nav-link, .footer-nav-link {
+      @apply py-2 px-1;
+      min-height: 44px; /* iOS recommended touch target size */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nav-link:active, .footer-nav-link:active {
+      @apply bg-primary-500/10 rounded-lg;
+    }
+  }
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }

@@ -123,10 +123,6 @@ export const BookCall: React.FC = () => {
                 variant="secondary" 
                 className="flex items-center space-x-2 px-4 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0"
                 aria-label="Return to homepage"
-                onClick={(e) => {
-                  // Ensure single click navigation
-                  e.stopPropagation();
-                }}
               >
                 <span>←</span>
                 <span className="hidden md:inline">Back to Homepage</span>
@@ -370,13 +366,13 @@ export const BookCall: React.FC = () => {
             </a>
             
             <div className="flex items-center space-x-8 mb-8 md:mb-0">
-              <a href="/" className="nav-link text-sm">Home</a>
-              <a href="/#services" className="nav-link text-sm">Services</a>
-              <a href="/#how-it-works" className="nav-link text-sm whitespace-nowrap">
+              <a href="/" className="nav-link text-sm footer-nav-link">Home</a>
+              <a href="/#services" className="nav-link text-sm footer-nav-link">Services</a>
+              <a href="/#how-it-works" className="nav-link text-sm footer-nav-link whitespace-nowrap">
                 <span className="md:hidden">How It<br />Works</span>
                 <span className="hidden md:inline">How It Works</span>
               </a>
-              <a href="/#faq" className="nav-link text-sm">FAQ</a>
+              <a href="/#faq" className="nav-link text-sm footer-nav-link">FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">
