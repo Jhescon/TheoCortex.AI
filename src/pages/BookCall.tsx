@@ -158,24 +158,24 @@ export const BookCall: React.FC = () => {
             </h1>
           </div>
           
-          {/* Subheadline */}
-          {typingComplete && (
-            <ScrollReveal delay={800} direction="up">
+          {/* Subheadline - appears after typing completes */}
+          <div className={`transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {typingComplete && (
               <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
                 Book your free strategy call and discover how TheoCortex.AI can save you hours, 
                 convert more leads, and scale your business automatically.
               </p>
-            </ScrollReveal>
-          )}
+            )}
+          </div>
 
-          {/* Small Note */}
-          {typingComplete && (
-            <ScrollReveal delay={1000} direction="fade">
+          {/* Small Note - appears with delay after typing */}
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100' : 'opacity-0'}`}>
+            {typingComplete && (
               <p className="text-primary-400 text-lg font-medium mb-16 italic">
                 No pressure. No tech skills needed. Just clarity.
               </p>
-            </ScrollReveal>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
