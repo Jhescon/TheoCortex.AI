@@ -674,13 +674,55 @@
 
   /* Mobile navigation improvements */
   @media (max-width: 768px) {
+    /* Mobile Navigation Optimizations */
+    .mobile-nav-button {
+      @apply w-12 h-12 flex items-center justify-center rounded-xl bg-dark-800/50 border border-dark-700/50 backdrop-blur-xl transition-all duration-300;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
+      user-select: none;
+    }
+
+    .mobile-nav-button:hover {
+      @apply bg-dark-700/50 border-primary-500/50;
+    }
+
+    .mobile-nav-button:active {
+      @apply bg-primary-500/20 scale-95;
+      transition: all 0.1s ease-out;
+    }
+
+    .mobile-menu-overlay {
+      @apply fixed inset-0 bg-dark-950/95 backdrop-blur-xl z-40;
+      touch-action: manipulation;
+    }
+
+    .mobile-menu-content {
+      @apply absolute inset-x-4 top-24 bottom-4 bg-dark-900/80 backdrop-blur-xl rounded-2xl border border-dark-700/50 p-6 overflow-y-auto;
+    }
+
+    .mobile-nav-item {
+      @apply w-full text-left p-4 rounded-xl bg-dark-800/30 border border-dark-700/50 transition-all duration-300;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
+      user-select: none;
+      min-height: 44px;
+    }
+
+    .mobile-nav-item:hover {
+      @apply bg-dark-700/50 border-primary-500/50;
+    }
+
+    .mobile-nav-item:active {
+      @apply bg-primary-500/20 scale-95;
+      transition: all 0.1s ease-out;
+    }
+
+    /* Disable hover effects on mobile for nav links */
     .nav-link:hover {
-      /* Disable hover effects on mobile to prevent double-tap issues */
       color: inherit;
     }
     
     .nav-link::after {
-      /* Disable hover underline on mobile */
       display: none;
     }
     
@@ -693,11 +735,7 @@
     }
     
     .footer-nav-link:active {
-      @apply bg-primary-500/10 rounded-lg;
-    }
-    
-    .touch-manipulation:active {
-      @apply bg-primary-500/10 rounded-lg;
+      @apply bg-primary-500/10 rounded-lg scale-95;
       transition: all 0.1s ease-out;
     }
   }

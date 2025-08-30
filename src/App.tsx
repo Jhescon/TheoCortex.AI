@@ -66,7 +66,7 @@ function App() {
   const handleNavigation = (sectionId: string, isMobile: boolean = false) => {
     // Close mobile menu immediately if on mobile
     if (isMobile) {
-      setIsMobileMenuOpen(false);
+      setMobileMenuOpen(false);
     }
 
     // Small delay to allow menu close animation, then navigate
@@ -364,10 +364,6 @@ function App() {
               >
                 FAQ
               </button>
-                <span className="md:hidden">How It<br />Works</span>
-                <span className="hidden md:inline">How It Works</span>
-              </a>
-              <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton icon={ExternalLink} href="#book-call">
                 Book Free Call
               </InteractiveButton>
