@@ -166,7 +166,7 @@ export const CRMIntegration: React.FC = () => {
                 <TypingEffect 
                   text="NEVER MISS A" 
                   delay={500}
-                  speed={120}
+                  speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>

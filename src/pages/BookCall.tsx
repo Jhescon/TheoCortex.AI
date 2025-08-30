@@ -144,7 +144,7 @@ export const BookCall: React.FC = () => {
                 <TypingEffect 
                   text="LET'S BUILD YOUR" 
                   delay={500}
-                  speed={120}
+                  speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>

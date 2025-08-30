@@ -136,7 +136,7 @@ export const WebsiteDesignFunnels: React.FC = () => {
                 <TypingEffect 
                   text="DESIGN THAT" 
                   delay={500}
-                  speed={120}
+                  speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
