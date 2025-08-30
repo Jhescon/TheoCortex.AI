@@ -144,45 +144,35 @@ export const SmartAIAgents: React.FC = () => {
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              {typingComplete && (
-                <ScrollReveal delay={200} direction="fade">
-                  <div className="text-white font-bold tracking-tighter">
-                    WHILE YOU REST
-                  </div>
-                </ScrollReveal>
-              )}
+              <div className={`text-white font-bold tracking-tighter transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                WHILE YOU REST
+              </div>
             </h1>
           </div>
           
-          <div className={`transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {typingComplete && (
-              <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
-                Our smart agents qualify leads, answer questions, and book appointments 24/7.
-              </p>
-            )}
-            {typingComplete && (
-              <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
-                We build custom AI assistants that sound human, understand your clients, and save you time. 
-                From chat support to lead qualification, they're trained to boost results without burnout.
-              </p>
-            )}
+          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
+              Our smart agents qualify leads, answer questions, and book appointments 24/7.
+            </p>
+            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+              We build custom AI assistants that sound human, understand your clients, and save you time. 
+              From chat support to lead qualification, they're trained to boost results without burnout.
+            </p>
           </div>
 
           {/* Stats Highlight */}
-          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            {typingComplete && (
-              <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
-                <div className="flex items-center justify-center space-x-4">
-                  <Bot className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-3xl font-montserrat font-bold text-gradient">+250%</div>
-                    <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
-                      lead qualification speed with automated conversations
-                    </p>
-                  </div>
+          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
+              <div className="flex items-center justify-center space-x-4">
+                <Bot className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
+                <div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient">+250%</div>
+                  <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
+                    lead qualification speed with automated conversations
+                  </p>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
