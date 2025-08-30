@@ -561,54 +561,6 @@
   }
 }
 
-@keyframes techParticle {
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(0);
-  }
-  20% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1);
-  }
-  80% {
-    opacity: 1;
-    transform: translateY(-15px) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-25px) scale(0);
-  }
-}
-
-@keyframes digitalGlow {
-  0%, 100% {
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor;
-    filter: brightness(1);
-  }
-  50% {
-    text-shadow: 
-      0 0 10px currentColor,
-      0 0 20px currentColor,
-      0 0 30px currentColor,
-      0 0 40px currentColor;
-    filter: brightness(1.2);
-  }
-}
-
-@keyframes counterPulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scale(1.02);
-    filter: brightness(1.1);
-  }
-}
-
 @keyframes circuitPulse {
   0%, 100% {
     opacity: 0.3;
