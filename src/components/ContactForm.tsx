@@ -51,17 +51,8 @@ export const ContactForm: React.FC = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
-    // CRITICAL: Force scroll to top immediately when component mounts
-    const scrollToTop = () => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
-    
-    scrollToTop();
-    
-    // Double-check scroll position after a brief delay
-    setTimeout(scrollToTop, 50);
+    // Ensure page starts at top without animation
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const serviceOptions = [

@@ -28,43 +28,8 @@ export const SmartAIAgents: React.FC = () => {
   useEffect(() => {
     setIsVisible(true);
     
-    // CRITICAL: Aggressive scroll to top with multiple fallbacks
-    const forceScrollToTop = () => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      
-      // Additional fallbacks for stubborn browsers
-      if (document.scrollingElement) {
-        document.scrollingElement.scrollTop = 0;
-      }
-      
-      // Force viewport to top
-      if (window.pageYOffset !== 0) {
-        window.pageYOffset = 0;
-      }
-      
-      // CSS-based force positioning
-      document.body.style.scrollBehavior = 'auto';
-      window.scroll({ top: 0, left: 0, behavior: 'auto' });
-      
-      // Reset scroll behavior
-      setTimeout(() => {
-        document.body.style.scrollBehavior = '';
-      }, 100);
-    };
-    
-    // Execute multiple times to ensure it works
-    forceScrollToTop();
-    
-    // Execute again immediately
-    setTimeout(forceScrollToTop, 1);
-    
-    // Final check
-    setTimeout(forceScrollToTop, 10);
-    
-    // Emergency fallback
-    setTimeout(forceScrollToTop, 50);
+    // Ensure page starts at top without animation
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const features = [
