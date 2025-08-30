@@ -201,7 +201,6 @@ export const SmartAIAgents: React.FC = () => {
                     {feature.description}
                   </p>
                 </div>
-              </div>
             ))}
           </div>
 
