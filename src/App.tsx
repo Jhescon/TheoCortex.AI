@@ -58,28 +58,6 @@ function App() {
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
-  const handleMobileNavClick = (href: string) => {
-    // Close mobile menu immediately
-    setMobileMenuOpen(false);
-    
-    // Small delay to allow menu close animation, then navigate
-    setTimeout(() => {
-      if (href.startsWith('#')) {
-        // Handle anchor links with smooth scrolling
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      } else {
-        // Handle regular page navigation
-        window.location.href = href;
-      }
-    }, 150);
-  };
-
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
@@ -151,6 +129,11 @@ function App() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleMobileNavClick = (path: string) => {
+    setMobileMenuOpen(false);
+    window.location.hash = path;
   };
 
   const benefits = [
@@ -365,6 +348,16 @@ function App() {
                 <a href="#about" className="nav-link py-2">About</a>
                 <a href="#how-it-works" className="nav-link py-2">How It Works</a>
                 <a href="#faq" className="nav-link py-2">FAQ</a>
+                {/* Book Call Button */}
+                <div className="mt-8 pt-8 border-t border-dark-700/50">
+                  <div
+                    onClick={() => handleMobileNavClick('/book-call')}
+                    className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group cursor-pointer touch-manipulation"
+                  >
+                    <Calendar className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Book Free Call</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
