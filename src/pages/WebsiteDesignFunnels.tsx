@@ -150,21 +150,23 @@ export const WebsiteDesignFunnels: React.FC = () => {
             </h1>
           </div>
           
-          {typingComplete && (
-            <ScrollReveal delay={800} direction="up">
+          <div className={`transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {typingComplete && (
               <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
                 Crafted websites and funnels that do more than look good—they convert.
               </p>
+            )}
+            {typingComplete && (
               <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
                 We create sleek, modern websites and optimized funnels built to turn visitors into paying clients. 
                 From landing pages to full digital experiences, every click is designed with strategy in mind.
               </p>
-            </ScrollReveal>
-          )}
+            )}
+          </div>
 
           {/* Stats Highlight */}
-          {typingComplete && (
-            <ScrollReveal delay={1200} direction="scale">
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            {typingComplete && (
               <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
                 <div className="flex items-center justify-center space-x-4">
                   <BarChart3 className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
@@ -176,8 +178,8 @@ export const WebsiteDesignFunnels: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
