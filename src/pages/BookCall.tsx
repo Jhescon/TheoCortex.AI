@@ -148,33 +148,25 @@ export const BookCall: React.FC = () => {
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              {typingComplete && (
-                <ScrollReveal delay={200} direction="fade">
-                  <div className="text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl">
-                    AI-POWERED SYSTEM
-                  </div>
-                </ScrollReveal>
-              )}
+              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                AI-POWERED SYSTEM
+              </div>
             </h1>
           </div>
           
           {/* Subheadline - appears after typing completes */}
-          <div className={`transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {typingComplete && (
-              <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
-                Book your free strategy call and discover how TheoCortex.AI can save you hours, 
-                convert more leads, and scale your business automatically.
-              </p>
-            )}
+          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
+              Book your free strategy call and discover how TheoCortex.AI can save you hours, 
+              convert more leads, and scale your business automatically.
+            </p>
           </div>
 
           {/* Small Note - appears with delay after typing */}
-          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100' : 'opacity-0'}`}>
-            {typingComplete && (
-              <p className="text-primary-400 text-lg font-medium mb-16 italic">
-                No pressure. No tech skills needed. Just clarity.
-              </p>
-            )}
+          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100' : 'opacity-0'}`}>
+            <p className="text-primary-400 text-lg font-medium mb-16 italic">
+              No pressure. No tech skills needed. Just clarity.
+            </p>
           </div>
         </div>
       </section>

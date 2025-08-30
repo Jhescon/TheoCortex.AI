@@ -170,45 +170,35 @@ export const CRMIntegration: React.FC = () => {
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              {typingComplete && (
-                <ScrollReveal delay={200} direction="fade">
-                  <div className="text-white font-bold tracking-tighter">
-                    LEAD AGAIN
-                  </div>
-                </ScrollReveal>
-              )}
+              <div className={`text-white font-bold tracking-tighter transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                LEAD AGAIN
+              </div>
             </h1>
           </div>
           
-          <div className={`transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {typingComplete && (
-              <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
-                Smart systems that track, nurture, and schedule automatically.
-              </p>
-            )}
-            {typingComplete && (
-              <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
-                We connect your CRM to your entire funnel so every inquiry is tracked, followed up, 
-                and booked without manual effort.
-              </p>
-            )}
+          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
+              Smart systems that track, nurture, and schedule automatically.
+            </p>
+            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+              We connect your CRM to your entire funnel so every inquiry is tracked, followed up, 
+              and booked without manual effort.
+            </p>
           </div>
 
           {/* Stats Highlight */}
-          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            {typingComplete && (
-              <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
-                <div className="flex items-center justify-center space-x-4">
-                  <Calendar className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-3xl font-montserrat font-bold text-gradient">+180%</div>
-                    <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
-                      increase in booking rates with automation in place
-                    </p>
-                  </div>
+          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
+              <div className="flex items-center justify-center space-x-4">
+                <Calendar className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
+                <div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient">+180%</div>
+                  <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
+                    increase in booking rates with automation in place
+                  </p>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
