@@ -269,12 +269,12 @@ export const ContactForm: React.FC = () => {
               <InteractiveButton 
                 onClick={() => window.location.href = '/'} 
                 variant="secondary" 
-                className="flex items-center space-x-2 px-4 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0"
+                className="flex items-center space-x-1 px-3 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Return to homepage"
               >
-                <span>←</span>
+                <span className="text-base">←</span>
+                <span className="hidden sm:inline md:hidden">Back</span>
                 <span className="hidden md:inline">Back to Homepage</span>
-                <span className="md:hidden">Back</span>
               </InteractiveButton>
             </div>
           </div>
