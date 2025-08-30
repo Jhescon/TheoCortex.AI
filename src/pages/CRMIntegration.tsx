@@ -154,40 +154,40 @@ export const CRMIntegration: React.FC = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative">
-        <ParallaxBackground speed={0.3} className="absolute inset-0">
+        <ParallaxBackground speed={0.3} className="absolute inset-0 animate-fade-in-sequential stagger-1">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-pulse-glow" style={{animationDelay: '1s'}}></div>
         </ParallaxBackground>
         
         <div className="section-container text-center relative z-10">
-          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="mb-12 animate-fade-in-sequential stagger-2">
             <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
               <div className="text-gradient mb-4">
                 <TypingEffect 
                   text="NEVER MISS A" 
-                  delay={500}
+                  delay={800}
                   speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              <div className={`text-white font-bold tracking-tighter transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+              <div className={`text-white font-bold tracking-tighter transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                 LEAD AGAIN
               </div>
             </h1>
           </div>
           
-          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
               Smart systems that track, nurture, and schedule automatically.
             </p>
-            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-800 delay-500">
               We connect your CRM to your entire funnel so every inquiry is tracked, followed up, 
               and booked without manual effort.
             </p>
           </div>
 
           {/* Stats Highlight */}
-          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`transition-all duration-800 delay-700 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
               <div className="flex items-center justify-center space-x-4">
                 <Calendar className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
@@ -206,49 +206,43 @@ export const CRMIntegration: React.FC = () => {
       {/* What You Get Section */}
       <section className="py-20 relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
-                WHAT YOU <span className="text-gradient">GET</span>
-              </h2>
-            </div>
-          </ScrollReveal>
+          <div className="text-center mb-16 animate-fade-in-sequential stagger-8">
+            <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
+              WHAT YOU <span className="text-gradient">GET</span>
+            </h2>
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {features.map((feature, index) => (
-              <ScrollReveal key={index} delay={index * 130} direction="up" stagger={true}>
-                <div className="glass-card group cursor-pointer h-full">
-                  <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
-                    <div className="text-primary-400">
-                      {feature.icon}
-                    </div>
+              <div key={index} className={`glass-card group cursor-pointer h-full animate-slide-in-left stagger-${9 + index}`}>
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-primary-400">
+                    {feature.icon}
                   </div>
-                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
-                    {feature.description}
-                  </p>
                 </div>
-              </ScrollReveal>
+                <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
+                  {feature.description}
+                </p>
+              </div>
             ))}
           </div>
 
           {/* Integrations */}
-          <ScrollReveal delay={400}>
-            <div className="glass-card max-w-4xl mx-auto">
-              <h3 className="font-montserrat font-bold text-2xl mb-8 text-center">
-                Popular <span className="text-gradient">CRM Integrations</span>
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {integrations.map((integration, index) => (
-                  <div key={index} className="flex items-center justify-center p-4 bg-dark-800/30 rounded-xl border border-dark-700/50 group cursor-pointer hover:border-primary-400/50 transition-all duration-300">
-                    <span className="text-dark-300 font-medium group-hover:text-white transition-colors duration-300">{integration}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="glass-card max-w-4xl mx-auto animate-scale-in-smooth stagger-14">
+            <h3 className="font-montserrat font-bold text-2xl mb-8 text-center">
+              Popular <span className="text-gradient">CRM Integrations</span>
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {integrations.map((integration, index) => (
+                <div key={index} className="flex items-center justify-center p-4 bg-dark-800/30 rounded-xl border border-dark-700/50 group cursor-pointer hover:border-primary-400/50 transition-all duration-300">
+                  <span className="text-dark-300 font-medium group-hover:text-white transition-colors duration-300">{integration}</span>
+                </div>
+              ))}
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 

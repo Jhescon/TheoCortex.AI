@@ -138,24 +138,24 @@ export const BookCall: React.FC = () => {
         <div className="section-container text-center relative z-10">
           
           {/* Main Headline */}
-          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="mb-12 animate-fade-in-sequential stagger-2">
             <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
               <div className="text-gradient mb-4">
                 <TypingEffect 
                   text="LET'S BUILD YOUR" 
-                  delay={500}
+                  delay={800}
                   speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                 AI-POWERED SYSTEM
               </div>
             </h1>
           </div>
           
           {/* Subheadline - appears after typing completes */}
-          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
               Book your free strategy call and discover how TheoCortex.AI can save you hours, 
               convert more leads, and scale your business automatically.
@@ -163,7 +163,7 @@ export const BookCall: React.FC = () => {
           </div>
 
           {/* Small Note - appears with delay after typing */}
-          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100' : 'opacity-0'}`}>
             <p className="text-primary-400 text-lg font-medium mb-16 italic">
               No pressure. No tech skills needed. Just clarity.
             </p>
@@ -174,18 +174,15 @@ export const BookCall: React.FC = () => {
       {/* Quick Highlights Section */}
       <section className="py-20 relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in-sequential stagger-7">
               <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
                 WHAT YOU'LL GET IN YOUR <span className="text-gradient">FREE CALL</span>
               </h2>
             </div>
-          </ScrollReveal>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((highlight, index) => (
-              <ScrollReveal key={index} delay={index * 150} direction="up">
-                <div className="glass-card text-center group cursor-pointer h-full">
+              <div key={index} className={`glass-card text-center group cursor-pointer h-full animate-scale-in-smooth stagger-${8 + index}`}>
                   <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary-400">
                       {highlight.icon}
@@ -198,7 +195,7 @@ export const BookCall: React.FC = () => {
                     {highlight.description}
                   </p>
                 </div>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
@@ -207,18 +204,15 @@ export const BookCall: React.FC = () => {
       {/* Who It's For Section */}
       <section className="py-20 bg-gradient-to-b from-dark-900/10 to-transparent relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-slide-in-left stagger-12">
               <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
                 PERFECT FOR <span className="text-gradient">AMBITIOUS BUSINESS OWNERS</span>
               </h2>
             </div>
-          </ScrollReveal>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {whoItsFor.map((item, index) => (
-              <ScrollReveal key={index} delay={index * 100} direction="up">
-                <div className="glass-card group cursor-pointer">
+              <div key={index} className={`glass-card group cursor-pointer animate-slide-in-right stagger-${13 + index}`}>
                   <div className="flex items-center space-x-4 mb-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-xl flex items-center justify-center border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
                       <div className="text-primary-400">
@@ -233,7 +227,7 @@ export const BookCall: React.FC = () => {
                     {item.description}
                   </p>
                 </div>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
