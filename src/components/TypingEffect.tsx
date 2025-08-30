@@ -17,13 +17,20 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({
 }) => {
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
-    // Initialize state - prevent duplicate animations
+    // Prevent duplicate animations by checking if already started
+    if (hasStarted) return;
+    
+    // Initialize state
     setDisplayText('');
     setShowCursor(true);
     
-    // Single animation cycle with optimized timing
+    // Mark as started to prevent duplicates
+    setHasStarted(true);
+    
+    // Single animation cycle
     const animationTimer = setTimeout(() => {
       let currentIndex = 0;
       
@@ -32,24 +39,24 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({
           setDisplayText(text.slice(0, currentIndex + 1));
           currentIndex++;
         } else {
-          // Animation complete - cleanup and callback
+          // Animation complete
           clearInterval(typeInterval);
           setShowCursor(false);
           
-          // Immediate callback execution for faster flow
+          // Execute callback
           if (onComplete) {
             onComplete();
           }
         }
       }, speed);
       
-      // Cleanup function to prevent memory leaks
+      // Return cleanup function
       return () => clearInterval(typeInterval);
     }, delay);
 
-    // Cleanup timeout to prevent duplicate animations
+    // Cleanup timeout
     return () => clearTimeout(animationTimer);
-  }, [text, delay, speed, onComplete]);
+  }, []); // Empty dependency array prevents re-execution
 
   return (
     <span className={`${className}`}>
