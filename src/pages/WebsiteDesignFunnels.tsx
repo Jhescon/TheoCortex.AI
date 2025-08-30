@@ -162,7 +162,17 @@ export const WebsiteDesignFunnels: React.FC = () => {
               <div className="flex items-center justify-center space-x-4">
                 <BarChart3 className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
                 <div>
-                  <div className="text-3xl font-montserrat font-bold text-gradient">+38%</div>
+                  <div className="flex items-center">
+                    <span className="text-primary-400 font-mono text-2xl mr-1">+</span>
+                    <CounterAnimation 
+                      value={38} 
+                      suffix="%" 
+                      duration={1800}
+                      delay={1500}
+                      glowColor="cyan"
+                      size="lg"
+                    />
+                  </div>
                   <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
                     increase in lead response rate with strategic funnel flow
                   </p>
