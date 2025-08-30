@@ -110,14 +110,18 @@ function App() {
   }, []);
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    // Only prevent default for same-page navigation (hash links)
-    // Only prevent default for same-page hash navigation
+    // Prevent default behavior for all navigation to fix double-click issue
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (targetId.startsWith('#')) {
-      e.preventDefault();
       const element = document.getElementById(targetId.substring(1));
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // For page navigation, use window.location for immediate navigation
+      window.location.href = targetId;
     }
     // For cross-page navigation, let the browser handle it naturally (no preventDefault)
     // For external links or different pages, let the browser handle navigation naturally
