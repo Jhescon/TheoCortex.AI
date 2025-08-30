@@ -55,7 +55,6 @@ function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
@@ -129,19 +128,6 @@ function App() {
     const element = document.getElementById(targetId.substring(1));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleMobileNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    // Handle navigation
-    if (href.startsWith('#')) {
-      const element = document.getElementById(href.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.location.href = href;
     }
   };
 
@@ -271,15 +257,6 @@ function App() {
     }
   ];
 
-  const mobileNavLinks = [
-    { href: '/#home', label: 'Home', icon: '🏠' },
-    { href: '/#services', label: 'Services', icon: '🚀' },
-    { href: '/#about', label: 'About', icon: '💡' },
-    { href: '/#how-it-works', label: 'How It Works', icon: '⚡' },
-    { href: '/#faq', label: 'FAQ', icon: '❓' },
-    { href: '/contact', label: 'Contact', icon: '📞' }
-  ];
-
   // Render different pages based on current route
   if (currentPage === 'book-call') {
     return <ContactForm />;
@@ -343,25 +320,17 @@ function App() {
               </a>
               <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton icon={ExternalLink} href="#book-call">
-                Book Call
+                Book Free Call
               </InteractiveButton>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="mobile-menu-trigger relative w-12 h-12 flex items-center justify-center bg-dark-800/50 backdrop-blur-sm border border-dark-600/50 rounded-xl transition-all duration-300 hover:bg-dark-700/60 hover:border-primary-500/50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 active:scale-95 md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-dark-300 hover:text-primary-400 transition-colors duration-300"
               aria-label="Toggle mobile menu"
-              aria-expanded={isMobileMenuOpen}
             >
-              <div className="relative w-6 h-6">
-                <span className={`absolute top-2 left-0 w-6 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full transition-all duration-300 ease-out ${isMobileMenuOpen ? 'rotate-45 translate-y-2.5 scale-110' : ''}`}></span>
-                <span className={`absolute top-3.5 left-0 w-6 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full transition-all duration-300 ease-out ${isMobileMenuOpen ? 'opacity-0 scale-75' : ''}`}></span>
-                <span className={`absolute top-5 left-0 w-6 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full transition-all duration-300 ease-out ${isMobileMenuOpen ? '-rotate-45 -translate-y-2.5 scale-110' : ''}`}></span>
-              </div>
-              
-              {/* Animated glow effect */}
-              <div className={`absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/20 to-secondary-500/20 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}></div>
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
@@ -379,95 +348,6 @@ function App() {
           )}
         </div>
       </nav>
-
-      {/* Enhanced Mobile Menu Overlay */}
-      <div className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ease-out ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        {/* Enhanced backdrop with gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-950/98 via-dark-900/95 to-dark-950/98 backdrop-blur-2xl"></div>
-        
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 grid-pattern"></div>
-        </div>
-        
-        {/* Floating tech elements */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute w-2 h-2 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full transition-all duration-700 ${isMobileMenuOpen ? 'opacity-30 animate-float' : 'opacity-0'}`}
-              style={{
-                left: `${20 + Math.random() * 60}%`,
-                top: `${20 + Math.random() * 60}%`,
-                animationDelay: `${i * 0.3}s`,
-                animationDuration: `${4 + Math.random() * 2}s`
-              }}
-            ></div>
-          ))}
-        </div>
-        
-        <div className="relative z-50 flex flex-col justify-center items-center h-full space-y-12 px-8">
-          {/* Mobile menu header */}
-          <div className={`text-center mb-8 transition-all duration-700 delay-200 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <Brain className="w-8 h-8 text-primary-500 animate-pulse-glow" />
-              <span className="text-2xl font-bold font-montserrat tracking-tight text-gradient">
-                THEOCORTEX.AI
-              </span>
-            </div>
-            <p className="text-dark-400 text-sm font-inter">AI Automation Agency</p>
-          </div>
-
-          {/* Enhanced Mobile Navigation Links */}
-          <nav className="space-y-8 w-full max-w-sm">
-            {mobileNavLinks.map((link, index) => (
-              <div
-                key={link.href}
-                className={`transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-                style={{ transitionDelay: `${300 + index * 100}ms` }}
-              >
-                <a
-                  href={link.href}
-                  onClick={(e) => handleMobileNavClick(link.href)}
-                  className="mobile-nav-link group flex items-center justify-between w-full p-6 bg-dark-800/30 backdrop-blur-sm border border-dark-700/50 rounded-2xl transition-all duration-300 hover:bg-dark-700/50 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10 active:scale-98 active:bg-primary-500/10"
-                >
-                  <div className="flex items-center space-x-4">
-                    <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{link.icon}</span>
-                    <span className="text-xl font-montserrat font-semibold text-white group-hover:text-primary-400 transition-colors duration-300">
-                      {link.label}
-                    </span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-dark-400 group-hover:text-primary-400 group-hover:translate-x-1 transition-all duration-300" />
-                </a>
-              </div>
-            ))}
-          </nav>
-
-          {/* Enhanced Mobile CTA */}
-          <div className={`pt-8 w-full max-w-sm transition-all duration-700 delay-700 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="space-y-4">
-              <InteractiveButton 
-                onClick={() => handleMobileNavClick('/contact')}
-                size="lg" 
-                className="w-full mobile-cta-button"
-              >
-                Get Started
-              </InteractiveButton>
-              
-              {/* Contact info */}
-              <div className="text-center">
-                <p className="text-dark-400 text-sm font-inter mb-2">Ready to talk?</p>
-                <a 
-                  href="mailto:theocortex.ai@gmail.com" 
-                  className="text-primary-400 hover:text-primary-300 transition-colors duration-300 text-sm font-medium"
-                >
-                  theocortex.ai@gmail.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Hero Section */}
       <section id="home" className="pt-20 min-h-screen flex items-center justify-center relative">
@@ -1109,17 +989,21 @@ function App() {
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <div>
-                <span className="text-2xl font-bold font-montserrat tracking-tight transition-all duration-300 group-hover:text-primary-400">
+                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300">
                   THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
                 </span>
                 <p className="text-dark-400 font-inter text-sm mt-1">Built with Higher Thinking.</p>
               </div>
             </div>
             
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+            <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8 mb-8 md:mb-0 text-center">
+              <a href="#home" className="nav-link text-sm">Home</a>
               <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#services')}>Services</a>
               <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
-              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>How It Works</a>
+              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>
+                <span className="hidden xs:inline">How It Works</span>
+                <span className="xs:hidden leading-tight">How It<br />Works</span>
+              </a>
               <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#faq')}>FAQ</a>
             </div>
             
@@ -1127,8 +1011,13 @@ function App() {
               <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
               </a>
-              <a href="mailto:theocortex.ai@gmail.com" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Email">
-                <Mail className="w-6 h-6" />
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="LinkedIn">
+                <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>
