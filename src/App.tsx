@@ -599,25 +599,25 @@ function App() {
                   </div>
                   <h3 className="font-montserrat font-bold text-xl mb-6 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{solution.title}</h3>
                   <p className="text-dark-300 leading-relaxed font-light font-inter mb-6 group-hover:text-white transition-colors duration-300">{solution.description}</p>
-                  <div className="flex items-center justify-between mt-auto">
+                     className="nav-link block px-3 py-2 text-base font-medium w-full text-left touch-manipulation"
                     <span className="text-primary-400 font-bold font-montserrat text-sm">{solution.metric}</span>
                     <InteractiveButton 
                       variant="ghost" 
                       icon={ArrowRight}
                       href={(() => {
-                        const routes = [
+                     className="nav-link block px-3 py-2 text-base font-medium w-full text-left touch-manipulation"
                           '#website-design-and-funnels',
                           '#smart-ai-agents', 
                           '#crm-integration-and-appointments'
                         ];
                         return routes[index];
-                      })()}
+                     className="nav-link block px-3 py-2 text-base font-medium w-full text-left touch-manipulation"
                     >
                       Learn More
                     </InteractiveButton>
                   </div>
                 </div>
-              </ScrollReveal>
+                     className="nav-link block px-3 py-2 text-base font-medium w-full text-left touch-manipulation"
             ))}
           </div>
         </div>
@@ -626,7 +626,7 @@ function App() {
       {/* How It Works Section */}
       <section id="how-it-works" className="py-32 relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
+                     className="btn-primary w-full mt-4 touch-manipulation"
             <div className="text-center mb-24">
               <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
                 AUTOMATION, IN JUST <span className="text-gradient">3 STEPS</span>

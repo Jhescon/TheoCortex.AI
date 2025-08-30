@@ -629,7 +629,6 @@
     @apply text-dark-300 hover:text-primary-400 transition-all duration-300 font-inter font-medium relative cursor-pointer select-none;
     /* Ensure proper click handling */
     pointer-events: auto;
-    touch-action: manipulation;
   }
 
   .nav-link::after {
@@ -654,7 +653,6 @@
     /* Mobile touch handling */
     -webkit-tap-highlight-color: rgba(6, 102, 255, 0.2);
     tap-highlight-color: rgba(6, 102, 255, 0.2);
-    touch-action: manipulation;
     user-select: none;
   }
 
@@ -663,9 +661,30 @@
     transition: all 0.1s ease-out;
   }
 
+  /* Mobile touch optimization */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(6, 102, 255, 0.3);
+    tap-highlight-color: rgba(6, 102, 255, 0.3);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
   /* Mobile navigation improvements */
   @media (max-width: 768px) {
-    .nav-link, .footer-nav-link {
+    .nav-link:hover {
+      /* Disable hover effects on mobile to prevent double-tap issues */
+      color: inherit;
+    }
+    
+    .nav-link::after {
+      /* Disable hover underline on mobile */
+      display: none;
+    }
+    
+    .footer-nav-link {
       @apply py-2 px-1;
       min-height: 44px;
       display: flex;
@@ -673,8 +692,13 @@
       justify-content: center;
     }
     
-    .nav-link:active, .footer-nav-link:active {
+    .footer-nav-link:active {
       @apply bg-primary-500/10 rounded-lg;
+    }
+    
+    .touch-manipulation:active {
+      @apply bg-primary-500/10 rounded-lg;
+      transition: all 0.1s ease-out;
     }
   }
 
