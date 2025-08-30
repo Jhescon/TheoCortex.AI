@@ -62,6 +62,30 @@ function App() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  // Enhanced navigation handler with proper section scrolling
+  const handleNavigation = (sectionId: string, isMobile: boolean = false) => {
+    // Close mobile menu immediately if on mobile
+    if (isMobile) {
+      setIsMobileMenuOpen(false);
+    }
+
+    // Small delay to allow menu close animation, then navigate
+    setTimeout(() => {
+      const targetElement = document.getElementById(sectionId);
+      if (targetElement) {
+        // Calculate offset for fixed header
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, isMobile ? 150 : 0);
+  };
+
   useEffect(() => {
     setIsVisible(true);
     
@@ -316,10 +340,30 @@ function App() {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="nav-link">Home</a>
-              <a href="#services" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
-              <a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
-              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>
+              <button 
+                onClick={() => handleNavigation('services')} 
+                className="nav-link cursor-pointer"
+              >
+                Services
+              </button>
+              <button 
+                onClick={() => handleNavigation('about')} 
+                className="nav-link cursor-pointer"
+              >
+                About
+              </button>
+              <button 
+                onClick={() => handleNavigation('how-it-works')} 
+                className="nav-link cursor-pointer"
+              >
+                How It Works
+              </button>
+              <button 
+                onClick={() => handleNavigation('faq')} 
+                className="nav-link cursor-pointer"
+              >
+                FAQ
+              </button>
                 <span className="md:hidden">How It<br />Works</span>
                 <span className="hidden md:inline">How It Works</span>
               </a>
