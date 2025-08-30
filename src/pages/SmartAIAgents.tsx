@@ -128,40 +128,40 @@ export const SmartAIAgents: React.FC = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative">
-        <ParallaxBackground speed={0.3} className="absolute inset-0">
+        <ParallaxBackground speed={0.3} className="absolute inset-0 animate-fade-in-sequential stagger-1">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-pulse-glow" style={{animationDelay: '1s'}}></div>
         </ParallaxBackground>
         
         <div className="section-container text-center relative z-10">
-          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="mb-12 animate-fade-in-sequential stagger-2">
             <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
               <div className="text-gradient mb-4">
                 <TypingEffect 
                   text="AI THAT WORKS" 
-                  delay={500}
+                  delay={800}
                   speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              <div className={`text-white font-bold tracking-tighter transition-all duration-800 delay-200 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+              <div className={`text-white font-bold tracking-tighter transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                 WHILE YOU REST
               </div>
             </h1>
           </div>
           
-          <div className={`transition-all duration-800 delay-500 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
               Our smart agents qualify leads, answer questions, and book appointments 24/7.
             </p>
-            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-800 delay-500">
               We build custom AI assistants that sound human, understand your clients, and save you time. 
               From chat support to lead qualification, they're trained to boost results without burnout.
             </p>
           </div>
 
           {/* Stats Highlight */}
-          <div className={`transition-all duration-800 delay-800 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`transition-all duration-800 delay-700 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <div className="glass-card max-w-md mx-auto mb-16 group cursor-pointer">
               <div className="flex items-center justify-center space-x-4">
                 <Bot className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
@@ -180,18 +180,15 @@ export const SmartAIAgents: React.FC = () => {
       {/* What You Get Section */}
       <section className="py-20 relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in-sequential stagger-8">
               <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
                 WHAT YOU <span className="text-gradient">GET</span>
               </h2>
             </div>
-          </ScrollReveal>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {features.map((feature, index) => (
-              <ScrollReveal key={index} delay={index * 120} direction="up" stagger={true}>
-                <div className="glass-card group cursor-pointer h-full">
+              <div key={index} className={`glass-card group cursor-pointer h-full animate-fade-in-sequential stagger-${9 + index}`}>
                   <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary-400">
                       {feature.icon}
@@ -204,13 +201,12 @@ export const SmartAIAgents: React.FC = () => {
                     {feature.description}
                   </p>
                 </div>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
 
           {/* Additional Capabilities */}
-          <ScrollReveal delay={400}>
-            <div className="glass-card max-w-4xl mx-auto">
+          <div className="glass-card max-w-4xl mx-auto animate-scale-in-smooth stagger-14">
               <h3 className="font-montserrat font-bold text-2xl mb-8 text-center">
                 Advanced <span className="text-gradient">AI Capabilities</span>
               </h3>
@@ -223,20 +219,17 @@ export const SmartAIAgents: React.FC = () => {
                 ))}
               </div>
             </div>
-          </ScrollReveal>
         </div>
       </section>
 
       {/* How It Works Section */}
       <section className="py-20 bg-gradient-to-b from-dark-900/10 to-transparent relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-slide-in-left stagger-15">
               <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
                 HOW OUR <span className="text-gradient">AI AGENTS WORK</span>
               </h2>
             </div>
-          </ScrollReveal>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -259,8 +252,7 @@ export const SmartAIAgents: React.FC = () => {
                 description: "Qualified leads are automatically scheduled or passed to your team for closing."
               }
             ].map((step, index) => (
-              <ScrollReveal key={index} delay={index * 160} direction="scale" stagger={true}>
-                <div className="text-center group cursor-pointer">
+              <div key={index} className={`text-center group cursor-pointer animate-scale-in-smooth stagger-${16 + index}`}>
                   <div className="relative mb-8">
                     <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                       <div className="text-white">
@@ -278,7 +270,7 @@ export const SmartAIAgents: React.FC = () => {
                     {step.description}
                   </p>
                 </div>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
