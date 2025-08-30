@@ -20,6 +20,7 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import { InteractiveButton } from '../components/InteractiveButton';
 import { TypingEffect } from '../components/TypingEffect';
 import { ParallaxBackground } from '../components/ParallaxBackground';
+import { CounterAnimation } from '../components/CounterAnimation';
 
 export const SmartAIAgents: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
