@@ -140,7 +140,7 @@ export const SmartAIAgents: React.FC = () => {
                 <TypingEffect 
                   text="AI THAT WORKS" 
                   delay={500}
-                  speed={120}
+                  speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
