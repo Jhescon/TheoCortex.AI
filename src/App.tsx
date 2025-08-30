@@ -133,6 +133,8 @@ function App() {
     };
   }, []);
 
+  const benefits = [
+    {
       icon: <Clock className="w-6 h-6" />,
       text: "Save 20+ hours per week on repetitive tasks"
     },
