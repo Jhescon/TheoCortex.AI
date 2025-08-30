@@ -657,84 +657,14 @@ function App() {
                     <div className="w-24 h-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                       <div className="text-white">
                         {step.icon}
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-                      }, 100);
-                    }} 
-                    className="nav-link text-sm footer-nav-link text-left touch-manipulation"
-                  >
-                    Home
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        document.getElementById('services')?.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }, 100);
-                    }} 
-                    className="nav-link text-sm footer-nav-link text-left touch-manipulation"
-                  >
-                    Services
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        document.getElementById('about')?.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }, 100);
-                    }} 
-                    className="nav-link text-sm footer-nav-link text-left touch-manipulation"
-                  >
-                    About
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        document.getElementById('how-it-works')?.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }, 100);
-                    }} 
-                    className="nav-link text-sm footer-nav-link text-left touch-manipulation"
-                  >
+                      </div>
+                    </div>
+                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-dark-800 rounded-full flex items-center justify-center border border-primary-400/30">
+                      <span className="text-primary-400 font-montserrat font-bold text-sm">{step.number}</span>
                     </div>
                   </div>
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        document.getElementById('faq')?.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }, 100);
-                    }} 
-                    className="nav-link text-sm footer-nav-link text-left touch-manipulation"
-                  >
-                    FAQ
-                  </button>
+                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{step.title}</h3>
+                  <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">{step.description}</p>
                   
                   {/* Connection Line */}
                   {index < steps.length - 1 && (
@@ -927,21 +857,13 @@ function App() {
           {/* Our Mission */}
           <ScrollReveal delay={800}>
             <div className="text-center mb-20">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                      setTimeout(() => {
-                        window.location.href = '/book-call';
-                      }, 100);
-                    }}
-                </h3>
-                <div className="glass-card group cursor-pointer">
-                  <p className="text-xl md:text-2xl text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
-                    To help businesses grow using <span className="text-primary-400 font-semibold">divine intelligence</span> by blending human insight with smart technology
-                  </button>
-                </div>
+              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
+                OUR <span className="text-gradient">MISSION</span>
+              </h3>
+              <div className="glass-card group cursor-pointer">
+                <p className="text-xl md:text-2xl text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
+                  To help businesses grow using <span className="text-primary-400 font-semibold">divine intelligence</span> by blending human insight with smart technology
+                </p>
               </div>
             </div>
           </ScrollReveal>
