@@ -58,6 +58,28 @@ function App() {
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
+  const handleMobileNavClick = (href: string) => {
+    // Close mobile menu immediately
+    setMobileMenuOpen(false);
+    
+    // Small delay to allow menu close animation, then navigate
+    setTimeout(() => {
+      if (href.startsWith('#')) {
+        // Handle anchor links with smooth scrolling
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      } else {
+        // Handle regular page navigation
+        window.location.href = href;
+      }
+    }, 150);
+  };
+
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
