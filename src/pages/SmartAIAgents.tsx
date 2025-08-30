@@ -269,7 +269,6 @@ export const SmartAIAgents: React.FC = () => {
                     {step.description}
                   </p>
                 </div>
-              </div>
             ))}
           </div>
         </div>
