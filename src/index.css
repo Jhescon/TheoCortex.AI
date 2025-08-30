@@ -782,7 +782,7 @@
     }
     
     .touch-manipulation:active {
-      @apply bg-primary-500/15 rounded-lg scale-98;
+      @apply bg-primary-500/15 rounded-lg scale-95;
       transition: all 0.1s ease-out;
     }
 
