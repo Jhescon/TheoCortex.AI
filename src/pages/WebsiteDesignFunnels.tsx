@@ -28,6 +28,9 @@ export const WebsiteDesignFunnels: React.FC = () => {
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Ensure page starts at top without animation
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const features = [
@@ -63,7 +66,7 @@ export const WebsiteDesignFunnels: React.FC = () => {
   ];
 
   return (
-    <div className={`min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+    <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 opacity-30">
         <div className="absolute inset-0 grid-pattern"></div>

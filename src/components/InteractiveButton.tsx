@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { type LucideIcon } from 'lucide-react';
 import { LoadingSpinner } from './LoadingSpinner';
-import { AILoadingScreen } from './AILoadingScreen';
 
 interface InteractiveButtonProps {
   children: React.ReactNode;
@@ -16,7 +15,6 @@ interface InteractiveButtonProps {
   loading?: boolean;
   href?: string;
   target?: string;
-  isNavigation?: boolean;
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
@@ -31,40 +29,24 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   disabled = false,
   loading = false,
   href,
-  target,
-  isNavigation = false
+  target
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showAILoader, setShowAILoader] = useState(false);
 
   const handleClick = async () => {
-    if (href && isNavigation) {
-      // Show AI loading animation for navigation
-      setShowAILoader(true);
-      
-      // Wait for animation to complete before navigating
-      setTimeout(() => {
-        window.location.href = href;
-      }, 1500); // 1.5s for the AI loading animation
-      
-      return;
-    }
-    
-    if (onClick && !disabled && !loading && !isLoading) {
-      if (!href) {
-        setIsLoading(true);
-        try {
-          await onClick();
-        } finally {
-          setTimeout(() => setIsLoading(false), 100);
-        }
-      } else {
-        // For href links with onClick, execute onClick but don't prevent navigation
-        try {
-          await onClick();
-        } catch (error) {
-          console.error('Click handler error:', error);
-        }
+    if (onClick && !disabled && !loading && !isLoading && !href) {
+      setIsLoading(true);
+      try {
+        await onClick();
+      } finally {
+        setTimeout(() => setIsLoading(false), 100);
+      }
+    } else if (onClick && href) {
+      // For href links, execute onClick but don't prevent navigation
+      try {
+        await onClick();
+      } catch (error) {
+        console.error('Click handler error:', error);
       }
     }
   };
@@ -108,9 +90,7 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
         )
       )}
       
-      <span className="relative z-10">
-        {children}
-      </span>
+      <span className="relative z-10">{children}</span>
       
       {!isButtonLoading && Icon && iconPosition === 'right' && (
         <Icon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:rotate-12" />
@@ -129,22 +109,17 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
 
   if (href) {
     return (
-      <>
-        <a
-          href={isNavigation ? undefined : href}
-          target={target}
-          onClick={handleClick}
-          className={buttonClasses}
-          aria-disabled={isDisabled}
-        >
-          {/* Animated background overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
-          {buttonContent}
-        </a>
-        
-        {/* AI Loading Screen */}
-        <AILoadingScreen isVisible={showAILoader} />
-      </>
+      <a
+        href={href}
+        target={target}
+        onClick={handleClick}
+        className={buttonClasses}
+        aria-disabled={isDisabled}
+      >
+        {/* Animated background overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+        {buttonContent}
+      </a>
     );
   }
 
