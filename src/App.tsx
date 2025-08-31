@@ -243,7 +243,7 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
         <div className="section-container text-center relative z-10">
           <div className="mb-12 animate-fade-in-sequential stagger-2">
             <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
-              <div className="text-gradient mb-4">
+              <div className="text-gradient mb-4 animate-tech-glow">
                 <TypingEffect 
                   text="AI AUTOMATION" 
                   delay={800}
@@ -251,14 +251,14 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 animate-digital-matrix ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                 FOR MODERN BUSINESS
               </div>
             </h1>
           </div>
           
           <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light animate-hologram-flicker">
               Stop chasing leads manually. Let AI handle the heavy lifting while you focus on what matters most.
             </p>
             <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-800 delay-500">
@@ -274,6 +274,7 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                 icon={Calendar} 
                 href="#book-call"
                 isNavigation={true}
+                className="animate-glow-pulse"
               >
                 Book Free Call
               </InteractiveButton>
@@ -281,16 +282,17 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                 variant="secondary" 
                 size="lg" 
                 href="#services"
+                className="animate-tech-glow"
               >
                 See Our Services
               </InteractiveButton>
             </div>
             
-            <div className="glass-card max-w-md mx-auto group cursor-pointer">
+            <div className="glass-card max-w-md mx-auto group cursor-pointer animate-circuit-pulse">
               <div className="flex items-center justify-center space-x-4">
-                <Zap className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
+                <Zap className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300 animate-ai-glow" />
                 <div>
-                  <div className="text-3xl font-montserrat font-bold text-gradient">+40%</div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient animate-digital-flicker">+40%</div>
                   <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
                     average increase in qualified leads with AI automation
                   </p>
@@ -305,23 +307,23 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
       <section id="services" className="py-20 relative">
         <div className="section-container relative z-10">
           <div className="text-center mb-16 animate-fade-in-sequential stagger-8">
-            <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
-              OUR <span className="text-gradient">SERVICES</span>
+            <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+              OUR <span className="text-gradient tech-gradient-text animate-gradient-wave">SERVICES</span>
             </h2>
-            <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
               Complete AI automation solutions designed to scale your business effortlessly.
             </p>
           </div>
           
           <div className="grid lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div key={index} className={`glass-card group cursor-pointer h-full animate-fade-in-sequential stagger-${9 + index}`}>
-                <div className="w-20 h-20 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-primary-400">
+              <div key={index} className={`glass-card group cursor-pointer h-full animate-fade-in-sequential stagger-${9 + index} hover:animate-tech-glow`}>
+                <div className="w-20 h-20 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300 animate-circuit-pulse">
+                  <div className="text-primary-400 animate-ai-pulse">
                     {service.icon}
                   </div>
                 </div>
-                <h3 className="font-montserrat font-bold text-2xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">
+                <h3 className="font-montserrat font-bold text-2xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
                   {service.title}
                 </h3>
                 <p className="text-dark-300 mb-6 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
@@ -330,14 +332,14 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                 <ul className="space-y-2 mb-8">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center space-x-3 group-hover:text-white transition-colors duration-300">
-                      <CheckCircle className="w-4 h-4 text-primary-400 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-primary-400 flex-shrink-0 animate-ai-pulse" />
                       <span className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <InteractiveButton 
                   variant="secondary" 
-                  className="w-full" 
+                  className="w-full animate-glow-pulse" 
                   icon={ArrowRight}
                   href={service.href}
                   isNavigation={true}
@@ -356,17 +358,17 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
               <div>
-                <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-8 tracking-tighter">
-                  WHY <span className="text-gradient">THEOCORTEX.AI?</span>
+                <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-8 tracking-tighter animate-matrix-text">
+                  WHY <span className="text-gradient tech-gradient-text animate-gradient-wave">THEOCORTEX.AI?</span>
                 </h2>
                 <div className="space-y-6 text-lg text-dark-300 leading-relaxed font-light">
-                  <p>
+                  <p className="animate-hologram-flicker">
                     We're not just another tech agency. We're automation specialists who understand that your time is your most valuable asset.
                   </p>
-                  <p>
+                  <p className="animate-digital-flicker">
                     While others build generic solutions, we create custom AI systems tailored to your specific business needs. Every automation is designed to feel natural, work seamlessly, and deliver measurable results.
                   </p>
-                  <p>
+                  <p className="animate-hologram-flicker">
                     Our clients don't just save time—they transform their entire business operations and scale without the overwhelm.
                   </p>
                 </div>
@@ -375,6 +377,7 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                     href="#contact-form" 
                     isNavigation={true}
                     icon={MessageSquare}
+                    className="animate-glow-pulse"
                   >
                     Start Your Transformation
                   </InteractiveButton>
@@ -390,8 +393,8 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                   { number: "40%", label: "Time Saved Average" },
                   { number: "2x", label: "Lead Response Rate" }
                 ].map((stat, index) => (
-                  <div key={index} className="glass-card text-center group cursor-pointer">
-                    <div className="text-4xl font-montserrat font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div key={index} className="glass-card text-center group cursor-pointer animate-tech-glow">
+                    <div className="text-4xl font-montserrat font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300 animate-digital-matrix">
                       {stat.number}
                     </div>
                     <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
@@ -410,10 +413,10 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
         <div className="section-container relative z-10">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
-                HOW IT <span className="text-gradient">WORKS</span>
+              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+                HOW IT <span className="text-gradient tech-gradient-text animate-gradient-wave">WORKS</span>
               </h2>
-              <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light">
+              <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
                 Simple process, powerful results. Here's how we transform your business operations.
               </p>
             </div>
@@ -441,18 +444,18 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
               }
             ].map((step, index) => (
               <ScrollReveal key={index} delay={index * 200} direction="scale" stagger={true}>
-                <div className="text-center group cursor-pointer">
+                <div className="text-center group cursor-pointer animate-tech-glow">
                   <div className="relative mb-8">
-                    <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-white">
+                    <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 animate-circuit-pulse">
+                      <div className="text-white animate-ai-glow">
                         {step.icon}
                       </div>
                     </div>
-                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-ai-pulse">
                       <span className="font-montserrat font-bold text-white text-sm">{step.step}</span>
                     </div>
                   </div>
-                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">
+                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
                     {step.title}
                   </h3>
                   <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
@@ -470,8 +473,8 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
         <div className="section-container relative z-10">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter">
-                FREQUENTLY ASKED <span className="text-gradient">QUESTIONS</span>
+              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+                FREQUENTLY ASKED <span className="text-gradient tech-gradient-text animate-gradient-wave">QUESTIONS</span>
               </h2>
             </div>
           </ScrollReveal>
@@ -479,23 +482,23 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
           <div className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <ScrollReveal key={index} delay={index * 100} stagger={true}>
-                <div className="glass-card group cursor-pointer">
+                <div className="glass-card group cursor-pointer animate-tech-glow">
                   <button
                     onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
                     className="w-full text-left flex items-center justify-between p-2 focus:outline-none"
                   >
-                    <h3 className="font-montserrat font-bold text-lg group-hover:text-primary-400 transition-colors duration-300">
+                    <h3 className="font-montserrat font-bold text-lg group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
                       {faq.question}
                     </h3>
                     <ChevronDown 
-                      className={`w-6 h-6 text-primary-400 transition-transform duration-300 ${
+                      className={`w-6 h-6 text-primary-400 transition-transform duration-300 animate-ai-pulse ${
                         openFAQ === index ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   {openFAQ === index && (
-                    <div className="mt-4 pt-4 border-t border-dark-700/50">
-                      <p className="text-dark-300 leading-relaxed font-light font-inter">
+                    <div className="mt-4 pt-4 border-t border-dark-700/50 animate-fade-in">
+                      <p className="text-dark-300 leading-relaxed font-light font-inter animate-hologram-flicker">
                         {faq.answer}
                       </p>
                     </div>
@@ -511,13 +514,13 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
       <section className="py-20 relative">
         <div className="section-container text-center relative z-10">
           <ScrollReveal>
-            <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter">
-              READY TO <span className="text-gradient">AUTOMATE YOUR SUCCESS?</span>
+            <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter animate-matrix-text">
+              READY TO <span className="text-gradient tech-gradient-text animate-gradient-wave">AUTOMATE YOUR SUCCESS?</span>
             </h2>
           </ScrollReveal>
           
           <ScrollReveal delay={200}>
-            <p className="text-xl text-dark-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl text-dark-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
               Book your free strategy call and discover how AI can transform your business operations.
             </p>
           </ScrollReveal>
@@ -529,11 +532,12 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
                 icon={ArrowRight} 
                 href="#book-call"
                 isNavigation={true}
+                className="animate-glow-pulse"
               >
                 Book Your Free Call Now
               </InteractiveButton>
             </div>
-            <p className="text-dark-400 text-lg font-light italic font-inter">
+            <p className="text-dark-400 text-lg font-light italic font-inter animate-digital-flicker">
               No obligations. Just results-focused strategy.
             </p>
           </ScrollReveal>
@@ -546,11 +550,11 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
           <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:space-x-12">
             <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="flex items-center space-x-4 mb-8 md:mb-0 group cursor-pointer">
               <div className="relative">
-                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
+                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300 animate-brain-rotate" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <div>
-                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300">
+                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
                   THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
                 </span>
                 <p className="text-dark-400 font-inter text-sm mt-1">
@@ -573,22 +577,22 @@ const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: b
             </div>
             
             <div className="flex items-center space-x-8">
-              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
+              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
               </a>
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="X (formerly Twitter)">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="LinkedIn">
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="LinkedIn">
                 <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>
           
           <div className="border-t border-dark-800/30 pt-10 text-center">
-            <p className="text-dark-400 font-light font-inter">
+            <p className="text-dark-400 font-light font-inter animate-digital-flicker">
               © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
             </p>
           </div>
