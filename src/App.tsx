@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { TechLoadingAnimation } from './components/TechLoadingAnimation';
 import { BookCall } from './pages/BookCall';
 import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
@@ -46,6 +46,7 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = (path: string) => {
     setIsNavigating(true);
@@ -54,22 +55,12 @@ function AppContent() {
       setIsNavigating(false);
     }, 2000);
   };
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
   }, []);
-
-  const handleNavigation = (path: string) => {
-    setIsNavigating(true);
-    setTimeout(() => {
-      navigate(path);
-      setIsNavigating(false);
-    }, 2000);
-  };
 
   if (isNavigating) {
     return <TechLoadingAnimation duration={2000} />;
