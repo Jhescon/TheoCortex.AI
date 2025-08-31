@@ -166,7 +166,7 @@ export const SmartAIAgents: React.FC = () => {
               <div className="flex items-center justify-center space-x-4">
                 <Bot className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
                 <div>
-                  <div className="text-3xl font-montserrat font-bold text-gradient">+300%</div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient">+250%</div>
                   <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
                     lead qualification speed with automated conversations
                   </p>
