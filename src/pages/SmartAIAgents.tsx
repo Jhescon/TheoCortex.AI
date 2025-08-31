@@ -21,7 +21,11 @@ import { InteractiveButton } from '../components/InteractiveButton';
 import { TypingEffect } from '../components/TypingEffect';
 import { ParallaxBackground } from '../components/ParallaxBackground';
 
-export const SmartAIAgents: React.FC = () => {
+interface SmartAIAgentsProps {
+  onNavigate?: (path: string) => void;
+}
+
+export const SmartAIAgents: React.FC<SmartAIAgentsProps> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -112,7 +116,8 @@ export const SmartAIAgents: React.FC = () => {
             
             <div className="flex items-center space-x-4 md:space-x-8 ml-4 md:ml-0">
               <InteractiveButton 
-                onClick={() => window.location.href = '/'} 
+                href="/"
+                onNavigate={onNavigate}
                 variant="secondary" 
                 className="flex items-center space-x-1 px-3 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Return to homepage"

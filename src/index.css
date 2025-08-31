@@ -597,6 +597,293 @@
 
 /* Component Styles */
 @layer components {
+  /* Tech Loading Animation Styles */
+  .tech-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: techGridMove 15s linear infinite;
+  }
+
+  .tech-circuit-bg {
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(102, 0, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
+  }
+
+  .tech-particle {
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #0066FF, #00FFFF);
+    border-radius: 50%;
+    animation: techParticleFloat 6s ease-in-out infinite;
+  }
+
+  .tech-neural-path {
+    stroke-dasharray: 10 5;
+    animation: techNeuralFlow 4s ease-in-out infinite;
+  }
+
+  .tech-progress-ring {
+    filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.5));
+  }
+
+  .tech-brain-container {
+    animation: techBrainPulse 2s ease-in-out infinite;
+  }
+
+  .tech-brain-icon {
+    animation: techBrainRotate 8s linear infinite;
+  }
+
+  .tech-orbit-container {
+    animation: techOrbitRotate 12s linear infinite;
+  }
+
+  .tech-orbit-element {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(45deg, #0066FF, #00FFFF);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+  }
+
+  .tech-orbit-1 {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(60px);
+    animation: techOrbit1 3s linear infinite;
+  }
+
+  .tech-orbit-2 {
+    transform: translate(-50%, -50%) rotate(120deg) translateX(60px);
+    animation: techOrbit2 3s linear infinite;
+  }
+
+  .tech-orbit-3 {
+    transform: translate(-50%, -50%) rotate(240deg) translateX(60px);
+    animation: techOrbit3 3s linear infinite;
+  }
+
+  .tech-progress-text {
+    animation: techProgressGlow 2s ease-in-out infinite;
+  }
+
+  .tech-phase-text {
+    animation: techPhaseFlicker 3s ease-in-out infinite;
+  }
+
+  .tech-data-bar {
+    animation: techDataPulse 1.5s ease-in-out infinite;
+  }
+
+  .tech-status-active {
+    animation: techStatusGlow 1s ease-in-out infinite;
+  }
+
+  .tech-scan-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00FFFF, transparent);
+    animation: techScanMove 4s ease-in-out infinite;
+  }
+
+  .tech-corner-element {
+    animation: techCornerPulse 3s ease-in-out infinite;
+  }
+
+  /* Animation Keyframes */
+  @keyframes techGridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  @keyframes techParticleFloat {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-20px) scale(1.2);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-10px) scale(0.8);
+      opacity: 1;
+    }
+    75% {
+      transform: translateY(-30px) scale(1.1);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes techNeuralFlow {
+    0% {
+      stroke-dashoffset: 0;
+      opacity: 0.3;
+    }
+    50% {
+      stroke-dashoffset: -15;
+      opacity: 0.8;
+    }
+    100% {
+      stroke-dashoffset: -30;
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes techBrainPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(0, 102, 255, 0.6), 0 0 40px rgba(102, 0, 255, 0.3);
+    }
+  }
+
+  @keyframes techBrainRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes techOrbitRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes techOrbit1 {
+    0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) translateX(60px) scale(1); }
+    50% { opacity: 0.5; transform: translate(-50%, -50%) rotate(180deg) translateX(60px) scale(1.5); }
+    100% { opacity: 1; transform: translate(-50%, -50%) rotate(360deg) translateX(60px) scale(1); }
+  }
+
+  @keyframes techOrbit2 {
+    0% { opacity: 0.8; transform: translate(-50%, -50%) rotate(120deg) translateX(60px) scale(1.2); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) rotate(300deg) translateX(60px) scale(0.8); }
+    100% { opacity: 0.8; transform: translate(-50%, -50%) rotate(480deg) translateX(60px) scale(1.2); }
+  }
+
+  @keyframes techOrbit3 {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) rotate(240deg) translateX(60px) scale(0.9); }
+    50% { opacity: 1; transform: translate(-50%, -50%) rotate(420deg) translateX(60px) scale(1.3); }
+    100% { opacity: 0.6; transform: translate(-50%, -50%) rotate(600deg) translateX(60px) scale(0.9); }
+  }
+
+  @keyframes techProgressGlow {
+    0%, 100% {
+      text-shadow: 
+        0 0 10px rgba(0, 102, 255, 0.5),
+        0 0 20px rgba(0, 102, 255, 0.3),
+        0 0 30px rgba(102, 0, 255, 0.2);
+    }
+    50% {
+      text-shadow: 
+        0 0 15px rgba(0, 102, 255, 0.8),
+        0 0 30px rgba(0, 102, 255, 0.5),
+        0 0 45px rgba(102, 0, 255, 0.4);
+    }
+  }
+
+  @keyframes techPhaseFlicker {
+    0%, 90%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    5% {
+      opacity: 0.8;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    }
+    10% {
+      opacity: 1;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
+  }
+
+  @keyframes techDataPulse {
+    0%, 100% {
+      transform: scaleY(0.3);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes techStatusGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(0, 102, 255, 0.5);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(0, 102, 255, 0.8), 0 0 25px rgba(0, 255, 255, 0.4);
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes techScanMove {
+    0% {
+      left: -100%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes techCornerPulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .tech-grid-pattern,
+    .tech-particle,
+    .tech-neural-path,
+    .tech-brain-container,
+    .tech-brain-icon,
+    .tech-orbit-container,
+    .tech-orbit-element,
+    .tech-progress-text,
+    .tech-phase-text,
+    .tech-data-bar,
+    .tech-status-active,
+    .tech-scan-line,
+    .tech-corner-element {
+      animation: none !important;
+    }
+    
+    .tech-progress-text {
+      text-shadow: 0 0 10px rgba(0, 102, 255, 0.5) !important;
+    }
+    
+    .tech-phase-text {
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5) !important;
+    }
+  }
+
   .animate-fade-in-primary {
     animation: fadeInPrimary 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
