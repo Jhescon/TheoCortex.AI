@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { TechLoadingAnimation } from './components/TechLoadingAnimation';
 import { BookCall } from './pages/BookCall';
 import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
@@ -46,6 +46,15 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
   const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    setIsNavigating(true);
+    setTimeout(() => {
+      navigate(path);
+      setIsNavigating(false);
+    }, 2000);
+  };
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -73,7 +82,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage onNavigate={handleNavigation} />} />
         <Route path="/book-call" element={<BookCall onNavigate={handleNavigation} />} />
         <Route path="/website-design-funnels" element={<WebsiteDesignFunnels onNavigate={handleNavigation} />} />
         <Route path="/smart-ai-agents" element={<SmartAIAgents onNavigate={handleNavigation} />} />
