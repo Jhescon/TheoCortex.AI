@@ -653,6 +653,26 @@
     animation: glowPulse 2s ease-in-out infinite;
   }
 
+  .animate-ai-glow {
+    animation: aiGlow 2s ease-in-out infinite;
+  }
+
+  .animate-brain-pulse {
+    animation: brainPulse 1.5s ease-in-out infinite;
+  }
+
+  .animate-brain-rotate {
+    animation: brainRotate 8s linear infinite;
+  }
+
+  .animate-progress-circle {
+    animation: progressCircle 1.5s ease-out forwards;
+  }
+
+  .animate-spin-slow {
+    animation: spinSlow 3s linear infinite;
+  }
+
   .tech-gradient-text {
     background: linear-gradient(
       90deg,
