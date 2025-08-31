@@ -231,7 +231,6 @@ export const BookCall: React.FC<BookCallProps> = ({ onNavigate }) => {
                     {item.description}
                   </p>
                 </div>
-              </div>
             ))}
           </div>
         </div>
