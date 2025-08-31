@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { type LucideIcon } from 'lucide-react';
 import { LoadingSpinner } from './LoadingSpinner';
-import { AINavigationLoader } from './AINavigationLoader';
 
 interface InteractiveButtonProps {
   children: React.ReactNode;
@@ -16,7 +15,6 @@ interface InteractiveButtonProps {
   loading?: boolean;
   href?: string;
   target?: string;
-  isNavigation?: boolean;
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
@@ -31,20 +29,11 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   disabled = false,
   loading = false,
   href,
-  target,
-  isNavigation = false
+  target
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showAILoader, setShowAILoader] = useState(false);
 
-  const handleClick = async (e?: React.MouseEvent) => {
-    // Handle navigation with AI loading animation
-    if (isNavigation && href) {
-      e?.preventDefault();
-      setShowAILoader(true);
-      return;
-    }
-
+  const handleClick = async () => {
     if (onClick && !disabled && !loading && !isLoading && !href) {
       setIsLoading(true);
       try {
@@ -59,13 +48,6 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
       } catch (error) {
         console.error('Click handler error:', error);
       }
-    }
-  };
-
-  const handleAILoadingComplete = () => {
-    setShowAILoader(false);
-    if (href) {
-      window.location.href = href;
     }
   };
 
@@ -100,13 +82,6 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
 
   const buttonContent = (
     <>
-      {/* AI Navigation Loader */}
-      <AINavigationLoader 
-        isVisible={showAILoader} 
-        onComplete={handleAILoadingComplete}
-        duration={1800}
-      />
-
       {isButtonLoading ? (
         <LoadingSpinner size="sm" className="mr-2" />
       ) : (
@@ -135,7 +110,7 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   if (href) {
     return (
       <a
-        href={isNavigation ? '#' : href}
+        href={href}
         target={target}
         onClick={handleClick}
         className={buttonClasses}
