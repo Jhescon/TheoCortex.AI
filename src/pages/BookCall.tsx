@@ -22,11 +22,7 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import { InteractiveButton } from '../components/InteractiveButton';
 import { TypingEffect } from '../components/TypingEffect';
 
-interface BookCallProps {
-  onNavigate?: (path: string) => void;
-}
-
-export const BookCall: React.FC<BookCallProps> = ({ onNavigate }) => {
+export const BookCall: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -123,8 +119,7 @@ export const BookCall: React.FC<BookCallProps> = ({ onNavigate }) => {
             
             <div className="flex items-center space-x-4 md:space-x-8 ml-4 md:ml-0">
               <InteractiveButton 
-                href="/"
-                onNavigate={onNavigate}
+                onClick={() => window.location.href = '/'} 
                 variant="secondary" 
                 className="flex items-center space-x-1 px-3 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Return to homepage"
@@ -200,6 +195,7 @@ export const BookCall: React.FC<BookCallProps> = ({ onNavigate }) => {
                     {highlight.description}
                   </p>
                 </div>
+              </div>
             ))}
           </div>
         </div>
@@ -231,6 +227,7 @@ export const BookCall: React.FC<BookCallProps> = ({ onNavigate }) => {
                     {item.description}
                   </p>
                 </div>
+              </div>
             ))}
           </div>
         </div>
