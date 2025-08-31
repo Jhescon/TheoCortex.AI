@@ -195,6 +195,7 @@ export const BookCall: React.FC = () => {
                     {highlight.description}
                   </p>
                 </div>
+              </div>
             ))}
           </div>
         </div>
