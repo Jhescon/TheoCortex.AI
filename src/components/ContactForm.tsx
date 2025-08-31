@@ -235,7 +235,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onNavigate }) => {
                 <span>We'll contact you to schedule your strategy call</span>
               </p>
             </div>
-            <InteractiveButton onClick={() => window.location.href = '/'} variant="primary">
             <InteractiveButton href="/" onNavigate={onNavigate} variant="primary">
               Return to Home
             </InteractiveButton>
