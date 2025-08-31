@@ -1,277 +1,149 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Brain, 
-  ChevronDown, 
-  ChevronUp, 
+  Globe, 
   Bot, 
   Database, 
-  Mail, 
-  Users, 
-  Globe, 
-  ExternalLink, 
-  Linkedin, 
-  Instagram,
-  Zap, 
-  CheckCircle, 
-  ArrowRight, 
-  Clock, 
-  TrendingUp, 
-  Shield, 
-  Cpu, 
-  Code, 
-  Sparkles, 
-  Target, 
-  Rocket, 
-  Award, 
-  MessageSquare, 
   Calendar, 
+  ArrowRight, 
+  Menu, 
+  X, 
+  CheckCircle, 
+  Zap, 
+  Target, 
+  Users, 
   BarChart3, 
-  Workflow,
-  Menu,
-  X
+  MessageSquare, 
+  ChevronDown,
+  Instagram,
+  Linkedin
 } from 'lucide-react';
 import { ScrollReveal } from './components/ScrollReveal';
 import { InteractiveButton } from './components/InteractiveButton';
 import { TypingEffect } from './components/TypingEffect';
 import { ParallaxBackground } from './components/ParallaxBackground';
 import { ContactForm } from './components/ContactForm';
-import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
+import { BookCall } from './pages/BookCall';
 import { SmartAIAgents } from './pages/SmartAIAgents';
 import { CRMIntegration } from './pages/CRMIntegration';
+import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
 
-// Smooth scroll navigation handler
-const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-  e.preventDefault();
-  const element = document.getElementById(targetId);
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
-};
+type Page = 'home' | 'book-call' | 'smart-ai-agents' | 'crm-integration' | 'website-design-funnels' | 'contact-form';
 
 function App() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
 
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
+  // Handle URL hash changes
   useEffect(() => {
-    setIsVisible(true);
-    
-    // Enhanced routing with immediate scroll to top
     const handleHashChange = () => {
-      const hash = window.location.hash;
-      
-      // CRITICAL: Force immediate scroll to top with multiple methods
-      const forceScrollToTop = () => {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        if (window.pageYOffset !== 0) {
-          window.pageYOffset = 0;
-        }
-      };
-      
-      // Execute immediately
-      forceScrollToTop();
-      
-      // Execute again after a tiny delay to ensure it takes effect
-      setTimeout(() => {
-        forceScrollToTop();
-        
-        // Then change the page content
-        if (hash === '#book-call') {
+      const hash = window.location.hash.slice(1);
+      switch (hash) {
+        case 'book-call':
           setCurrentPage('book-call');
-        } else if (hash === '#website-design-and-funnels') {
-          setCurrentPage('website-design-and-funnels');
-        } else if (hash === '#smart-ai-agents') {
+          break;
+        case 'smart-ai-agents':
           setCurrentPage('smart-ai-agents');
-        } else if (hash === '#crm-integration-and-appointments') {
-          setCurrentPage('crm-integration-and-appointments');
-        } else {
+          break;
+        case 'crm-integration':
+          setCurrentPage('crm-integration');
+          break;
+        case 'website-design-funnels':
+          setCurrentPage('website-design-funnels');
+          break;
+        case 'contact-form':
+          setCurrentPage('contact-form');
+          break;
+        default:
           setCurrentPage('home');
-        }
-      }, 1);
+      }
     };
 
+    // Set initial page based on hash
     handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
     
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    // Only prevent default for same-page navigation (hash links)
-    // Only prevent default for same-page hash navigation
-    if (targetId.startsWith('#')) {
-      e.preventDefault();
-      const element = document.getElementById(targetId.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    // For cross-page navigation, let the browser handle it naturally (no preventDefault)
-    // For external links or different pages, let the browser handle navigation naturally
-  };
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    const element = document.getElementById(targetId.substring(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  // Render current page
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'book-call':
+        return <BookCall />;
+      case 'smart-ai-agents':
+        return <SmartAIAgents />;
+      case 'crm-integration':
+        return <CRMIntegration />;
+      case 'website-design-funnels':
+        return <WebsiteDesignFunnels />;
+      case 'contact-form':
+        return <ContactForm />;
+      default:
+        return <HomePage typingComplete={typingComplete} setTypingComplete={setTypingComplete} />;
     }
   };
 
-  const handleMobileNavClick = (path: string) => {
-    setMobileMenuOpen(false);
-    window.location.hash = path;
-  };
+  return renderCurrentPage();
+}
 
-  const benefits = [
-    {
-      icon: <Clock className="w-6 h-6" />,
-      text: "Save 20+ hours per week on repetitive tasks"
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6" />,
-      text: "Increase lead conversion by 300%+"
-    },
-    {
-      icon: <Bot className="w-6 h-6" />,
-      text: "24/7 automated customer engagement"
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      text: "Enterprise-grade security & reliability"
-    }
-  ];
+// HomePage Component
+const HomePage: React.FC<{ typingComplete: boolean; setTypingComplete: (value: boolean) => void }> = ({ 
+  typingComplete, 
+  setTypingComplete 
+}) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const painPoints = [
-    {
-      icon: <MessageSquare className="w-6 h-6" />,
-      text: "You're juggling DMs, emails, and client calls 24/7"
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      text: "Your website looks nice—but doesn't sell"
-    },
-    {
-      icon: <Target className="w-6 h-6" />,
-      text: "You lose leads because you don't follow up fast enough"
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6" />,
-      text: "You want to scale, but your systems aren't built for growth"
-    }
-  ];
-
-  const solutions = [
+  const services = [
     {
       icon: <Globe className="w-12 h-12" />,
       title: "Website Design & Funnels",
-      description: "Strategic, beautiful websites and sales funnels that convert leads into paying clients.",
-      metric: "+38% lead response rate",
-      color: "from-primary-400 to-secondary-400"
+      description: "Custom websites and high-converting funnels that turn visitors into paying clients.",
+      features: ["Responsive Design", "Conversion Optimization", "Brand Integration", "SEO Ready"],
+      href: "#website-design-funnels"
     },
     {
       icon: <Bot className="w-12 h-12" />,
       title: "Smart AI Agents",
-      description: "Custom-built AI assistants that chat, qualify, and book leads while you sleep.",
-      metric: "+250% qualification speed",
-      color: "from-secondary-400 to-primary-400"
+      description: "24/7 AI assistants that qualify leads, answer questions, and book appointments automatically.",
+      features: ["Lead Qualification", "24/7 Availability", "Natural Conversations", "CRM Integration"],
+      href: "#smart-ai-agents"
     },
     {
-      icon: <Calendar className="w-12 h-12" />,
+      icon: <Database className="w-12 h-12" />,
       title: "CRM Integration & Appointment Setting",
-      description: "Never miss a lead again. Track, nurture, and schedule automatically.",
-      metric: "+180% booking rate",
-      color: "from-primary-500 to-secondary-500"
-    }
-  ];
-
-  const steps = [
-    {
-      number: "01",
-      icon: <MessageSquare className="w-8 h-8" />,
-      title: "Book Your Free Call",
-      description: "We audit your current system and goals."
-    },
-    {
-      number: "02",
-      icon: <Workflow className="w-8 h-8" />,
-      title: "We Build Your AI Stack",
-      description: "Custom website, agent, CRM, and automations."
-    },
-    {
-      number: "03",
-      icon: <Rocket className="w-8 h-8" />,
-      title: "You Scale on Autopilot",
-      description: "Save time, convert more, grow with less stress."
+      description: "Seamless systems that capture, nurture, and convert leads without manual effort.",
+      features: ["Automated Follow-ups", "Calendar Sync", "Lead Tracking", "Analytics Dashboard"],
+      href: "#crm-integration"
     }
   ];
 
   const faqs = [
     {
-      question: "What exactly does TheoCortex.AI do?",
-      answer: "We help businesses automate growth using AI-powered websites, smart agents, and CRM integration. Our systems are built to convert leads, book appointments, and simplify customer engagement with less manual effort."
+      question: "How quickly can you implement AI automation?",
+      answer: "Most basic automations are live within 1-2 weeks. Complex integrations may take 3-4 weeks depending on your current systems."
     },
     {
-      question: "How do your smart AI agents work?",
-      answer: "Our AI agents are custom-built to handle DMs, live chat, email, and lead qualification. They engage, respond, and schedule calls automatically — all while sounding human and professional."
+      question: "Do I need technical knowledge to use these systems?",
+      answer: "Not at all. We handle all the technical setup and provide simple dashboards for you to monitor and manage everything."
     },
     {
-      question: "What platforms do you work with for CRM integration?",
-      answer: "We integrate with leading CRM tools like GoHighLevel, HubSpot, and others. Whether you're just starting or already have a system, we make sure it's optimized for follow-ups and automation."
+      question: "What if I already have a website or CRM?",
+      answer: "Perfect! We integrate with existing systems like GoHighLevel, HubSpot, Calendly, and most popular platforms."
     },
     {
-      question: "Will the website and funnel be mobile-friendly?",
-      answer: "Yes, everything we build is fully responsive and optimized for mobile, tablet, and desktop. Your site will look amazing and convert well on every device."
-    },
-    {
-      question: "Can your services fit any type of business?",
-      answer: "Definitely. We've worked with coaches, consultants, agencies, and service providers. If you generate leads or take bookings, our system can help you automate and grow."
-    },
-    {
-      question: "How long does it take to get everything set up?",
-      answer: "Setup time depends on the project, but most clients see results and working automations within a few weeks. We'll walk you through this during your free call."
+      question: "How much does AI automation cost?",
+      answer: "Investment varies based on your needs. We'll discuss pricing during your free strategy call after understanding your specific requirements."
     },
     {
       question: "What kind of results can I expect?",
-      answer: "Clients usually see a boost in qualified leads, higher booking rates, and a dramatic drop in manual work. We'll show you real examples during your strategy session."
-    },
-    {
-      question: "Do I need to know anything technical?",
-      answer: "Not at all. We handle all the tech and integrations for you. You focus on your business, we'll handle the backend."
-    },
-    {
-      question: "How much do your services cost?",
-      answer: "We don't list prices publicly because every business has different needs. We'll go over everything in your free strategy call and give you a clear recommendation."
-    },
-    {
-      question: "How do I get started?",
-      answer: "Click \"Book a Free Strategy Call,\" choose a time, and we'll meet on Zoom to explore how TheoCortex.AI can help you grow."
+      answer: "Clients typically see 40-60% time savings, 25-50% increase in lead response rates, and significantly improved conversion rates within the first month."
     }
   ];
 
-  // Render different pages based on current route
-  if (currentPage === 'book-call') {
-    return <ContactForm />;
-  } else if (currentPage === 'website-design-and-funnels') {
-    return <WebsiteDesignFunnels />;
-  } else if (currentPage === 'smart-ai-agents') {
-    return <SmartAIAgents />;
-  } else if (currentPage === 'crm-integration-and-appointments') {
-    return <CRMIntegration />;
-  }
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
@@ -283,7 +155,7 @@ function App() {
 
       {/* Floating Particles */}
       <div className="fixed inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full opacity-20"
@@ -304,7 +176,7 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-950/90 backdrop-blur-xl border-b border-dark-800/50 transition-all duration-300">
         <div className="section-container">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center space-x-4 group">
+            <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="flex items-center space-x-4 group flex-shrink-0">
               <div className="relative">
                 <Brain className="w-10 h-10 text-primary-500 transition-transform duration-300 group-hover:rotate-12" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
@@ -312,645 +184,325 @@ function App() {
               <span className="text-2xl font-bold font-montserrat tracking-tight transition-all duration-300 group-hover:text-primary-400">
                 THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
               </span>
-            </div>
+            </a>
             
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="nav-link">Home</a>
-              <a href="#services" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
-              <a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
-              <a href="#how-it-works" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>
-                <span className="md:hidden">How It<br />Works</span>
-                <span className="hidden md:inline">How It Works</span>
-              </a>
-              <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
-              <InteractiveButton icon={ExternalLink} href="#book-call">
+              <a href="#services" className="nav-link">Services</a>
+              <a href="#about" className="nav-link">About</a>
+              <a href="#how-it-works" className="nav-link">How It Works</a>
+              <a href="#faq" className="nav-link">FAQ</a>
+              <InteractiveButton 
+                href="#book-call" 
+                isNavigation={true}
+                className="flex items-center space-x-2"
+              >
                 Book Free Call
               </InteractiveButton>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 text-dark-300 hover:text-primary-400 transition-colors duration-300"
-              aria-label="Toggle mobile menu"
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+        </div>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className="md:hidden py-4 border-t border-dark-800/50">
-              <div className="flex flex-col space-y-4">
-                <a href="#home" className="nav-link py-2">Home</a>
-                <a href="#services" className="nav-link py-2">Services</a>
-                <a href="#about" className="nav-link py-2">About</a>
-                <a href="#how-it-works" className="nav-link py-2">How It Works</a>
-                <a href="#faq" className="nav-link py-2">FAQ</a>
-                {/* Book Call Button */}
-                <div className="mt-8 pt-8 border-t border-dark-700/50">
-                  <div
-                    onClick={() => handleMobileNavClick('/book-call')}
-                    className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group cursor-pointer touch-manipulation"
-                  >
-                    <Calendar className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-                    <span>Book Free Call</span>
-                  </div>
-                </div>
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-dark-900/95 backdrop-blur-xl border-t border-dark-800/50">
+            <div className="section-container py-6 space-y-4">
+              <a href="#services" className="block nav-link py-2" onClick={() => setIsMenuOpen(false)}>Services</a>
+              <a href="#about" className="block nav-link py-2" onClick={() => setIsMenuOpen(false)}>About</a>
+              <a href="#how-it-works" className="block nav-link py-2" onClick={() => setIsMenuOpen(false)}>How It Works</a>
+              <a href="#faq" className="block nav-link py-2" onClick={() => setIsMenuOpen(false)}>FAQ</a>
+              <div className="pt-4">
+                <InteractiveButton 
+                  href="#book-call" 
+                  isNavigation={true}
+                  className="w-full"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Book Free Call
+                </InteractiveButton>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 min-h-screen flex items-center justify-center relative">
-        <ParallaxBackground speed={0.3} className="absolute inset-0">
+      <section className="pt-32 pb-20 relative">
+        <ParallaxBackground speed={0.3} className="absolute inset-0 animate-fade-in-sequential stagger-1">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-pulse-glow" style={{animationDelay: '1s'}}></div>
         </ParallaxBackground>
         
-        <div className={`section-container text-center relative z-10 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          
-          {/* Main Headline */}
-          <div className="mb-8">
-            <h1 className="font-inter font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 leading-[1.1] tracking-tight text-center">
-              <div className="text-gradient mb-4 animate-fade-in-primary">
+        <div className="section-container text-center relative z-10">
+          <div className="mb-12 animate-fade-in-sequential stagger-2">
+            <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
+              <div className="text-gradient mb-4 animate-tech-glow">
                 <TypingEffect 
-                  text="AUTOMATE GROWTH" 
-                  delay={500}
+                  text="AI AUTOMATION" 
+                  delay={800}
                   speed={80}
                   onComplete={() => setTypingComplete(true)}
                 />
               </div>
-              {typingComplete && (
-                <div className="animate-fade-in-secondary" style={{animationDelay: '0.3s', animationFillMode: 'both'}}>
-                  <div className="text-white font-bold tracking-tight relative">
-                    <span className="tech-gradient-text animate-gradient-wave">
-                      WITH DIVINE INTELLIGENCE
-                    </span>
-                  </div>
-                </div>
-              )}
+              <div className={`text-white font-light tracking-wider text-4xl md:text-5xl lg:text-6xl transition-all duration-800 animate-digital-matrix ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                FOR MODERN BUSINESS
+              </div>
             </h1>
           </div>
           
-          {/* Value Proposition */}
-          {typingComplete && (
-            <ScrollReveal delay={1200} direction="up">
-              <div className="text-sm md:text-lg text-dark-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light relative group">
-                {/* First Line */}
-                <div className="mb-2 animate-fade-in-up" style={{animationDelay: '1.4s', animationFillMode: 'both'}}>
-                  <span className="font-light tracking-wide">We Build </span>
-                  <span className="text-primary-400 font-semibold relative inline-block animate-hologram-flicker" style={{animationDelay: '1.6s'}}>
-                    <span className="relative z-10">AI-Powered Websites</span>
-                    <span className="absolute inset-0 bg-primary-400/20 blur-sm animate-pulse-glow"></span>
-                  </span>
-                  <span className="font-light tracking-wide">, </span>
-                  <span className="text-primary-400 font-semibold relative inline-block animate-hologram-flicker" style={{animationDelay: '1.8s'}}>
-                    <span className="relative z-10">Smart Agents</span>
-                    <span className="absolute inset-0 bg-primary-400/20 blur-sm animate-pulse-glow"></span>
-                  </span>
-                  <span className="font-light tracking-wide">, and </span>
-                  <span className="text-primary-400 font-semibold relative inline-block animate-hologram-flicker" style={{animationDelay: '2s'}}>
-                    <span className="relative z-10">CRM Systems</span>
-                    <span className="absolute inset-0 bg-primary-400/20 blur-sm animate-pulse-glow"></span>
-                  </span>
-                </div>
-                
-                {/* Second Line */}
-                <div className="animate-fade-in-up" style={{animationDelay: '2.2s', animationFillMode: 'both'}}>
-                  <span className="font-light tracking-wide">that Convert Leads, Schedule Appointments, and Scale your Business </span>
-                  <span className="text-white font-semibold relative inline-block animate-matrix-text" style={{animationDelay: '2.4s'}}>
-                    <span className="relative z-10">on Autopilot</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-primary-500/30 to-secondary-500/30 blur-sm animate-scan-line"></span>
-                  </span>
-                </div>
-              </div>
-              
-              {/* Tech overlay effects */}
-              <div className="absolute inset-0 pointer-events-none opacity-20 animate-fade-in" style={{animationDelay: '2.6s', animationFillMode: 'both'}}>
-                {/* Data particles */}
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-0.5 h-0.5 bg-primary-400 rounded-full animate-data-stream"
-                    style={{
-                      left: `${15 + i * 15}%`,
-                      top: `${30 + (i % 2) * 40}%`,
-                      animationDelay: `${2.8 + i * 0.2}s`,
-                      animationDuration: `${3 + Math.random() * 2}s`
-                    }}
-                  ></div>
-                ))}
-                
-                {/* Circuit connections */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 200" fill="none">
-                  <path 
-                    d="M100 100 L200 100 L210 90 L230 90 L240 100 L340 100 L350 110 L370 110 L380 100 L480 100 L490 90 L510 90 L520 100 L620 100 L630 110 L650 110 L660 100 L700 100" 
-                    stroke="url(#tech-gradient)" 
-                    strokeWidth="0.5" 
-                    className="animate-pulse opacity-30"
-                  />
-                  <circle cx="210" cy="90" r="1" fill="#0066FF" className="animate-ping opacity-40" style={{animationDelay: '3s'}}/>
-                  <circle cx="350" cy="110" r="1" fill="#6600FF" className="animate-ping opacity-40" style={{animationDelay: '3.2s'}}/>
-                  <circle cx="490" cy="90" r="1" fill="#0066FF" className="animate-ping opacity-40" style={{animationDelay: '3.4s'}}/>
-                  <circle cx="630" cy="110" r="1" fill="#6600FF" className="animate-ping opacity-40" style={{animationDelay: '3.6s'}}/>
-                  <defs>
-                    <linearGradient id="tech-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#0066FF" stopOpacity="0.2"/>
-                      <stop offset="50%" stopColor="#6600FF" stopOpacity="0.4"/>
-                      <stop offset="100%" stopColor="#0066FF" stopOpacity="0.2"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </ScrollReveal>
-          )}
+          <div className={`transition-all duration-800 delay-300 ${typingComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <p className="text-xl md:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed font-light animate-hologram-flicker">
+              Stop chasing leads manually. Let AI handle the heavy lifting while you focus on what matters most.
+            </p>
+            <p className="text-lg text-dark-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-800 delay-500">
+              We build custom AI systems that qualify leads, book appointments, and nurture prospects 24/7. 
+              Transform your business operations with intelligent automation that feels human.
+            </p>
+          </div>
 
-          {/* Benefits Grid */}
-          {typingComplete && (
-          <ScrollReveal delay={2800} direction="up">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl mx-auto">
-              {benefits.map((benefit, index) => (
-                <ScrollReveal key={index} delay={3000 + index * 100} direction="scale">
-                  <div className="glass-card group cursor-pointer">
-                    <div className="text-primary-400 flex-shrink-0 mb-3 group-hover:scale-110 transition-transform duration-300">
-                      {benefit.icon}
-                    </div>
-                    <span className="text-dark-300 text-sm font-medium font-inter group-hover:text-white transition-colors duration-300">{benefit.text}</span>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </ScrollReveal>
-          )}
-          
-          {/* Primary CTA */}
-          {typingComplete && (
-          <ScrollReveal delay={3400} direction="scale">
-            <div className="mb-8">
-              <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                BOOK A FREE STRATEGY CALL
+          <div className={`transition-all duration-800 delay-700 ${typingComplete ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
+              <InteractiveButton 
+                size="lg" 
+                icon={Calendar} 
+                href="#book-call"
+                isNavigation={true}
+                className="animate-glow-pulse"
+              >
+                Book Free Call
+              </InteractiveButton>
+              <InteractiveButton 
+                variant="secondary" 
+                size="lg" 
+                href="#services"
+                className="animate-tech-glow"
+              >
+                See Our Services
               </InteractiveButton>
             </div>
-            <div className="text-center">
-              <p className="text-dark-400 text-lg font-light italic font-inter text-center mx-auto">
-              Let's see if AI can save you 20+ hours a week.
-              </p>
-            </div>
-          </ScrollReveal>
-          )}
-
-          {/* Secondary Text */}
-          {typingComplete && (
-          <ScrollReveal delay={3600} direction="fade">
-            <div></div>
-          </ScrollReveal>
-          )}
-        </div>
-      </section>
-
-      {/* Problem Section */}
-      <section className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-red-900/5 via-transparent to-transparent"></div>
-        <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter text-white">
-                STILL DOING THINGS <span className="text-red-400">MANUALLY?</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Pain Points */}
-            <div className="space-y-8">
-              {painPoints.map((pain, index) => (
-                <ScrollReveal key={index} delay={index * 200} direction="left">
-                  <div className="flex items-start space-x-6 group cursor-pointer">
-                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-xl flex items-center justify-center border border-red-500/30 group-hover:border-red-400/50 transition-all duration-300 group-hover:scale-110">
-                      <div className="text-red-400 group-hover:scale-110 transition-transform duration-300">
-                        {pain.icon}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xl text-dark-300 font-light leading-relaxed font-inter group-hover:text-white transition-colors duration-300">
-                        {pain.text}
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-
-            {/* Visual Contrast */}
-            <ScrollReveal delay={400} direction="right">
-              <div className="space-y-8">
-                <div className="glass-card group cursor-pointer border-red-500/30 hover:border-red-400/50">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/30 group-hover:scale-110 transition-transform duration-300">
-                      <X className="w-8 h-8 text-red-400" />
-                    </div>
-                    <h3 className="font-montserrat font-bold text-xl text-red-400 mb-4">MANUAL CHAOS</h3>
-                    <div className="space-y-2 text-dark-400 font-inter text-sm">
-                      <p>• Missed opportunities</p>
-                      <p>• Slow response times</p>
-                      <p>• Inconsistent follow-up</p>
-                      <p>• Overwhelmed team</p>
-                      <p>• Limited growth potential</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="glass-card group cursor-pointer border-primary-500/30 hover:border-primary-400/50">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary-400/20 to-secondary-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
-                      <CheckCircle className="w-8 h-8 text-primary-400" />
-                    </div>
-                    <h3 className="font-montserrat font-bold text-xl text-primary-400 mb-4">AI AUTOMATION</h3>
-                    <div className="space-y-2 text-dark-300 font-inter text-sm">
-                      <p>• Instant lead response</p>
-                      <p>• 24/7 availability</p>
-                      <p>• Perfect follow-up</p>
-                      <p>• Scalable systems</p>
-                      <p>• Unlimited growth</p>
-                    </div>
-                  </div>
+            
+            <div className="glass-card max-w-md mx-auto group cursor-pointer animate-circuit-pulse">
+              <div className="flex items-center justify-center space-x-4">
+                <Zap className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300 animate-ai-glow" />
+                <div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient animate-digital-flicker">+40%</div>
+                  <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
+                    average increase in qualified leads with AI automation
+                  </p>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section id="services" className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/5 via-transparent to-secondary-900/5"></div>
+      {/* Services Section */}
+      <section id="services" className="py-20 relative">
         <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-24">
-              <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
-                WE BUILD <span className="text-gradient">SMART SYSTEMS</span>
-              </h2>
-              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 text-white">
-                SO YOU CAN FOCUS ON GROWTH
-              </h3>
-              <p className="text-xl text-dark-300 max-w-3xl mx-auto font-light">
-                Everything your business needs to automate, convert, and close—done for you.
-              </p>
-            </div>
-          </ScrollReveal>
+          <div className="text-center mb-16 animate-fade-in-sequential stagger-8">
+            <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+              OUR <span className="text-gradient tech-gradient-text animate-gradient-wave">SERVICES</span>
+            </h2>
+            <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
+              Complete AI automation solutions designed to scale your business effortlessly.
+            </p>
+          </div>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
-            {solutions.map((solution, index) => (
-              <ScrollReveal key={index} delay={index * 200} direction="up">
-                <div className="glass-card group cursor-pointer h-full">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${solution.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                    <div className="text-white">
-                      {solution.icon}
-                    </div>
-                  </div>
-                  <h3 className="font-montserrat font-bold text-xl mb-6 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{solution.title}</h3>
-                  <p className="text-dark-300 leading-relaxed font-light font-inter mb-6 group-hover:text-white transition-colors duration-300">{solution.description}</p>
-                  <div className="mt-auto">
-                    <span className="text-primary-400 font-bold font-montserrat text-sm">{solution.metric}</span>
-                    <InteractiveButton 
-                      variant="ghost" 
-                      icon={ArrowRight}
-                      href={(() => {
-                        const routes = [
-                          '#website-design-and-funnels',
-                          '#smart-ai-agents', 
-                          '#crm-integration-and-appointments'
-                        ];
-                        return routes[index];
-                      })()}
-                    >
-                      Learn More
-                    </InteractiveButton>
+          <div className="grid lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className={`glass-card group cursor-pointer h-full animate-fade-in-sequential stagger-${9 + index} hover:animate-tech-glow`}>
+                <div className="w-20 h-20 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300 animate-circuit-pulse">
+                  <div className="text-primary-400 animate-ai-pulse">
+                    {service.icon}
                   </div>
                 </div>
-              </ScrollReveal>
+                <h3 className="font-montserrat font-bold text-2xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
+                  {service.title}
+                </h3>
+                <p className="text-dark-300 mb-6 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
+                  {service.description}
+                </p>
+                <ul className="space-y-2 mb-8">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center space-x-3 group-hover:text-white transition-colors duration-300">
+                      <CheckCircle className="w-4 h-4 text-primary-400 flex-shrink-0 animate-ai-pulse" />
+                      <span className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <InteractiveButton 
+                  variant="secondary" 
+                  className="w-full animate-glow-pulse" 
+                  icon={ArrowRight}
+                  href={service.href}
+                  isNavigation={true}
+                >
+                  Learn More
+                </InteractiveButton>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-gradient-to-b from-dark-900/10 to-transparent relative">
+        <div className="section-container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ScrollReveal direction="left">
+              <div>
+                <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-8 tracking-tighter animate-matrix-text">
+                  WHY <span className="text-gradient tech-gradient-text animate-gradient-wave">THEOCORTEX.AI?</span>
+                </h2>
+                <div className="space-y-6 text-lg text-dark-300 leading-relaxed font-light">
+                  <p className="animate-hologram-flicker">
+                    We're not just another tech agency. We're automation specialists who understand that your time is your most valuable asset.
+                  </p>
+                  <p className="animate-digital-flicker">
+                    While others build generic solutions, we create custom AI systems tailored to your specific business needs. Every automation is designed to feel natural, work seamlessly, and deliver measurable results.
+                  </p>
+                  <p className="animate-hologram-flicker">
+                    Our clients don't just save time—they transform their entire business operations and scale without the overwhelm.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <InteractiveButton 
+                    href="#contact-form" 
+                    isNavigation={true}
+                    icon={MessageSquare}
+                    className="animate-glow-pulse"
+                  >
+                    Start Your Transformation
+                  </InteractiveButton>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="right" delay={200}>
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { number: "50+", label: "Businesses Automated" },
+                  { number: "24/7", label: "AI Availability" },
+                  { number: "40%", label: "Time Saved Average" },
+                  { number: "2x", label: "Lead Response Rate" }
+                ].map((stat, index) => (
+                  <div key={index} className="glass-card text-center group cursor-pointer animate-tech-glow">
+                    <div className="text-4xl font-montserrat font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300 animate-digital-matrix">
+                      {stat.number}
+                    </div>
+                    <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-32 relative">
+      <section id="how-it-works" className="py-20 relative">
         <div className="section-container relative z-10">
           <ScrollReveal>
-            <div className="text-center mb-24">
-              <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
-                AUTOMATION, IN JUST <span className="text-gradient">3 STEPS</span>
+            <div className="text-center mb-16">
+              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+                HOW IT <span className="text-gradient tech-gradient-text animate-gradient-wave">WORKS</span>
               </h2>
+              <p className="text-xl text-dark-300 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
+                Simple process, powerful results. Here's how we transform your business operations.
+              </p>
             </div>
           </ScrollReveal>
           
-          <div className="grid md:grid-cols-3 gap-12 relative">
-            {steps.map((step, index) => (
-              <ScrollReveal key={index} delay={index * 200} direction="up">
-                <div className="text-center group cursor-pointer relative">
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                icon: <MessageSquare className="w-8 h-8" />,
+                title: "Strategy Call",
+                description: "We analyze your current processes and identify automation opportunities that will save you the most time."
+              },
+              {
+                step: "02",
+                icon: <Brain className="w-8 h-8" />,
+                title: "Custom Build",
+                description: "Our team creates and implements AI systems tailored specifically to your business needs and workflows."
+              },
+              {
+                step: "03",
+                icon: <BarChart3 className="w-8 h-8" />,
+                title: "Launch & Optimize",
+                description: "We launch your automation, monitor performance, and continuously optimize for better results."
+              }
+            ].map((step, index) => (
+              <ScrollReveal key={index} delay={index * 200} direction="scale" stagger={true}>
+                <div className="text-center group cursor-pointer animate-tech-glow">
                   <div className="relative mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-white">
+                    <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 animate-circuit-pulse">
+                      <div className="text-white animate-ai-glow">
                         {step.icon}
                       </div>
                     </div>
-                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-dark-800 rounded-full flex items-center justify-center border border-primary-400/30">
-                      <span className="text-primary-400 font-montserrat font-bold text-sm">{step.number}</span>
+                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-ai-pulse">
+                      <span className="font-montserrat font-bold text-white text-sm">{step.step}</span>
                     </div>
                   </div>
-                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{step.title}</h3>
-                  <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">{step.description}</p>
-                  
-                  {/* Connection Line */}
-                  {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-12 left-full w-12 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 transform -translate-x-6"></div>
-                  )}
+                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
+                    {step.title}
+                  </h3>
+                  <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
+                    {step.description}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
-
-        </div>
-      </section>
-
-      {/* About TheoCortex.AI Section */}
-      <section id="about" className="py-32 bg-gradient-to-b from-dark-900/10 to-transparent relative">
-        <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-24">
-              <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter">
-                ABOUT <span className="text-gradient">THEOCORTEX.AI</span>
-              </h2>
-              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter text-white">
-                AUTOMATION THAT THINKS AHEAD
-              </h3>
-              
-              {/* Enhanced Content Cards */}
-              <div className="max-w-6xl mx-auto">
-                {/* Main Value Proposition Card */}
-                <ScrollReveal delay={200}>
-                  <div className="glass-card group cursor-pointer mb-12 relative overflow-hidden">
-                    {/* Animated Background Pattern */}
-                    <div className="absolute inset-0 opacity-5">
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 via-transparent to-secondary-500/20 animate-pulse-glow"></div>
-                      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 200" fill="none">
-                        <defs>
-                          <pattern id="circuit-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M0 20h40M20 0v40" stroke="url(#circuit-gradient)" strokeWidth="0.5" opacity="0.3"/>
-                            <circle cx="20" cy="20" r="1" fill="currentColor" opacity="0.4"/>
-                          </pattern>
-                          <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#0066FF"/>
-                            <stop offset="100%" stopColor="#6600FF"/>
-                          </linearGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
-                      </svg>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-center mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
-                          <Brain className="w-8 h-8 text-primary-400" />
-                        </div>
-                      </div>
-                      <p className="text-xl md:text-2xl text-dark-200 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
-                        TheoCortex.AI is a <span className="text-gradient font-semibold">next-generation automation agency</span> built for modern businesses that want to grow smarter.
-                      </p>
-                      <p className="text-lg text-dark-300 leading-relaxed font-light group-hover:text-dark-100 transition-colors duration-300">
-                        We create AI-powered websites, intelligent agents, and fully integrated CRM systems so you can stop chasing leads and start scaling with confidence.
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-
-                {/* Two-Column Feature Cards */}
-                <div className="grid md:grid-cols-2 gap-8 mb-12">
-                  <ScrollReveal delay={400} direction="left">
-                    <div className="glass-card group cursor-pointer h-full relative overflow-hidden">
-                      {/* Animated Accent */}
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                      
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-xl flex items-center justify-center border border-primary-400/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 mt-1">
-                          <Target className="w-6 h-6 text-primary-400" />
-                        </div>
-                        <div>
-                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-primary-400 transition-colors duration-300">
-                            Results-Focused Team
-                          </h4>
-                          <p className="text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
-                            We're not just another tech company. We're a team focused on one thing: <span className="text-primary-400 font-semibold">measurable results</span> that drive your business forward.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-
-                  <ScrollReveal delay={600} direction="right">
-                    <div className="glass-card group cursor-pointer h-full relative overflow-hidden">
-                      {/* Animated Accent */}
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary-500 to-primary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                      
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-secondary-500/20 to-primary-500/20 rounded-xl flex items-center justify-center border border-secondary-400/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 mt-1">
-                          <Users className="w-6 h-6 text-secondary-400" />
-                        </div>
-                        <div>
-                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-secondary-400 transition-colors duration-300">
-                            Human-Centered Automation
-                          </h4>
-                          <p className="text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
-                            We believe automation isn't about replacing people. It's about <span className="text-secondary-400 font-semibold">freeing them</span> to focus on what really matters.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                </div>
-
-                {/* Impact Statement Card */}
-                <ScrollReveal delay={800}>
-                  <div className="glass-card group cursor-pointer relative overflow-hidden">
-                    {/* Animated Background Glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 via-secondary-500/5 to-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    {/* Floating Elements */}
-                    <div className="absolute top-4 right-4 w-2 h-2 bg-primary-400 rounded-full animate-pulse opacity-60"></div>
-                    <div className="absolute bottom-4 left-4 w-1 h-1 bg-secondary-400 rounded-full animate-pulse opacity-40" style={{animationDelay: '1s'}}></div>
-                    
-                    <div className="relative z-10 text-center">
-                      <div className="flex items-center justify-center space-x-2 mb-6">
-                        <Zap className="w-6 h-6 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
-                        <span className="text-primary-400 font-montserrat font-bold text-lg">Our Impact</span>
-                        <Zap className="w-6 h-6 text-secondary-400 group-hover:scale-110 transition-transform duration-300" />
-                      </div>
-                      <p className="text-lg md:text-xl text-dark-200 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
-                        Every solution we create <span className="text-gradient font-semibold">eliminates manual tasks</span>, 
-                        <span className="text-gradient font-semibold"> boosts conversions</span>, and gives business owners 
-                        <span className="text-gradient font-semibold"> more time and freedom</span>.
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </ScrollReveal>
-          
-          {/* What Makes Us Different */}
-          <ScrollReveal delay={200}>
-            <div className="mb-20">
-              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-12 text-center tracking-tighter">
-                WHAT MAKES US <span className="text-gradient">DIFFERENT</span>
-              </h3>
-              <div className="max-w-5xl mx-auto space-y-8">
-                {[
-                  {
-                    title: "Real Strategy with Every Build",
-                    description: "We go beyond templates. Our websites and funnels are backed by marketing psychology and conversion data"
-                  },
-                  {
-                    title: "Smart AI Agents That Deliver",
-                    description: "Our AI agents handle chats, qualify leads, and book appointments while staying true to your brand voice"
-                  },
-                  {
-                    title: "Automation That Feels Human",
-                    description: "Your clients get instant responses and seamless experiences without realizing it's automated"
-                  },
-                  {
-                    title: "Scalable Systems Built to Grow With You",
-                    description: "Whether you're a coach, agency, or service provider, we make sure your systems are future-ready"
-                  },
-                  {
-                    title: "End to End Support",
-                    description: "We handle strategy, design, tech, and launch. You get a smooth experience from start to finish"
-                  }
-                ].map((item, index) => (
-                  <ScrollReveal key={index} delay={300 + index * 100} direction="up">
-                    <div className="glass-card group cursor-pointer">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform duration-300">
-                          <CheckCircle className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-primary-400 transition-colors duration-300">
-                            {item.title}
-                          </h4>
-                          <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Our Mission */}
-          <ScrollReveal delay={800}>
-            <div className="text-center mb-20">
-              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
-                OUR <span className="text-gradient">MISSION</span>
-              </h3>
-              <div className="glass-card group cursor-pointer">
-                <p className="text-xl md:text-2xl text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
-                  To help businesses grow using <span className="text-primary-400 font-semibold">divine intelligence</span> by blending human insight with smart technology
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* What's Next */}
-          <ScrollReveal delay={1000}>
-            <div className="text-center">
-              <div className="max-w-4xl mx-auto">
-                <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
-                  WHAT'S <span className="text-gradient">NEXT</span>
-                </h3>
-                <div className="glass-card group cursor-pointer mb-12">
-                  <p className="text-xl text-dark-300 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
-                    <span className="font-montserrat font-semibold text-lg">
-                      Book a Free Strategy Call and see how TheoCortex.AI can automate your growth without adding complexity
-                    </span>
-                  </p>
-                </div>
-                <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                  BOOK YOUR FREE STRATEGY CALL
-                </InteractiveButton>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Social Proof Stats */}
-      <section className="py-20 bg-gradient-to-b from-primary-900/5 to-transparent relative">
-        <div className="section-container relative z-10">
-          <ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center group cursor-pointer">
-                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">300%</div>
-                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Average Lead Conversion Increase</p>
-              </div>
-              <div className="text-center group cursor-pointer">
-                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">24/7</div>
-                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Automated Customer Engagement</p>
-              </div>
-              <div className="text-center group cursor-pointer">
-                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">20+</div>
-                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Hours Saved Per Week</p>
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-32 relative">
+      <section id="faq" className="py-20 bg-gradient-to-b from-primary-900/5 to-transparent relative">
         <div className="section-container relative z-10">
           <ScrollReveal>
-            <div className="text-center mb-24">
-              <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter">
-                FREQUENTLY ASKED <span className="text-gradient">QUESTIONS</span>
+            <div className="text-center mb-16">
+              <h2 className="font-montserrat font-bold text-4xl md:text-5xl mb-6 tracking-tighter animate-matrix-text">
+                FREQUENTLY ASKED <span className="text-gradient tech-gradient-text animate-gradient-wave">QUESTIONS</span>
               </h2>
             </div>
           </ScrollReveal>
           
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <ScrollReveal key={index} delay={index * 100} direction="up">
-                <div className="glass-card overflow-hidden">
+              <ScrollReveal key={index} delay={index * 100} stagger={true}>
+                <div className="glass-card group cursor-pointer animate-tech-glow">
                   <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full px-8 py-8 text-left flex items-center justify-between hover:bg-dark-800/20 transition-all duration-300 group focus-visible"
-                    aria-expanded={openFaq === index}
-                    aria-controls={`faq-${index}`}
+                    onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                    className="w-full text-left flex items-center justify-between p-2 focus:outline-none"
                   >
-                    <span className="font-montserrat font-bold text-lg tracking-wide pr-4 group-hover:text-primary-400 transition-colors duration-300">{faq.question}</span>
-                    <div className="flex-shrink-0">
-                      {openFaq === index ? (
-                        <ChevronUp className="w-6 h-6 text-primary-400 transform group-hover:scale-110 transition-transform duration-300" />
-                      ) : (
-                        <ChevronDown className="w-6 h-6 text-primary-400 transform group-hover:scale-110 transition-transform duration-300" />
-                      )}
-                    </div>
+                    <h3 className="font-montserrat font-bold text-lg group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
+                      {faq.question}
+                    </h3>
+                    <ChevronDown 
+                      className={`w-6 h-6 text-primary-400 transition-transform duration-300 animate-ai-pulse ${
+                        openFAQ === index ? 'rotate-180' : ''
+                      }`} 
+                    />
                   </button>
-                  <div 
-                    id={`faq-${index}`}
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-                  >
-                    <div className="px-8 pb-8 border-t border-dark-700/20">
-                      <p className="text-dark-300 leading-relaxed font-light font-inter pt-6">{faq.answer}</p>
+                  {openFAQ === index && (
+                    <div className="mt-4 pt-4 border-t border-dark-700/50 animate-fade-in">
+                      <p className="text-dark-300 leading-relaxed font-light font-inter animate-hologram-flicker">
+                        {faq.answer}
+                      </p>
                     </div>
-                  </div>
+                  )}
                 </div>
               </ScrollReveal>
             ))}
@@ -959,34 +511,34 @@ function App() {
       </section>
 
       {/* Final CTA Section */}
-      <section id="contact" className="py-32 bg-gradient-to-b from-primary-900/10 to-secondary-900/10 relative">
+      <section className="py-20 relative">
         <div className="section-container text-center relative z-10">
           <ScrollReveal>
-            <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
-              READY TO <span className="text-gradient">AUTOMATE YOUR BUSINESS</span>
+            <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter animate-matrix-text">
+              READY TO <span className="text-gradient tech-gradient-text animate-gradient-wave">AUTOMATE YOUR SUCCESS?</span>
             </h2>
-            <h3 className="font-montserrat font-bold text-4xl md:text-5xl mb-12 text-white">
-              AND GET YOUR TIME BACK?
-            </h3>
           </ScrollReveal>
           
           <ScrollReveal delay={200}>
-            <p className="text-xl text-dark-300 mb-16 max-w-3xl mx-auto font-light">
-              Book a free discovery call and let's build your custom AI system today.
+            <p className="text-xl text-dark-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-hologram-flicker">
+              Book your free strategy call and discover how AI can transform your business operations.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={400}>
-            <div className="mb-8 flex justify-center">
-              <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                BOOK FREE STRATEGY CALL
+            <div className="mb-8">
+              <InteractiveButton 
+                size="lg" 
+                icon={ArrowRight} 
+                href="#book-call"
+                isNavigation={true}
+                className="animate-glow-pulse"
+              >
+                Book Your Free Call Now
               </InteractiveButton>
             </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={600}>
-            <p className="text-dark-400 text-lg font-light italic font-inter text-center mx-auto">
-              No obligations. Just clarity.
+            <p className="text-dark-400 text-lg font-light italic font-inter animate-digital-flicker">
+              No obligations. Just results-focused strategy.
             </p>
           </ScrollReveal>
         </div>
@@ -996,47 +548,51 @@ function App() {
       <footer className="bg-gradient-to-t from-dark-900/50 to-dark-950 border-t border-dark-800/30 py-20 relative">
         <div className="section-container relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:space-x-12">
-            <div className="flex items-center space-x-4 mb-8 md:mb-0 group cursor-pointer">
+            <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="flex items-center space-x-4 mb-8 md:mb-0 group cursor-pointer">
               <div className="relative">
-                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
+                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300 animate-brain-rotate" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <div>
-                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300">
+                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300 animate-digital-matrix">
                   THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
                 </span>
-                <p className="text-dark-400 font-inter text-sm mt-1">Built with Higher Thinking.</p>
+                <p className="text-dark-400 font-inter text-sm mt-1">
+                  <a href="mailto:theocortex.ai@gmail.com" className="hover:text-primary-400 transition-colors duration-300">
+                    theocortex.ai@gmail.com
+                  </a>
+                </p>
               </div>
-            </div>
+            </a>
             
-            <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8 mb-8 md:mb-0 text-center">
-              <a href="#home" className="nav-link text-sm">Home</a>
-              <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#services')}>Services</a>
-              <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
-              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>
-                <span className="hidden xs:inline">How It Works</span>
-                <span className="xs:hidden leading-tight">How It<br />Works</span>
+            <div className="flex items-center space-x-8 mb-8 md:mb-0">
+              <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="nav-link text-sm footer-nav-link">Home</a>
+              <a href="#services" className="nav-link text-sm footer-nav-link">Services</a>
+              <a href="#about" className="nav-link text-sm footer-nav-link">About</a>
+              <a href="#how-it-works" className="nav-link text-sm footer-nav-link">
+                <span className="md:hidden">How It<br />Works</span>
+                <span className="hidden md:inline">How It Works</span>
               </a>
-              <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#faq')}>FAQ</a>
+              <a href="#faq" className="nav-link text-sm footer-nav-link">FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">
-              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
+              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
               </a>
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="X (formerly Twitter)">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="LinkedIn">
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform animate-ai-glow" aria-label="LinkedIn">
                 <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>
           
           <div className="border-t border-dark-800/30 pt-10 text-center">
-            <p className="text-dark-400 font-light font-inter">
+            <p className="text-dark-400 font-light font-inter animate-digital-flicker">
               © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
             </p>
           </div>
@@ -1044,6 +600,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
 export default App;
