@@ -901,3 +901,31 @@ html {
   background: linear-gradient(180deg, #3399FF, #9933FF);
 }
 /* Mobile Book Call Button Styles */
+
+/* Modern Navigation Animation */
+@keyframes navigationFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    backdrop-filter: blur(8px);
+  }
+}
+
+.navigation-overlay {
+  animation: navigationFade 0.3s ease-out forwards;
+}
+
+/* Reduced motion support for navigation */
+@media (prefers-reduced-motion: reduce) {
+  .navigation-overlay {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    backdrop-filter: blur(4px) !important;
+  }
+}

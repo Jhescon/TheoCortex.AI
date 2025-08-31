@@ -15,6 +15,7 @@ interface InteractiveButtonProps {
   loading?: boolean;
   href?: string;
   target?: string;
+  navigationAnimation?: boolean;
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
@@ -29,11 +30,36 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   disabled = false,
   loading = false,
   href,
-  target
+  target,
+  navigationAnimation = false
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const handleClick = async () => {
+    if (navigationAnimation && href) {
+      // Modern navigation animation for subpages
+      setIsNavigating(true);
+      
+      // Create overlay for smooth transition
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 z-[9999] bg-dark-950/80 backdrop-blur-sm transition-all duration-300 ease-out';
+      overlay.style.opacity = '0';
+      document.body.appendChild(overlay);
+      
+      // Animate overlay in
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+      });
+      
+      // Navigate after animation
+      setTimeout(() => {
+        window.location.href = href;
+      }, 250);
+      
+      return;
+    }
+    
     if (onClick && !disabled && !loading && !isLoading && !href) {
       setIsLoading(true);
       try {
@@ -78,11 +104,11 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   };
 
   const isButtonLoading = loading || isLoading;
-  const isDisabled = disabled || isButtonLoading;
+  const isDisabled = disabled || isButtonLoading || isNavigating;
 
   const buttonContent = (
     <>
-      {isButtonLoading ? (
+      {(isButtonLoading || isNavigating) ? (
         <LoadingSpinner size="sm" className="mr-2" />
       ) : (
         Icon && iconPosition === 'left' && (
@@ -90,9 +116,11 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
         )
       )}
       
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10">
+        {isNavigating ? 'Loading...' : children}
+      </span>
       
-      {!isButtonLoading && Icon && iconPosition === 'right' && (
+      {!(isButtonLoading || isNavigating) && Icon && iconPosition === 'right' && (
         <Icon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:rotate-12" />
       )}
     </>
@@ -102,6 +130,7 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
     ${getVariantClasses()}
     ${variant !== 'ghost' ? getSizeClasses() : ''}
     ${isDisabled ? 'opacity-50 cursor-not-allowed hover:scale-100' : ''}
+    ${isNavigating ? 'scale-95 opacity-75' : ''}
     flex items-center justify-center
     group relative overflow-hidden
     ${className}
