@@ -239,7 +239,7 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden transition-all duration-500 ease-out ${pageLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+    <div className={`min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-950/90 backdrop-blur-xl border-b border-dark-800/50 transition-all duration-300">
         <div className="section-container">
