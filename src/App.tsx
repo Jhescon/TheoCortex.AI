@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { TechLoadingAnimation } from './components/TechLoadingAnimation';
+import { BookCall } from './pages/BookCall';
+import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
+import { SmartAIAgents } from './pages/SmartAIAgents';
+import { CRMIntegration } from './pages/CRMIntegration';
+import { ContactForm } from './components/ContactForm';
 import { 
   Brain, 
-  ChevronDown, 
-  ChevronUp, 
-  Bot, 
-  Database, 
-  Mail, 
-  Users, 
-  Globe, 
-  ExternalLink, 
-  Linkedin, 
-  Instagram,
   Zap, 
   CheckCircle, 
   ArrowRight, 
@@ -29,124 +25,88 @@ import {
   BarChart3, 
   Workflow,
   Menu,
-  X
+  X,
+  ExternalLink,
+  Globe,
+  Bot,
+  Users,
+  Mail,
+  Database,
+  ChevronDown,
+  ChevronUp,
+  Linkedin,
+  Instagram
 } from 'lucide-react';
 import { ScrollReveal } from './components/ScrollReveal';
 import { InteractiveButton } from './components/InteractiveButton';
 import { TypingEffect } from './components/TypingEffect';
 import { ParallaxBackground } from './components/ParallaxBackground';
-import { ContactForm } from './components/ContactForm';
-import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
-import { SmartAIAgents } from './pages/SmartAIAgents';
-import { CRMIntegration } from './pages/CRMIntegration';
 
-// Smooth scroll navigation handler
-const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-  e.preventDefault();
-  const element = document.getElementById(targetId);
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
-};
-
-function App() {
+function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
+  const handleNavigation = (path: string) => {
+    setIsNavigating(true);
+    setTimeout(() => {
+      navigate(path);
+      setIsNavigating(false);
+    }, 2000);
+  };
+
+  if (isNavigating) {
+    return <TechLoadingAnimation duration={2000} />;
+  }
+
+  if (isLoading) {
+    return <TechLoadingAnimation duration={3000} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/book-call" element={<BookCall onNavigate={handleNavigation} />} />
+        <Route path="/website-design-funnels" element={<WebsiteDesignFunnels onNavigate={handleNavigation} />} />
+        <Route path="/smart-ai-agents" element={<SmartAIAgents onNavigate={handleNavigation} />} />
+        <Route path="/crm-integration" element={<CRMIntegration onNavigate={handleNavigation} />} />
+        <Route path="/contact" element={<ContactForm onNavigate={handleNavigation} />} />
+      </Routes>
+    </div>
+  );
+}
+
+function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
   useEffect(() => {
-    // Show loading animation for 3 seconds on initial load
-    const loadingTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
     setIsVisible(true);
-    
-    // Enhanced routing with immediate scroll to top
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      
-      // CRITICAL: Force immediate scroll to top with multiple methods
-      const forceScrollToTop = () => {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        if (window.pageYOffset !== 0) {
-          window.pageYOffset = 0;
-        }
-      };
-      
-      // Execute immediately
-      forceScrollToTop();
-      
-      // Execute again after a tiny delay to ensure it takes effect
-      setTimeout(() => {
-        forceScrollToTop();
-        
-        // Then change the page content
-        if (hash === '#book-call') {
-          setCurrentPage('book-call');
-        } else if (hash === '#website-design-and-funnels') {
-          setCurrentPage('website-design-and-funnels');
-        } else if (hash === '#smart-ai-agents') {
-          setCurrentPage('smart-ai-agents');
-        } else if (hash === '#crm-integration-and-appointments') {
-          setCurrentPage('crm-integration-and-appointments');
-        } else {
-          setCurrentPage('home');
-        }
-      }, 1);
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    
-    return () => {
-      clearTimeout(loadingTimer);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
   }, []);
 
-  // Show loading animation on initial load
-  if (isLoading) {
-    return <TechLoadingAnimation onComplete={() => setIsLoading(false)} />;
-  }
-
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    // Only prevent default for same-page navigation (hash links)
-    // Only prevent default for same-page hash navigation
-    if (targetId.startsWith('#')) {
-      e.preventDefault();
-      const element = document.getElementById(targetId.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    // For cross-page navigation, let the browser handle it naturally (no preventDefault)
-    // For external links or different pages, let the browser handle navigation naturally
-  };
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
-    const element = document.getElementById(targetId.substring(1));
+    const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
-  };
-
-  const handleMobileNavClick = (path: string) => {
-    setMobileMenuOpen(false);
-    window.location.hash = path;
   };
 
   const benefits = [
@@ -275,17 +235,6 @@ function App() {
     }
   ];
 
-  // Render different pages based on current route
-  if (currentPage === 'book-call') {
-    return <ContactForm />;
-  } else if (currentPage === 'website-design-and-funnels') {
-    return <WebsiteDesignFunnels />;
-  } else if (currentPage === 'smart-ai-agents') {
-    return <SmartAIAgents />;
-  } else if (currentPage === 'crm-integration-and-appointments') {
-    return <CRMIntegration />;
-  }
-
   return (
     <div className="min-h-screen bg-dark-950 text-dark-50 font-inter relative overflow-x-hidden">
       {/* Animated Background */}
@@ -337,8 +286,14 @@ function App() {
                 <span className="hidden md:inline">How It Works</span>
               </a>
               <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
-              <InteractiveButton icon={ExternalLink} href="#book-call">
-                Book Free Call
+              <InteractiveButton 
+                href="/book-call"
+                size="lg" 
+                icon={ArrowRight}
+                onNavigate={handleNavigation}
+                className="animate-scale-in-smooth stagger-6"
+              >
+                Book Free Strategy Call
               </InteractiveButton>
             </div>
 
@@ -361,15 +316,16 @@ function App() {
                 <a href="#about" className="nav-link py-2">About</a>
                 <a href="#how-it-works" className="nav-link py-2">How It Works</a>
                 <a href="#faq" className="nav-link py-2">FAQ</a>
-                {/* Book Call Button */}
                 <div className="mt-8 pt-8 border-t border-dark-700/50">
-                  <div
-                    onClick={() => handleMobileNavClick('/book-call')}
-                    className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group cursor-pointer touch-manipulation"
+                  <InteractiveButton 
+                    href="/book-call"
+                    size="lg" 
+                    icon={Calendar}
+                    onNavigate={handleNavigation}
+                    className="w-full"
                   >
-                    <Calendar className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-                    <span>Book Free Call</span>
-                  </div>
+                    Book Free Call
+                  </InteractiveButton>
                 </div>
               </div>
             </div>
@@ -504,8 +460,14 @@ function App() {
           {typingComplete && (
           <ScrollReveal delay={3400} direction="scale">
             <div className="mb-8">
-              <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                BOOK A FREE STRATEGY CALL
+              <InteractiveButton 
+                href="/book-call"
+                size="lg" 
+                icon={ArrowRight}
+                onNavigate={handleNavigation}
+                className="animate-scale-in-smooth stagger-6"
+              >
+                Book Free Strategy Call
               </InteractiveButton>
             </div>
             <div className="text-center">
@@ -629,20 +591,39 @@ function App() {
                   <p className="text-dark-300 leading-relaxed font-light font-inter mb-6 group-hover:text-white transition-colors duration-300">{solution.description}</p>
                   <div className="mt-auto">
                     <span className="text-primary-400 font-bold font-montserrat text-sm">{solution.metric}</span>
-                    <InteractiveButton 
-                      variant="ghost" 
-                      icon={ArrowRight}
-                      href={(() => {
-                        const routes = [
-                          '#website-design-and-funnels',
-                          '#smart-ai-agents', 
-                          '#crm-integration-and-appointments'
-                        ];
-                        return routes[index];
-                      })()}
-                    >
-                      Learn More
-                    </InteractiveButton>
+                    {index === 0 && (
+                      <InteractiveButton 
+                        href="/website-design-funnels"
+                        variant="ghost" 
+                        icon={ArrowRight}
+                        onNavigate={handleNavigation}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                      >
+                        Learn More
+                      </InteractiveButton>
+                    )}
+                    {index === 1 && (
+                      <InteractiveButton 
+                        href="/smart-ai-agents"
+                        variant="ghost" 
+                        icon={ArrowRight}
+                        onNavigate={handleNavigation}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                      >
+                        Learn More
+                      </InteractiveButton>
+                    )}
+                    {index === 2 && (
+                      <InteractiveButton 
+                        href="/crm-integration"
+                        variant="ghost" 
+                        icon={ArrowRight}
+                        onNavigate={handleNavigation}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                      >
+                        Learn More
+                      </InteractiveButton>
+                    )}
                   </div>
                 </div>
               </ScrollReveal>
@@ -688,6 +669,18 @@ function App() {
             ))}
           </div>
 
+          <ScrollReveal delay={800}>
+            <div className="text-center mt-16">
+              <InteractiveButton 
+                href="/book-call"
+                size="lg" 
+                icon={ArrowRight}
+                onNavigate={handleNavigation}
+              >
+                Book Your Strategy Call
+              </InteractiveButton>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -895,7 +888,7 @@ function App() {
                     </span>
                   </p>
                 </div>
-                <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
+                <InteractiveButton size="lg" icon={ExternalLink} href="/book-call">
                   BOOK YOUR FREE STRATEGY CALL
                 </InteractiveButton>
               </div>
@@ -991,8 +984,13 @@ function App() {
 
           <ScrollReveal delay={400}>
             <div className="mb-8 flex justify-center">
-              <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
-                BOOK FREE STRATEGY CALL
+              <InteractiveButton 
+                href="/contact"
+                size="lg" 
+                icon={ArrowRight}
+                onNavigate={handleNavigation}
+              >
+                Get Started Today
               </InteractiveButton>
             </div>
           </ScrollReveal>
@@ -1024,13 +1022,13 @@ function App() {
             
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8 mb-8 md:mb-0 text-center">
               <a href="#home" className="nav-link text-sm">Home</a>
-              <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#services')}>Services</a>
-              <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
-              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>
+              <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleSmoothScroll(e, 'services')}>Services</a>
+              <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleSmoothScroll(e, 'about')}>About</a>
+              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleSmoothScroll(e, 'how-it-works')}>
                 <span className="hidden xs:inline">How It Works</span>
                 <span className="xs:hidden leading-tight">How It<br />Works</span>
               </a>
-              <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#faq')}>FAQ</a>
+              <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
             </div>
             
             <div className="flex items-center space-x-8">
@@ -1056,6 +1054,14 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
