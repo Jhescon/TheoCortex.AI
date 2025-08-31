@@ -192,17 +192,7 @@ export const CRMIntegration: React.FC = () => {
               <div className="flex items-center justify-center space-x-4">
                 <Calendar className="w-8 h-8 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
                 <div>
-                  <div className="flex items-center">
-                    <span className="text-green-400 font-mono text-2xl mr-1">+</span>
-                    <CounterAnimation 
-                      value={180} 
-                      suffix="%" 
-                      duration={2200}
-                      delay={1500}
-                      glowColor="green"
-                      size="lg"
-                    />
-                  </div>
+                  <div className="text-3xl font-montserrat font-bold text-gradient">+180%</div>
                   <p className="text-dark-300 text-sm group-hover:text-white transition-colors duration-300">
                     increase in booking rates with automation in place
                   </p>
