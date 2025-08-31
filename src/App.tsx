@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TechLoadingAnimation } from './components/TechLoadingAnimation';
 import { 
   Brain, 
   ChevronDown, 
@@ -52,6 +53,7 @@ const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: st
 };
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,6 +65,11 @@ function App() {
   };
 
   useEffect(() => {
+    // Show loading animation for 3 seconds on initial load
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
     setIsVisible(true);
     
     // Enhanced routing with immediate scroll to top
@@ -105,9 +112,15 @@ function App() {
     window.addEventListener('hashchange', handleHashChange);
     
     return () => {
+      clearTimeout(loadingTimer);
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
+
+  // Show loading animation on initial load
+  if (isLoading) {
+    return <TechLoadingAnimation onComplete={() => setIsLoading(false)} />;
+  }
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Only prevent default for same-page navigation (hash links)
