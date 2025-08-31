@@ -28,9 +28,6 @@ export const WebsiteDesignFunnels: React.FC = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Ensure page starts at top without animation
-    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const features = [

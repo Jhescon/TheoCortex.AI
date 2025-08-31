@@ -51,8 +51,6 @@ export const ContactForm: React.FC = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Ensure page starts at top without animation
-    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const serviceOptions = [
