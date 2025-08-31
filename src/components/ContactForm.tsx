@@ -35,11 +35,7 @@ interface FormErrors {
   problems?: string;
 }
 
-interface ContactFormProps {
-  onNavigate?: (path: string) => void;
-}
-
-export const ContactForm: React.FC<ContactFormProps> = ({ onNavigate }) => {
+export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -235,7 +231,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onNavigate }) => {
                 <span>We'll contact you to schedule your strategy call</span>
               </p>
             </div>
-            <InteractiveButton href="/" onNavigate={onNavigate} variant="primary">
+            <InteractiveButton onClick={() => window.location.href = '/'} variant="primary">
               Return to Home
             </InteractiveButton>
           </div>
@@ -262,8 +258,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onNavigate }) => {
             
             <div className="flex items-center space-x-4 md:space-x-8 ml-4 md:ml-0">
               <InteractiveButton 
-                href="/"
-                onNavigate={onNavigate}
+                onClick={() => window.location.href = '/'} 
                 variant="secondary" 
                 className="flex items-center space-x-1 px-3 py-2 text-sm md:px-8 md:py-4 md:text-base flex-shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Return to homepage"

@@ -15,7 +15,6 @@ interface InteractiveButtonProps {
   loading?: boolean;
   href?: string;
   target?: string;
-  onNavigate?: (path: string) => void;
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
@@ -30,16 +29,12 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   disabled = false,
   loading = false,
   href,
-  target,
-  onNavigate
+  target
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
-    if (href && onNavigate && href.startsWith('/')) {
-      // Handle internal navigation with loading animation
-      onNavigate(href);
-    } else if (onClick && !disabled && !loading && !isLoading && !href) {
+    if (onClick && !disabled && !loading && !isLoading && !href) {
       setIsLoading(true);
       try {
         await onClick();
