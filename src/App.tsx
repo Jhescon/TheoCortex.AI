@@ -389,7 +389,19 @@ function App() {
                 >
                   How It Works
                 </a>
-                <a href="#faq" className="nav-link py-2">FAQ</a>
+                <a 
+                  href="#faq" 
+                  className="nav-link py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                >
+                  FAQ
+                </a>
                 {/* Book Call Button */}
                 <div className="mt-8 pt-8 border-t border-dark-700/50">
                   <div
