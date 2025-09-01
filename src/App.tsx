@@ -341,6 +341,7 @@ function App() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
+            <>
             <div className="md:hidden py-4 border-t border-dark-800/50">
               <div className="flex flex-col space-y-4">
                 <a href="#home" className="nav-link py-2">Home</a>
@@ -842,7 +843,8 @@ function App() {
                 </a>
               </div>
             </div>
-            
+            </>
+          )}
             <div className="border-t border-dark-800/30 pt-10 text-center">
               <p className="text-dark-400 font-light font-inter">
                 © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
