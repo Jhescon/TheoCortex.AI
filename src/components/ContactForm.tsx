@@ -50,10 +50,17 @@ export const ContactForm: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Scroll to top when component mounts
   useEffect(() => {
-    // Ensure page starts at top without animation
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
+
+  // Scroll to top when form is successfully submitted
+  useEffect(() => {
+    if (isSubmitted) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isSubmitted]);
 
   const serviceOptions = [
     { value: '', label: 'Select a service...' },
