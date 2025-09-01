@@ -57,9 +57,17 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -341,7 +349,6 @@ function App() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <>
             <div className="md:hidden py-4 border-t border-dark-800/50">
               <div className="flex flex-col space-y-4">
                 <a href="#home" className="nav-link py-2">Home</a>
@@ -417,8 +424,8 @@ function App() {
                   </InteractiveButton>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -792,7 +799,6 @@ function App() {
         {currentPage === 'website-design' && <WebsiteDesignFunnels />}
         {currentPage === 'ai-agents' && <SmartAIAgents />}
         {currentPage === 'crm-integration' && <CRMIntegration />}
-        {currentPage === 'book-call' && <BookCall />}
         {currentPage === 'contact-form' && <ContactForm />}
       </main>
 
@@ -843,8 +849,6 @@ function App() {
                 </a>
               </div>
             </div>
-            </>
-          )}
             <div className="border-t border-dark-800/30 pt-10 text-center">
               <p className="text-dark-400 font-light font-inter">
                 © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
@@ -855,6 +859,6 @@ function App() {
       )}
     </div>
   );
-};
+}
 
 export default App;
