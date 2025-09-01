@@ -528,7 +528,7 @@ function App() {
           <ScrollReveal delay={2800} direction="up">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl mx-auto">
               {benefits.map((benefit, index) => (
-                <ScrollReveal key={index} delay={3000 + index * 100} direction="scale" mobileOptimized={true}>
+                <ScrollReveal key={index} delay={3000 + index * 100} direction="scale">
                   <div className="glass-card group cursor-pointer">
                     <div className="text-primary-400 flex-shrink-0 mb-3 group-hover:scale-110 transition-transform duration-300">
                       {benefit.icon}
@@ -543,7 +543,7 @@ function App() {
           
           {/* Primary CTA */}
           {typingComplete && (
-          <ScrollReveal delay={3400} direction="scale" mobileOptimized={true}>
+          <ScrollReveal delay={3400} direction="scale">
             <div className="mb-8">
               <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
                 BOOK A FREE STRATEGY CALL
@@ -559,7 +559,7 @@ function App() {
 
           {/* Secondary Text */}
           {typingComplete && (
-          <ScrollReveal delay={3600} direction="fade" mobileOptimized={true}>
+          <ScrollReveal delay={3600} direction="fade">
             <div></div>
           </ScrollReveal>
           )}
@@ -584,4 +584,520 @@ function App() {
               {painPoints.map((pain, index) => (
                 <ScrollReveal key={index} delay={index * 200} direction="left">
                   <div className="flex items-start space-x-6 group cursor-pointer">
-                    <div className="flex
+                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-xl flex items-center justify-center border border-red-500/30 group-hover:border-red-400/50 transition-all duration-300 group-hover:scale-110">
+                      <div className="text-red-400 group-hover:scale-110 transition-transform duration-300">
+                        {pain.icon}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xl text-dark-300 font-light leading-relaxed font-inter group-hover:text-white transition-colors duration-300">
+                        {pain.text}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Visual Contrast */}
+            <ScrollReveal delay={400} direction="right">
+              <div className="space-y-8">
+                <div className="glass-card group cursor-pointer border-red-500/30 hover:border-red-400/50">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/30 group-hover:scale-110 transition-transform duration-300">
+                      <X className="w-8 h-8 text-red-400" />
+                    </div>
+                    <h3 className="font-montserrat font-bold text-xl text-red-400 mb-4">MANUAL CHAOS</h3>
+                    <div className="space-y-2 text-dark-400 font-inter text-sm">
+                      <p>• Missed opportunities</p>
+                      <p>• Slow response times</p>
+                      <p>• Inconsistent follow-up</p>
+                      <p>• Overwhelmed team</p>
+                      <p>• Limited growth potential</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="glass-card group cursor-pointer border-primary-500/30 hover:border-primary-400/50">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary-400/20 to-secondary-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
+                      <CheckCircle className="w-8 h-8 text-primary-400" />
+                    </div>
+                    <h3 className="font-montserrat font-bold text-xl text-primary-400 mb-4">AI AUTOMATION</h3>
+                    <div className="space-y-2 text-dark-300 font-inter text-sm">
+                      <p>• Instant lead response</p>
+                      <p>• 24/7 availability</p>
+                      <p>• Perfect follow-up</p>
+                      <p>• Scalable systems</p>
+                      <p>• Unlimited growth</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section id="services" className="py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/5 via-transparent to-secondary-900/5"></div>
+        <div className="section-container relative z-10">
+          <ScrollReveal>
+            <div className="text-center mb-24">
+              <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
+                WE BUILD <span className="text-gradient">SMART SYSTEMS</span>
+              </h2>
+              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 text-white">
+                SO YOU CAN FOCUS ON GROWTH
+              </h3>
+              <p className="text-xl text-dark-300 max-w-3xl mx-auto font-light">
+                Everything your business needs to automate, convert, and close—done for you.
+              </p>
+            </div>
+          </ScrollReveal>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
+            {solutions.map((solution, index) => (
+              <ScrollReveal key={index} delay={index * 200} direction="up">
+                <div className="glass-card group cursor-pointer h-full">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${solution.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className="text-white">
+                      {solution.icon}
+                    </div>
+                  </div>
+                  <h3 className="font-montserrat font-bold text-xl mb-6 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{solution.title}</h3>
+                  <p className="text-dark-300 leading-relaxed font-light font-inter mb-6 group-hover:text-white transition-colors duration-300">{solution.description}</p>
+                  <div className="mt-auto">
+                    <span className="text-primary-400 font-bold font-montserrat text-sm">{solution.metric}</span>
+                    <InteractiveButton 
+                      variant="ghost" 
+                      icon={ArrowRight}
+                      href={(() => {
+                        const routes = [
+                          '#website-design-and-funnels',
+                          '#smart-ai-agents', 
+                          '#crm-integration-and-appointments'
+                        ];
+                        return routes[index];
+                      })()}
+                    >
+                      Learn More
+                    </InteractiveButton>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-32 relative">
+        <div className="section-container relative z-10">
+          <ScrollReveal>
+            <div className="text-center mb-24">
+              <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
+                AUTOMATION, IN JUST <span className="text-gradient">3 STEPS</span>
+              </h2>
+            </div>
+          </ScrollReveal>
+          
+          <div className="grid md:grid-cols-3 gap-12 relative">
+            {steps.map((step, index) => (
+              <ScrollReveal key={index} delay={index * 200} direction="up">
+                <div className="text-center group cursor-pointer relative">
+                  <div className="relative mb-8">
+                    <div className="w-24 h-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                      <div className="text-white">
+                        {step.icon}
+                      </div>
+                    </div>
+                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-dark-800 rounded-full flex items-center justify-center border border-primary-400/30">
+                      <span className="text-primary-400 font-montserrat font-bold text-sm">{step.number}</span>
+                    </div>
+                  </div>
+                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{step.title}</h3>
+                  <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">{step.description}</p>
+                  
+                  {/* Connection Line */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden md:block absolute top-12 left-full w-12 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 transform -translate-x-6"></div>
+                  )}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* About TheoCortex.AI Section */}
+      <section id="about" className="py-32 bg-gradient-to-b from-dark-900/10 to-transparent relative">
+        <div className="section-container relative z-10">
+          <ScrollReveal>
+            <div className="text-center mb-24">
+              <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter">
+                ABOUT <span className="text-gradient">THEOCORTEX.AI</span>
+              </h2>
+              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter text-white">
+                AUTOMATION THAT THINKS AHEAD
+              </h3>
+              
+              {/* Enhanced Content Cards */}
+              <div className="max-w-6xl mx-auto">
+                {/* Main Value Proposition Card */}
+                <ScrollReveal delay={200}>
+                  <div className="glass-card group cursor-pointer mb-12 relative overflow-hidden">
+                    {/* Animated Background Pattern */}
+                    <div className="absolute inset-0 opacity-5">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 via-transparent to-secondary-500/20 animate-pulse-glow"></div>
+                      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 200" fill="none">
+                        <defs>
+                          <pattern id="circuit-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M0 20h40M20 0v40" stroke="url(#circuit-gradient)" strokeWidth="0.5" opacity="0.3"/>
+                            <circle cx="20" cy="20" r="1" fill="currentColor" opacity="0.4"/>
+                          </pattern>
+                          <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#0066FF"/>
+                            <stop offset="100%" stopColor="#6600FF"/>
+                          </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+                      </svg>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-center mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center border border-primary-400/30 group-hover:scale-110 transition-transform duration-300">
+                          <Brain className="w-8 h-8 text-primary-400" />
+                        </div>
+                      </div>
+                      <p className="text-xl md:text-2xl text-dark-200 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
+                        TheoCortex.AI is a <span className="text-gradient font-semibold">next-generation automation agency</span> built for modern businesses that want to grow smarter.
+                      </p>
+                      <p className="text-lg text-dark-300 leading-relaxed font-light group-hover:text-dark-100 transition-colors duration-300">
+                        We create AI-powered websites, intelligent agents, and fully integrated CRM systems so you can stop chasing leads and start scaling with confidence.
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* Two-Column Feature Cards */}
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                  <ScrollReveal delay={400} direction="left">
+                    <div className="glass-card group cursor-pointer h-full relative overflow-hidden">
+                      {/* Animated Accent */}
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-xl flex items-center justify-center border border-primary-400/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 mt-1">
+                          <Target className="w-6 h-6 text-primary-400" />
+                        </div>
+                        <div>
+                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-primary-400 transition-colors duration-300">
+                            Results-Focused Team
+                          </h4>
+                          <p className="text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
+                            We're not just another tech company. We're a team focused on one thing: <span className="text-primary-400 font-semibold">measurable results</span> that drive your business forward.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={600} direction="right">
+                    <div className="glass-card group cursor-pointer h-full relative overflow-hidden">
+                      {/* Animated Accent */}
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary-500 to-primary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-r from-secondary-500/20 to-primary-500/20 rounded-xl flex items-center justify-center border border-secondary-400/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 mt-1">
+                          <Users className="w-6 h-6 text-secondary-400" />
+                        </div>
+                        <div>
+                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-secondary-400 transition-colors duration-300">
+                            Human-Centered Automation
+                          </h4>
+                          <p className="text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
+                            We believe automation isn't about replacing people. It's about <span className="text-secondary-400 font-semibold">freeing them</span> to focus on what really matters.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                </div>
+
+                {/* Impact Statement Card */}
+                <ScrollReveal delay={800}>
+                  <div className="glass-card group cursor-pointer relative overflow-hidden">
+                    {/* Animated Background Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 via-secondary-500/5 to-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Floating Elements */}
+                    <div className="absolute top-4 right-4 w-2 h-2 bg-primary-400 rounded-full animate-pulse opacity-60"></div>
+                    <div className="absolute bottom-4 left-4 w-1 h-1 bg-secondary-400 rounded-full animate-pulse opacity-40" style={{animationDelay: '1s'}}></div>
+                    
+                    <div className="relative z-10 text-center">
+                      <div className="flex items-center justify-center space-x-2 mb-6">
+                        <Zap className="w-6 h-6 text-primary-400 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="text-primary-400 font-montserrat font-bold text-lg">Our Impact</span>
+                        <Zap className="w-6 h-6 text-secondary-400 group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                      <p className="text-lg md:text-xl text-dark-200 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
+                        Every solution we create <span className="text-gradient font-semibold">eliminates manual tasks</span>, 
+                        <span className="text-gradient font-semibold"> boosts conversions</span>, and gives business owners 
+                        <span className="text-gradient font-semibold"> more time and freedom</span>.
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          {/* What Makes Us Different */}
+          <ScrollReveal delay={200}>
+            <div className="mb-20">
+              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-12 text-center tracking-tighter">
+                WHAT MAKES US <span className="text-gradient">DIFFERENT</span>
+              </h3>
+              <div className="max-w-5xl mx-auto space-y-8">
+                {[
+                  {
+                    title: "Real Strategy with Every Build",
+                    description: "We go beyond templates. Our websites and funnels are backed by marketing psychology and conversion data"
+                  },
+                  {
+                    title: "Smart AI Agents That Deliver",
+                    description: "Our AI agents handle chats, qualify leads, and book appointments while staying true to your brand voice"
+                  },
+                  {
+                    title: "Automation That Feels Human",
+                    description: "Your clients get instant responses and seamless experiences without realizing it's automated"
+                  },
+                  {
+                    title: "Scalable Systems Built to Grow With You",
+                    description: "Whether you're a coach, agency, or service provider, we make sure your systems are future-ready"
+                  },
+                  {
+                    title: "End to End Support",
+                    description: "We handle strategy, design, tech, and launch. You get a smooth experience from start to finish"
+                  }
+                ].map((item, index) => (
+                  <ScrollReveal key={index} delay={300 + index * 100} direction="up">
+                    <div className="glass-card group cursor-pointer">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform duration-300">
+                          <CheckCircle className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-montserrat font-bold text-xl mb-3 text-white group-hover:text-primary-400 transition-colors duration-300">
+                            {item.title}
+                          </h4>
+                          <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Our Mission */}
+          <ScrollReveal delay={800}>
+            <div className="text-center mb-20">
+              <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
+                OUR <span className="text-gradient">MISSION</span>
+              </h3>
+              <div className="glass-card group cursor-pointer">
+                <p className="text-xl md:text-2xl text-dark-300 leading-relaxed font-light group-hover:text-white transition-colors duration-300">
+                  To help businesses grow using <span className="text-primary-400 font-semibold">divine intelligence</span> by blending human insight with smart technology
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* What's Next */}
+          <ScrollReveal delay={1000}>
+            <div className="text-center">
+              <div className="max-w-4xl mx-auto">
+                <h3 className="font-montserrat font-bold text-3xl md:text-4xl mb-8 tracking-tighter">
+                  WHAT'S <span className="text-gradient">NEXT</span>
+                </h3>
+                <div className="glass-card group cursor-pointer mb-12">
+                  <p className="text-xl text-dark-300 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
+                    <span className="font-montserrat font-semibold text-lg">
+                      Book a Free Strategy Call and see how TheoCortex.AI can automate your growth without adding complexity
+                    </span>
+                  </p>
+                </div>
+                <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
+                  BOOK YOUR FREE STRATEGY CALL
+                </InteractiveButton>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Social Proof Stats */}
+      <section className="py-20 bg-gradient-to-b from-primary-900/5 to-transparent relative">
+        <div className="section-container relative z-10">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center group cursor-pointer">
+                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">300%</div>
+                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Average Lead Conversion Increase</p>
+              </div>
+              <div className="text-center group cursor-pointer">
+                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">24/7</div>
+                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Automated Customer Engagement</p>
+              </div>
+              <div className="text-center group cursor-pointer">
+                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">20+</div>
+                <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Hours Saved Per Week</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-32 relative">
+        <div className="section-container relative z-10">
+          <ScrollReveal>
+            <div className="text-center mb-24">
+              <h2 className="font-montserrat font-bold text-4xl md:text-6xl mb-8 tracking-tighter">
+                FREQUENTLY ASKED <span className="text-gradient">QUESTIONS</span>
+              </h2>
+            </div>
+          </ScrollReveal>
+          
+          <div className="max-w-4xl mx-auto space-y-6">
+            {faqs.map((faq, index) => (
+              <ScrollReveal key={index} delay={index * 100} direction="up">
+                <div className="glass-card overflow-hidden">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full px-8 py-8 text-left flex items-center justify-between hover:bg-dark-800/20 transition-all duration-300 group focus-visible"
+                    aria-expanded={openFaq === index}
+                    aria-controls={`faq-${index}`}
+                  >
+                    <span className="font-montserrat font-bold text-lg tracking-wide pr-4 group-hover:text-primary-400 transition-colors duration-300">{faq.question}</span>
+                    <div className="flex-shrink-0">
+                      {openFaq === index ? (
+                        <ChevronUp className="w-6 h-6 text-primary-400 transform group-hover:scale-110 transition-transform duration-300" />
+                      ) : (
+                        <ChevronDown className="w-6 h-6 text-primary-400 transform group-hover:scale-110 transition-transform duration-300" />
+                      )}
+                    </div>
+                  </button>
+                  <div 
+                    id={`faq-${index}`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                  >
+                    <div className="px-8 pb-8 border-t border-dark-700/20">
+                      <p className="text-dark-300 leading-relaxed font-light font-inter pt-6">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section id="contact" className="py-32 bg-gradient-to-b from-primary-900/10 to-secondary-900/10 relative">
+        <div className="section-container text-center relative z-10">
+          <ScrollReveal>
+            <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
+              READY TO <span className="text-gradient">AUTOMATE YOUR BUSINESS</span>
+            </h2>
+            <h3 className="font-montserrat font-bold text-4xl md:text-5xl mb-12 text-white">
+              AND GET YOUR TIME BACK?
+            </h3>
+          </ScrollReveal>
+          
+          <ScrollReveal delay={200}>
+            <p className="text-xl text-dark-300 mb-16 max-w-3xl mx-auto font-light">
+              Book a free discovery call and let's build your custom AI system today.
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={400}>
+            <div className="mb-8 flex justify-center">
+              <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
+                BOOK FREE STRATEGY CALL
+              </InteractiveButton>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={600}>
+            <p className="text-dark-400 text-lg font-light italic font-inter text-center mx-auto">
+              No obligations. Just clarity.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-t from-dark-900/50 to-dark-950 border-t border-dark-800/30 py-20 relative">
+        <div className="section-container relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:space-x-12">
+            <div className="flex items-center space-x-4 mb-8 md:mb-0 group cursor-pointer">
+              <div className="relative">
+                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
+              </div>
+              <div>
+                <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300">
+                  THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
+                </span>
+                <p className="text-dark-400 font-inter text-sm mt-1">Built with Higher Thinking.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8 mb-8 md:mb-0 text-center">
+              <a href="#home" className="nav-link text-sm">Home</a>
+              <a href="#services" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#services')}>Services</a>
+              <a href="#about" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
+              <a href="#how-it-works" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#how-it-works')}>
+                <span className="hidden xs:inline">How It Works</span>
+                <span className="xs:hidden leading-tight">How It<br />Works</span>
+              </a>
+              <a href="#faq" className="nav-link text-sm footer-nav-link" onClick={(e) => handleNavClick(e, '#faq')}>FAQ</a>
+            </div>
+            
+            <div className="flex items-center space-x-8">
+              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="LinkedIn">
+                <Linkedin className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+          
+          <div className="border-t border-dark-800/30 pt-10 text-center">
+            <p className="text-dark-400 font-light font-inter">
+              © 2025 THEOCORTEX.AI – ALL RIGHTS RESERVED
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
