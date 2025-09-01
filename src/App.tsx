@@ -360,7 +360,22 @@ function App() {
                 >
                   Services
                 </a>
-                <a href="#about" className="nav-link py-2">About</a>
+                <a 
+                  href="/#about" 
+                  className="nav-link py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      const aboutSection = document.getElementById('about');
+                      if (aboutSection) {
+                        aboutSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                >
+                  About
+                </a>
                 <a href="#how-it-works" className="nav-link py-2">How It Works</a>
                 <a href="#faq" className="nav-link py-2">FAQ</a>
                 {/* Book Call Button */}
