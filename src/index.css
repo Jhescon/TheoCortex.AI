@@ -714,6 +714,60 @@
     transition: all 0.1s ease-out;
   }
 
+  /* Mobile Animation Optimizations */
+  .animate-fade-in-sequential,
+  .animate-scale-in-smooth,
+  .animate-slide-in-left,
+  .animate-slide-in-right {
+    animation-duration: 0.4s !important;
+    animation-delay: 0s !important;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Remove all stagger delays on mobile */
+  .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5,
+  .stagger-6, .stagger-7, .stagger-8, .stagger-9, .stagger-10,
+  .stagger-11, .stagger-12, .stagger-13, .stagger-14, .stagger-15 {
+    animation-delay: 0s !important;
+  }
+
+  /* Optimize specific mobile animations */
+  .mobile-optimized {
+    animation: mobileSlideUp 0.3s ease-out forwards;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Hardware-accelerated mobile animations */
+  @keyframes mobileSlideUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes mobileFadeIn {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0, 0) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  /* Immediate animation triggers for mobile */
+  .mobile-instant {
+    animation: mobileFadeIn 0.3s ease-out forwards;
+    will-change: transform, opacity;
+  }
+
   /* Mobile touch optimization */
   .touch-manipulation {
     touch-action: manipulation;
