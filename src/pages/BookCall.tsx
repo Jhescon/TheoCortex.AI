@@ -226,7 +226,6 @@ export const BookCall: React.FC = () => {
                   <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">
                     {item.description}
                   </p>
-                </div>
               </div>
             ))}
           </div>
