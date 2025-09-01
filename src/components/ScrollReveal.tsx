@@ -7,8 +7,6 @@ interface ScrollRevealProps {
   className?: string;
   threshold?: number;
   rootMargin?: string;
-  stagger?: boolean;
-  staggerDelay?: number;
 }
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({ 
@@ -17,26 +15,26 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   direction = 'up',
   className = '',
   threshold = 0.1,
-  rootMargin = '0px 0px -50px 0px',
-  stagger = false,
-  staggerDelay = 100
+  rootMargin = '0px 0px -20px 0px'
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          const finalDelay = stagger ? delay + (Math.random() * staggerDelay) : delay;
+          const finalDelay = isMobile ? Math.max(delay * 0.5, 0) : delay;
           setTimeout(() => {
             setIsVisible(true);
           }, finalDelay);
         }
       },
       {
-        threshold,
-        rootMargin
+        threshold: isMobile ? 0.05 : threshold,
+        rootMargin: isMobile ? '0px 0px 0px 0px' : rootMargin
       }
     );
 
@@ -49,7 +47,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         observer.unobserve(ref.current);
       }
     };
-  }, [delay, threshold, rootMargin, stagger, staggerDelay]);
+  }, [delay, threshold, rootMargin]);
 
   const getAnimationClass = () => {
     if (!isVisible) {
@@ -76,7 +74,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <div 
       ref={ref} 
-      className={`transition-all duration-700 ease-out ${getAnimationClass()} ${className}`}
+      className={`transition-all duration-500 ease-out ${getAnimationClass()} ${className}`}
       style={{
         transform: !isVisible ? 
           (direction === 'up' ? 'translateY(30px)' : 
@@ -84,7 +82,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
            direction === 'left' ? 'translateX(-30px)' :
            direction === 'right' ? 'translateX(30px)' :
            direction === 'scale' ? 'scale(0.95)' : 'none') : 
-          'none'
+          'none',
+        willChange: 'transform, opacity'
       }}
     >
       {children}
