@@ -58,7 +58,7 @@ export const ContactForm: React.FC = () => {
   // Scroll to top when form is successfully submitted
   useEffect(() => {
     if (isSubmitted) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, [isSubmitted]);
 
