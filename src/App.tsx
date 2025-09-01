@@ -405,7 +405,13 @@ function App() {
                 {/* Book Call Button */}
                 <div className="mt-8 pt-8 border-t border-dark-700/50">
                   <div
-                    onClick={() => handleMobileNavClick('/book-call')}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileMenuOpen(false);
+                      setTimeout(() => {
+                        window.location.href = '/book-call';
+                      }, 100);
+                    }}
                     className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group cursor-pointer touch-manipulation"
                   >
                     <Calendar className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
