@@ -33,6 +33,7 @@ import {
 import { ScrollReveal } from './components/ScrollReveal';
 import { InteractiveButton } from './components/InteractiveButton';
 import { TypingEffect } from './components/TypingEffect';
+import { PageTransition } from './components/PageTransition';
 import { ParallaxBackground } from './components/ParallaxBackground';
 import { ContactForm } from './components/ContactForm';
 import { WebsiteDesignFunnels } from './pages/WebsiteDesignFunnels';
@@ -61,6 +62,8 @@ function App() {
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     setIsVisible(true);
@@ -109,6 +112,15 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    // Mark initial load as complete after a short delay
+    const timer = setTimeout(() => {
+      setIsInitialLoad(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Only prevent default for same-page navigation (hash links)
     // Only prevent default for same-page hash navigation
@@ -124,6 +136,29 @@ function App() {
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handlePageChange = (page: string) => {
+    // Don't show transition on initial load
+    if (isInitialLoad) {
+      setCurrentPage(page);
+      return;
+    }
+
+    // Show transition animation for navigation
+    setIsTransitioning(true);
+    
+    // Close mobile menu if open
+    setIsMobileMenuOpen(false);
+    
+    // Change page after a brief delay
+    setTimeout(() => {
+      setCurrentPage(page);
+    }, 300);
+  };
+
+  const handleTransitionComplete = () => {
+    setIsTransitioning(false);
+  };
+
     e.preventDefault();
     const element = document.getElementById(targetId.substring(1));
     if (element) {
@@ -134,7 +169,7 @@ function App() {
   const handleMobileNavClick = (path: string) => {
     setMobileMenuOpen(false);
     window.location.hash = path;
-  };
+        handlePageChange('home');
 
   const benefits = [
     {
@@ -251,9 +286,8 @@ function App() {
     {
       question: "Do I need to know anything technical?",
       answer: "Not at all. We handle all the tech and integrations for you. You focus on your business, we'll handle the backend."
-    },
+      handlePageChange(page);
     {
-      question: "How much do your services cost?",
       answer: "We don't list prices publicly because every business has different needs. We'll go over everything in your free strategy call and give you a clear recommendation."
     },
     {
@@ -325,7 +359,7 @@ function App() {
               </a>
               <a href="#faq" className="nav-link" onClick={(e) => handleSmoothScroll(e, 'faq')}>FAQ</a>
               <InteractiveButton icon={ExternalLink} href="#book-call">
-                Book Free Call
+                onClick={() => handlePageChange('book-call')}
               </InteractiveButton>
             </div>
 
@@ -700,7 +734,7 @@ function App() {
               <h2 className="font-montserrat font-bold text-5xl md:text-7xl mb-8 tracking-tighter">
                 AUTOMATION, IN JUST <span className="text-gradient">3 STEPS</span>
               </h2>
-            </div>
+                 onClick={() => handlePageChange('ai-agents')}>
           </ScrollReveal>
           
           <div className="grid md:grid-cols-3 gap-12 relative">
@@ -717,7 +751,7 @@ function App() {
                       <span className="text-primary-400 font-montserrat font-bold text-sm">{step.number}</span>
                     </div>
                   </div>
-                  <h3 className="font-montserrat font-bold text-xl mb-4 tracking-wide group-hover:text-primary-400 transition-colors duration-300">{step.title}</h3>
+                 onClick={() => handlePageChange('crm-integration')}>
                   <p className="text-dark-300 leading-relaxed font-light font-inter group-hover:text-white transition-colors duration-300">{step.description}</p>
                   
                   {/* Connection Line */}
@@ -873,7 +907,7 @@ function App() {
                     title: "Smart AI Agents That Deliver",
                     description: "Our AI agents handle chats, qualify leads, and book appointments while staying true to your brand voice"
                   },
-                  {
+                    onClick={() => handlePageChange('book-call')}
                     title: "Automation That Feels Human",
                     description: "Your clients get instant responses and seamless experiences without realizing it's automated"
                   },
@@ -959,7 +993,7 @@ function App() {
                 <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Automated Customer Engagement</p>
               </div>
               <div className="text-center group cursor-pointer">
-                <div className="text-5xl font-montserrat font-bold text-gradient mb-4 group-hover:scale-110 transition-transform duration-300">20+</div>
+                onClick={() => handlePageChange('book-call')}
                 <p className="text-dark-300 font-inter group-hover:text-white transition-colors duration-300">Hours Saved Per Week</p>
               </div>
             </div>
@@ -1030,6 +1064,12 @@ function App() {
             </p>
           </ScrollReveal>
 
+      {/* Page Transition Loading Animation */}
+      <PageTransition 
+        isTransitioning={isTransitioning} 
+        onTransitionComplete={handleTransitionComplete}
+      />
+
           <ScrollReveal delay={400}>
             <div className="mb-8 flex justify-center">
               <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
@@ -1055,7 +1095,7 @@ function App() {
                 <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
-              <div>
+                onClick={() => handlePageChange('book-call')}
                 <span className="text-xl font-bold font-montserrat tracking-tight group-hover:text-primary-400 transition-colors duration-300">
                   THEO<span className="text-primary-500">CORTEX</span><span className="text-dark-400 font-inter">.AI</span>
                 </span>
@@ -1101,3 +1141,4 @@ function App() {
 }
 
 export default App;
+                 onClick={() => handlePageChange('website-design')}>
