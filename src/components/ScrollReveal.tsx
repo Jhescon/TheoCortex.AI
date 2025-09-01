@@ -9,6 +9,7 @@ interface ScrollRevealProps {
   rootMargin?: string;
   stagger?: boolean;
   staggerDelay?: number;
+  mobileOptimized?: boolean;
 }
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({ 
@@ -19,16 +20,29 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   threshold = 0.1,
   rootMargin = '0px 0px -50px 0px',
   stagger = false,
-  staggerDelay = 100
+  staggerDelay = 100,
+  mobileOptimized = false
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          const finalDelay = stagger ? delay + (Math.random() * staggerDelay) : delay;
+          // Remove delays on mobile for immediate animations
+          const finalDelay = isMobile ? 0 : (stagger ? delay + (Math.random() * staggerDelay) : delay);
           setTimeout(() => {
             setIsVisible(true);
           }, finalDelay);
@@ -36,7 +50,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       },
       {
         threshold,
-        rootMargin
+        // More aggressive mobile detection for faster triggers
+        rootMargin: isMobile ? '0px 0px -20px 0px' : rootMargin
       }
     );
 
@@ -49,11 +64,16 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         observer.unobserve(ref.current);
       }
     };
-  }, [delay, threshold, rootMargin, stagger, staggerDelay]);
+  }, [delay, threshold, rootMargin, stagger, staggerDelay, isMobile]);
 
   const getAnimationClass = () => {
     if (!isVisible) {
       return 'opacity-0 transform';
+    }
+
+    // Use optimized mobile animations
+    if (isMobile && mobileOptimized) {
+      return 'mobile-optimized opacity-100';
     }
 
     switch (direction) {
@@ -76,7 +96,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <div 
       ref={ref} 
-      className={`transition-all duration-700 ease-out ${getAnimationClass()} ${className}`}
+      className={`transition-all ${isMobile ? 'duration-300' : 'duration-700'} ease-out ${getAnimationClass()} ${className}`}
       style={{
         transform: !isVisible ? 
           (direction === 'up' ? 'translateY(30px)' : 
@@ -84,7 +104,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
            direction === 'left' ? 'translateX(-30px)' :
            direction === 'right' ? 'translateX(30px)' :
            direction === 'scale' ? 'scale(0.95)' : 'none') : 
-          'none'
+          'none',
       }}
     >
       {children}

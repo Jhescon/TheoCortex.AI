@@ -528,7 +528,7 @@ function App() {
           <ScrollReveal delay={2800} direction="up">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl mx-auto">
               {benefits.map((benefit, index) => (
-                <ScrollReveal key={index} delay={3000 + index * 100} direction="scale">
+                <ScrollReveal key={index} delay={3000 + index * 100} direction="scale" mobileOptimized={true}>
                   <div className="glass-card group cursor-pointer">
                     <div className="text-primary-400 flex-shrink-0 mb-3 group-hover:scale-110 transition-transform duration-300">
                       {benefit.icon}
@@ -543,7 +543,7 @@ function App() {
           
           {/* Primary CTA */}
           {typingComplete && (
-          <ScrollReveal delay={3400} direction="scale">
+          <ScrollReveal delay={3400} direction="scale" mobileOptimized={true}>
             <div className="mb-8">
               <InteractiveButton size="lg" icon={ExternalLink} href="#book-call">
                 BOOK A FREE STRATEGY CALL
@@ -559,7 +559,7 @@ function App() {
 
           {/* Secondary Text */}
           {typingComplete && (
-          <ScrollReveal delay={3600} direction="fade">
+          <ScrollReveal delay={3600} direction="fade" mobileOptimized={true}>
             <div></div>
           </ScrollReveal>
           )}
