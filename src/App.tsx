@@ -344,7 +344,22 @@ function App() {
             <div className="md:hidden py-4 border-t border-dark-800/50">
               <div className="flex flex-col space-y-4">
                 <a href="#home" className="nav-link py-2">Home</a>
-                <a href="#services" className="nav-link py-2">Services</a>
+                <a 
+                  href="#services" 
+                  className="nav-link py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      const servicesSection = document.getElementById('services');
+                      if (servicesSection) {
+                        servicesSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                >
+                  Services
+                </a>
                 <a href="#about" className="nav-link py-2">About</a>
                 <a href="#how-it-works" className="nav-link py-2">How It Works</a>
                 <a href="#faq" className="nav-link py-2">FAQ</a>
