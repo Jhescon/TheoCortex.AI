@@ -792,71 +792,13 @@
     }
 
     /* Mobile navigation button enhancements */
+    /* Mobile navigation button enhancements */
     .mobile-nav-button {
-      min-height: 56px;
+      min-height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 24px;
-      border-radius: 12px;
-      background: rgba(30, 41, 59, 0.2);
-      border: 1px solid rgba(51, 65, 85, 0.3);
-      backdrop-filter: blur(8px);
-      transition: all 0.3s ease-out;
-    }
-
-    .mobile-nav-button:active {
-      transform: scale(0.98);
-      background: rgba(6, 102, 255, 0.1);
-      border-color: rgba(6, 102, 255, 0.5);
-    }
-
-    .mobile-nav-button:hover {
-      background: rgba(51, 65, 85, 0.4);
-      border-color: rgba(6, 102, 255, 0.5);
-      transform: scale(1.02);
-    }
-  }
-
-  /* Enhanced mobile menu animations */
-  @keyframes mobileSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.98);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Tech-inspired mobile navigation styles */
-  .mobile-nav-item {
-    animation: mobileSlideIn 0.4s ease-out forwards;
-    opacity: 0;
-  }
-
-  /* Mobile navigation tech effects */
-  @media (max-width: 768px) {
-    .mobile-nav-item:nth-child(1) { animation-delay: 0.1s; }
-    .mobile-nav-item:nth-child(2) { animation-delay: 0.2s; }
-    .mobile-nav-item:nth-child(3) { animation-delay: 0.3s; }
-    .mobile-nav-item:nth-child(4) { animation-delay: 0.4s; }
-    .mobile-nav-item:nth-child(5) { animation-delay: 0.5s; }
-
-    /* Enhanced touch feedback */
-    .touch-manipulation:active {
-      transform: scale(0.96) !important;
-      transition: transform 0.1s ease-out;
-    }
-
-    /* Improved mobile button styling */
-    .mobile-nav-button {
-      min-height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
+      padding: 20px 24px;
       border-radius: 16px;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(51, 65, 85, 0.2));
       border: 1px solid rgba(51, 65, 85, 0.3);
@@ -864,6 +806,7 @@
       transition: all 0.3s ease-out;
       position: relative;
       overflow: hidden;
+      text-decoration: none;
     }
 
     .mobile-nav-button::before {
@@ -892,6 +835,38 @@
       border-color: rgba(6, 102, 255, 0.4);
       transform: scale(1.02);
       box-shadow: 0 8px 32px rgba(6, 102, 255, 0.15);
+    }
+  }
+
+  /* Enhanced mobile menu animations */
+  @keyframes mobileSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .mobile-nav-item {
+    animation: mobileSlideIn 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Mobile navigation tech effects */
+  @media (max-width: 768px) {
+    .mobile-nav-item:nth-child(1) { animation-delay: 0.1s; }
+    .mobile-nav-item:nth-child(2) { animation-delay: 0.2s; }
+    .mobile-nav-item:nth-child(3) { animation-delay: 0.3s; }
+    .mobile-nav-item:nth-child(4) { animation-delay: 0.4s; }
+    .mobile-nav-item:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Enhanced touch feedback */
+    .touch-manipulation:active {
+      transform: scale(0.96) !important;
+      transition: transform 0.1s ease-out;
     }
   }
 

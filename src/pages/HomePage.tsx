@@ -32,8 +32,6 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Ensure page starts at top without animation
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
@@ -46,7 +44,6 @@ export const HomePage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -59,7 +56,6 @@ export const HomePage: React.FC = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -72,7 +68,6 @@ export const HomePage: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  // Auto-close mobile menu when clicking navigation links
   const handleMobileNavClick = () => {
     setIsMobileMenuOpen(false);
   };
@@ -255,9 +250,8 @@ export const HomePage: React.FC = () => {
               </InteractiveButton>
             </div>
 
-            {/* Mobile Navigation - Redesigned */}
+            {/* Mobile Menu Button */}
             <div className="md:hidden mobile-menu-container">
-              {/* Mobile Menu Toggle Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="relative p-3 text-dark-300 hover:text-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 rounded-xl bg-dark-800/40 backdrop-blur-sm border border-dark-700/60 hover:border-primary-500/60 hover:bg-dark-700/50 active:scale-95 touch-manipulation group"
@@ -277,7 +271,7 @@ export const HomePage: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-primary-500/10 to-primary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
               </button>
 
-              {/* Mobile Menu Overlay - Completely Redesigned */}
+              {/* Mobile Menu Overlay */}
               <div className={`
                 fixed inset-0 bg-dark-950/98 backdrop-blur-2xl z-50
                 transition-all duration-400 ease-out
@@ -310,7 +304,7 @@ export const HomePage: React.FC = () => {
                     </a>
                   </div>
 
-                  {/* Redesigned Navigation Buttons */}
+                  {/* Navigation Links */}
                   <div className="space-y-4 w-full max-w-sm mb-12">
                     {navigationLinks.map((link, index) => (
                       <a
@@ -357,7 +351,7 @@ export const HomePage: React.FC = () => {
                     ))}
                   </div>
                   
-                  {/* Enhanced CTA Button */}
+                  {/* CTA Button */}
                   <div className="w-full max-w-sm mobile-nav-item" style={{ animationDelay: `${(navigationLinks.length + 1) * 100}ms` }}>
                     <a
                       href="/book-call"
@@ -404,8 +398,8 @@ export const HomePage: React.FC = () => {
         
         <div className="section-container text-center relative z-10">
           <div className="mb-12 animate-fade-in-sequential stagger-2">
-            <h1 className="font-montserrat font-bold text-2xl md:text-3xl lg:text-4xl mb-2 leading-tight tracking-tighter">
-              <div className="text-gradient mb-2">
+            <h1 className="font-montserrat font-bold text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight tracking-tighter">
+              <div className="text-gradient mb-4">
                 <TypingEffect 
                   text="AI THAT WORKS" 
                   delay={800}
