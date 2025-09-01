@@ -405,13 +405,7 @@ function App() {
                 {/* Book Call Button */}
                 <div className="mt-8 pt-8 border-t border-dark-700/50">
                   <div
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMobileMenuOpen(false);
-                      setTimeout(() => {
-                        window.location.href = '/book-call';
-                      }, 100);
-                    }}
+                    onClick={() => handleMobileNavClick('/book-call')}
                     className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group cursor-pointer touch-manipulation"
                   >
                     <Calendar className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
@@ -491,11 +485,10 @@ function App() {
               
               {/* Tech overlay effects */}
               <div className="absolute inset-0 pointer-events-none opacity-20 animate-fade-in" style={{animationDelay: '2.6s', animationFillMode: 'both'}}>
-                <button 
-                  onClick={handleBookCallClick}
-                  className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-montserrat font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-dark-950 flex items-center justify-center space-x-3 group touch-manipulation"
-                  type="button"
-                >
+                {/* Data particles */}
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
                     className="absolute w-0.5 h-0.5 bg-primary-400 rounded-full animate-data-stream"
                     style={{
                       left: `${15 + i * 15}%`,
@@ -639,7 +632,7 @@ function App() {
                       <p>• Unlimited growth</p>
                     </div>
                   </div>
-                </button>
+                </div>
               </div>
             </ScrollReveal>
           </div>
