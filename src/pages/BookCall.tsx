@@ -195,6 +195,7 @@ export const BookCall: React.FC = () => {
                     {highlight.description}
                   </p>
                 </div>
+              </div>
             ))}
           </div>
         </div>
@@ -226,6 +227,7 @@ export const BookCall: React.FC = () => {
                     {item.description}
                   </p>
                 </div>
+              </div>
             ))}
           </div>
         </div>
