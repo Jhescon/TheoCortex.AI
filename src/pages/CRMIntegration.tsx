@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
+  Brain, 
   Database, 
   Calendar, 
   MessageSquare, 
@@ -127,11 +128,7 @@ export const CRMIntegration: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             <a href="/" className="flex items-center space-x-4 group flex-shrink-0">
               <div className="relative">
-                <img 
-                  src="/brain-logo.jpg" 
-                  alt="TheoCortex.AI Brain Logo" 
-                  className="w-10 h-10 transition-transform duration-300 group-hover:rotate-12 object-contain"
-                />
+                <Brain className="w-10 h-10 text-primary-500 transition-transform duration-300 group-hover:rotate-12" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <span className="text-2xl font-bold font-montserrat tracking-tight transition-all duration-300 group-hover:text-primary-400">
@@ -428,11 +425,7 @@ export const CRMIntegration: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:space-x-12">
             <a href="/" className="flex items-center space-x-4 mb-8 md:mb-0 group cursor-pointer">
               <div className="relative">
-                <img 
-                  src="/brain-logo.jpg" 
-                  alt="TheoCortex.AI Brain Logo" 
-                  className="w-10 h-10 group-hover:rotate-12 transition-transform duration-300 object-contain"
-                />
+                <Brain className="w-10 h-10 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <div>

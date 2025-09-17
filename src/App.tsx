@@ -432,10 +432,10 @@ function App() {
             <h1 className="font-inter font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 leading-[1.1] tracking-tight text-center">
               <div className="text-gradient mb-4 animate-fade-in-primary">
                 <TypingEffect 
-                <img 
-                  src="/brain-logo.jpg" 
-                  alt="TheoCortex.AI Brain Logo" 
-                  className="w-10 h-10 group-hover:rotate-12 transition-transform duration-300 object-contain"
+                  text="AUTOMATE GROWTH" 
+                  delay={500}
+                  speed={80}
+                  onComplete={() => setTypingComplete(true)}
                 />
               </div>
               {typingComplete && (
