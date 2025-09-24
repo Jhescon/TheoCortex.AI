@@ -626,6 +626,7 @@ export const ContactForm: React.FC = () => {
                     className="rounded-xl"
                     loading="lazy"
                   ></iframe>
+                </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
                   <div className="text-center">
                     <h3 className="font-montserrat font-bold text-xl text-green-400 mb-3">
