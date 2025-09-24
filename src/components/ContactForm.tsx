@@ -368,7 +368,6 @@ export const ContactForm: React.FC = () => {
                   className={`w-full px-4 py-3 bg-dark-800/50 border rounded-xl text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 ${
                     errors.fullName ? 'border-red-500' : 'border-dark-600'
                   } ${isSubmitted ? 'opacity-75 cursor-not-allowed' : ''}`}
-                  }`}
                   placeholder="Enter your full name"
                   required
                 />
@@ -396,7 +395,6 @@ export const ContactForm: React.FC = () => {
                   className={`w-full px-4 py-3 bg-dark-800/50 border rounded-xl text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 ${
                     errors.email ? 'border-red-500' : 'border-dark-600'
                   } ${isSubmitted ? 'opacity-75 cursor-not-allowed' : ''}`}
-                  }`}
                   placeholder="Enter your email address"
                   required
                 />
@@ -424,7 +422,6 @@ export const ContactForm: React.FC = () => {
                   className={`w-full px-4 py-3 bg-dark-800/50 border rounded-xl text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 ${
                     errors.companyName ? 'border-red-500' : 'border-dark-600'
                   } ${isSubmitted ? 'opacity-75 cursor-not-allowed' : ''}`}
-                  }`}
                   placeholder="Enter your company name"
                   required
                 />
@@ -451,7 +448,6 @@ export const ContactForm: React.FC = () => {
                   className={`w-full px-4 py-3 bg-dark-800/50 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 ${
                     errors.serviceSelection ? 'border-red-500' : 'border-dark-600'
                   } ${isSubmitted ? 'opacity-75 cursor-not-allowed' : ''}`}
-                  }`}
                   required
                 >
                   {serviceOptions.map((option) => (
@@ -484,7 +480,6 @@ export const ContactForm: React.FC = () => {
                   className={`w-full px-4 py-3 bg-dark-800/50 border rounded-xl text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 resize-vertical ${
                     errors.problems ? 'border-red-500' : 'border-dark-600'
                   } ${isSubmitted ? 'opacity-75 cursor-not-allowed' : ''}`}
-                  }`}
                   placeholder="Describe the specific challenges you're facing with lead generation, customer engagement, or business automation. Be as detailed as possible (minimum 50 characters)."
                   required
                 />
@@ -719,46 +714,6 @@ export const ContactForm: React.FC = () => {
           </div>
         </footer>
       )}
-    </div>
-  );
-};
-
-                <InteractiveButton
-                  type="submit"
-                  size="lg"
-                  icon={Send}
-                  disabled={isSubmitting}
-                  loading={isSubmitting}
-                  className="w-full md:w-auto"
-                >
-                  {isSubmitting ? 'Scheduling...' : 'Schedule Consultation'}
-                </InteractiveButton>
-              </div>
-            </form>
-
-            {/* Privacy Notice */}
-            <div className="mt-12 pt-8 border-t border-dark-700/50">
-              <div className="flex items-start space-x-3 text-sm text-dark-400">
-                <Shield className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="mb-2">
-                    <strong className="text-dark-300">Privacy & Security:</strong> Your information is encrypted and securely stored. We comply with GDPR and never share your data with third parties.
-                  </p>
-                  <p className="flex items-center space-x-2">
-                    <Lock className="w-4 h-4 text-primary-400" />
-                    <span>SSL encrypted • CSRF protected • GDPR compliant</span>
-                  </p>
-                  <p className="text-dark-400 font-inter text-sm mt-1">
-                    <a href="mailto:theocortex.ai@gmail.com" className="hover:text-primary-400 transition-colors duration-300">
-                      theocortex.ai@gmail.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
