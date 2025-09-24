@@ -900,4 +900,47 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #3399FF, #9933FF);
 }
+
+/* Calendly Embed Styles */
+.calendly-embed-container {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.calendly-embed-container iframe {
+  border-radius: 12px;
+}
+
+/* Enhanced fade-in animation for Step 2 */
+@keyframes fadeInUpStep2 {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in-step2 {
+  animation: fadeInUpStep2 1s ease-out forwards;
+}
+
+/* Progress indicator animations */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.progress-fill {
+  animation: progressFill 1s ease-out forwards;
+}
+
 /* Mobile Book Call Button Styles */
