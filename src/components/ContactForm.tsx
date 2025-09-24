@@ -617,7 +617,7 @@ export const ContactForm: React.FC = () => {
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
                   <iframe
-                    src="https://calendly.com/jhescon-theocortex/30min?embed_domain=aiwebpagedemo.com&embed_type=Inline"
+                    src="https://calendly.com/jhescon-theocortex/30min?hide_event_type_details=1&hide_gdpr_banner=1"
                     width="100%"
                     height="700"
                     frameBorder="0"
