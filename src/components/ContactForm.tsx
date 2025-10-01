@@ -320,11 +320,11 @@ export const ContactForm: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-montserrat font-bold text-lg">
-                      Step 1 of 2: Consultation Form
+                      Step 1: Consultation Form
                       {isSubmitted && <span className="text-green-400 ml-2">✅</span>}
                     </h3>
                     <p className="text-dark-400 text-sm">
-                      {isSubmitted ? 'Form completed successfully!' : 'Tell us about your business needs'}
+                      {isSubmitted ? 'Complete!' : 'Your business needs'}
                     </p>
                   </div>
                 </div>
@@ -351,10 +351,10 @@ export const ContactForm: React.FC = () => {
                     <h3 className={`font-montserrat font-bold text-lg transition-colors duration-500 ${
                       showCalendly ? 'text-white' : 'text-dark-400'
                     }`}>
-                      Step 2 of 2: Schedule Your Call
+                      Step 2: Schedule Call
                     </h3>
                     <p className="text-dark-400 text-sm">
-                      {showCalendly ? 'Choose your preferred time slot' : 'Complete Step 1 first'}
+                      {showCalendly ? 'Pick your time' : 'Complete Step 1'}
                     </p>
                   </div>
                 </div>
