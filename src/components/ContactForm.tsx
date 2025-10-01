@@ -616,16 +616,16 @@ export const ContactForm: React.FC = () => {
 
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
-                  <iframe
-                    src="https://calendly.com/jhescon-theocortex/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-                    width="100%"
-                    height="700"
-                    frameBorder="0"
-                    scrolling="no"
-                    title="Schedule your consultation"
-                    className="rounded-xl"
-                    loading="lazy"
-                  ></iframe>
+                  <div 
+                    className="calendly-inline-widget rounded-xl overflow-hidden" 
+                    data-url="https://calendly.com/jhescon-theocortex/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+                    style={{ minWidth: '320px', height: '700px' }}
+                  ></div>
+                  <script 
+                    type="text/javascript" 
+                    src="https://assets.calendly.com/assets/external/widget.js" 
+                    async
+                  ></script>
                 </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
                   <div className="text-center">
