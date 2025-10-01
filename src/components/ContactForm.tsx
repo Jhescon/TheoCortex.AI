@@ -52,12 +52,31 @@ export const ContactForm: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [calendlyLoaded, setCalendlyLoaded] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
+  // Load Calendly script when showCalendly becomes true
+  useEffect(() => {
+    if (showCalendly && !calendlyLoaded) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => setCalendlyLoaded(true);
+      document.head.appendChild(script);
+      
+      return () => {
+        // Cleanup script if component unmounts
+        const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+        if (existingScript) {
+          document.head.removeChild(existingScript);
+        }
+      };
+    }
+  }, [showCalendly, calendlyLoaded]);
   // Handle form submission success - show Calendly instead of redirect
   useEffect(() => {
     if (isSubmitted) {
@@ -616,18 +635,13 @@ export const ContactForm: React.FC = () => {
 
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
-                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50">
-                    <iframe 
-                      src="https://calendly.com/jhescon-theocortex/30min?embed_domain=localhost&embed_type=Inline" 
-                      width="100%" 
-                      height="700" 
-                      frameBorder="0"
-                      title="Schedule a consultation with TheoCortex.AI"
-                      className="rounded-xl"
-                      loading="lazy"
-                      allow="microphone; camera"
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                    ></iframe>
+                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50 p-4">
+                    {/* Calendly inline widget begin */}
+                    <div 
+                      className="calendly-inline-widget" 
+                      data-url="https://calendly.com/jhescon-theocortex/30min" 
+                      style={{minWidth: '320px', height: '700px'}}
+                    ></div>
                   </div>
                 </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
