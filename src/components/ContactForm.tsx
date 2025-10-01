@@ -616,16 +616,19 @@ export const ContactForm: React.FC = () => {
 
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
-                  <div 
-                    className="calendly-inline-widget rounded-xl overflow-hidden" 
-                    data-url="https://calendly.com/jhescon-theocortex/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-                    style={{ minWidth: '320px', height: '700px' }}
-                  ></div>
-                  <script 
-                    type="text/javascript" 
-                    src="https://assets.calendly.com/assets/external/widget.js" 
-                    async
-                  ></script>
+                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50">
+                    <iframe 
+                      src="https://calendly.com/jhescon-theocortex/30min?embed_domain=localhost&embed_type=Inline" 
+                      width="100%" 
+                      height="700" 
+                      frameBorder="0"
+                      title="Schedule a consultation with TheoCortex.AI"
+                      className="rounded-xl"
+                      loading="lazy"
+                      allow="microphone; camera"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    ></iframe>
+                  </div>
                 </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
                   <div className="text-center">
