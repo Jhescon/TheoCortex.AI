@@ -62,6 +62,14 @@ export const ContactForm: React.FC = () => {
   // Load Calendly script when showCalendly becomes true
   useEffect(() => {
     if (showCalendly && !calendlyLoaded) {
+      // Load Calendly CSS first
+      const cssLink = document.createElement('link');
+      cssLink.href = 'https://assets.calendly.com/assets/external/widget.css';
+      cssLink.rel = 'stylesheet';
+      cssLink.type = 'text/css';
+      document.head.appendChild(cssLink);
+      
+      // Then load Calendly script
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
@@ -69,10 +77,14 @@ export const ContactForm: React.FC = () => {
       document.head.appendChild(script);
       
       return () => {
-        // Cleanup script if component unmounts
+        // Cleanup script and CSS if component unmounts
         const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
         if (existingScript) {
           document.head.removeChild(existingScript);
+        }
+        const existingCSS = document.querySelector('link[href="https://assets.calendly.com/assets/external/widget.css"]');
+        if (existingCSS) {
+          document.head.removeChild(existingCSS);
         }
       };
     }
@@ -635,13 +647,14 @@ export const ContactForm: React.FC = () => {
 
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
-                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50 p-4">
+                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50">
                     {/* Calendly inline widget begin */}
                     <div 
                       className="calendly-inline-widget" 
                       data-url="https://calendly.com/jhescon-theocortex/30min" 
-                      style={{minWidth: '320px', height: '700px'}}
+                      style={{minWidth: '320px', height: '700px', borderRadius: '12px'}}
                     ></div>
+                    {/* Calendly inline widget end */}
                   </div>
                 </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
