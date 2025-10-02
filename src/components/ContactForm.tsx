@@ -304,59 +304,141 @@ export const ContactForm: React.FC = () => {
 
           {/* Progress Indicator */}
           <div className="max-w-3xl mx-auto mb-12">
-            <div className="glass-card">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
-                    isSubmitted 
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-500' 
-                      : 'bg-gradient-to-r from-primary-500 to-secondary-500'
-                  }`}>
-                    {isSubmitted ? (
-                      <CheckCircle className="w-6 h-6 text-white" />
-                    ) : (
-                      <span className="text-white font-montserrat font-bold">1</span>
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="font-montserrat font-bold text-lg">
-                      Step 1: Consultation Form
-                      {isSubmitted && <span className="text-green-400 ml-2">✅</span>}
-                    </h3>
-                    <p className="text-dark-400 text-sm">
-                      {isSubmitted ? 'Complete!' : 'Your business needs'}
-                    </p>
+            <div className="space-y-4">
+              {/* Step 1 Card */}
+              <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 ${
+                isSubmitted 
+                  ? 'bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/30 shadow-lg shadow-green-500/10' 
+                  : 'bg-gradient-to-r from-primary-900/20 to-secondary-900/20 border-primary-500/30 shadow-lg shadow-primary-500/10'
+              } backdrop-blur-xl group hover:shadow-xl hover:shadow-primary-500/20`}>
+                {/* Animated background glow */}
+                <div className={`absolute inset-0 opacity-20 transition-opacity duration-500 ${
+                  isSubmitted 
+                    ? 'bg-gradient-to-r from-green-500/10 to-emerald-500/10' 
+                    : 'bg-gradient-to-r from-primary-500/10 to-secondary-500/10'
+                }`}></div>
+                
+                <div className="relative p-6">
+                  <div className="flex items-center space-x-4">
+                    {/* Step Icon */}
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${
+                      isSubmitted 
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30' 
+                        : 'bg-gradient-to-r from-primary-500 to-secondary-500 shadow-lg shadow-primary-500/30'
+                    } group-hover:scale-110`}>
+                      {isSubmitted ? (
+                        <CheckCircle className="w-7 h-7 text-white" />
+                      ) : (
+                        <User className="w-7 h-7 text-white" />
+                      )}
+                    </div>
+                    
+                    {/* Step Content */}
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className={`text-xs font-montserrat font-bold px-3 py-1 rounded-full ${
+                          isSubmitted 
+                            ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                            : 'bg-primary-500/20 text-primary-400 border border-primary-500/30'
+                        }`}>
+                          STEP 1
+                        </span>
+                        {isSubmitted && (
+                          <span className="text-green-400 text-sm font-bold">✅ COMPLETE</span>
+                        )}
+                      </div>
+                      <h3 className={`font-montserrat font-bold text-xl mb-1 transition-colors duration-500 ${
+                        isSubmitted ? 'text-green-400' : 'text-white'
+                      }`}>
+                        Consultation Form
+                      </h3>
+                      <p className="text-dark-300 text-sm leading-relaxed">
+                        {isSubmitted ? 'Form submitted successfully!' : 'Tell us about your business needs and goals'}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="hidden md:block w-16 h-1 bg-dark-700 rounded-full mx-4">
-                  <div className={`h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full transition-all duration-1000 ${
-                    isSubmitted ? 'w-full' : 'w-0'
+                {/* Progress bar at bottom */}
+                <div className="h-1 bg-dark-800/50">
+                  <div className={`h-full transition-all duration-1000 ${
+                    isSubmitted 
+                      ? 'w-full bg-gradient-to-r from-green-500 to-emerald-500' 
+                      : 'w-0 bg-gradient-to-r from-primary-500 to-secondary-500'
                   }`}></div>
                 </div>
+              </div>
+
+              {/* Connection Line */}
+              <div className="flex justify-center">
+                <div className={`w-1 h-8 rounded-full transition-all duration-500 ${
+                  isSubmitted 
+                    ? 'bg-gradient-to-b from-green-500 to-primary-500' 
+                    : 'bg-dark-700'
+                }`}></div>
+              </div>
+
+              {/* Step 2 Card */}
+              <div className={`relative overflow-hidden rounded-2xl border transition-all duration-500 ${
+                showCalendly 
+                  ? 'bg-gradient-to-r from-primary-900/20 to-secondary-900/20 border-primary-500/30 shadow-lg shadow-primary-500/10' 
+                  : 'bg-dark-800/30 border-dark-700/50 shadow-lg shadow-dark-900/20'
+              } backdrop-blur-xl group hover:shadow-xl ${
+                showCalendly ? 'hover:shadow-primary-500/20' : 'hover:shadow-dark-700/30'
+              }`}>
+                {/* Animated background glow */}
+                {showCalendly && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 opacity-20"></div>
+                )}
                 
-                <div className="flex items-center space-x-4">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
+                <div className="relative p-6">
+                  <div className="flex items-center space-x-4">
+                    {/* Step Icon */}
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${
+                      showCalendly 
+                        ? 'bg-gradient-to-r from-primary-500 to-secondary-500 shadow-lg shadow-primary-500/30' 
+                        : 'bg-dark-700 shadow-lg shadow-dark-900/30'
+                    } group-hover:scale-110`}>
+                      <Calendar className={`w-7 h-7 transition-colors duration-500 ${
+                        showCalendly ? 'text-white' : 'text-dark-400'
+                      }`} />
+                    </div>
+                    
+                    {/* Step Content */}
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className={`text-xs font-montserrat font-bold px-3 py-1 rounded-full ${
+                          showCalendly 
+                            ? 'bg-primary-500/20 text-primary-400 border border-primary-500/30' 
+                            : 'bg-dark-700/50 text-dark-400 border border-dark-600/30'
+                        }`}>
+                          STEP 2
+                        </span>
+                        {showCalendly && (
+                          <span className="text-primary-400 text-sm font-bold">🎯 ACTIVE</span>
+                        )}
+                      </div>
+                      <h3 className={`font-montserrat font-bold text-xl mb-1 transition-colors duration-500 ${
+                        showCalendly ? 'text-white' : 'text-dark-400'
+                      }`}>
+                        Schedule Your Call
+                      </h3>
+                      <p className={`text-sm leading-relaxed transition-colors duration-500 ${
+                        showCalendly ? 'text-dark-300' : 'text-dark-500'
+                      }`}>
+                        {showCalendly ? 'Choose your preferred time slot below' : 'Complete Step 1 to unlock scheduling'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Progress bar at bottom */}
+                <div className="h-1 bg-dark-800/50">
+                  <div className={`h-full transition-all duration-1000 ${
                     showCalendly 
-                      ? 'bg-gradient-to-r from-primary-500 to-secondary-500' 
-                      : 'bg-dark-700'
-                  }`}>
-                    {showCalendly ? (
-                      <Calendar className="w-6 h-6 text-white" />
-                    ) : (
-                      <span className="text-dark-400 font-montserrat font-bold">2</span>
-                    )}
-                  </div>
-                  <div>
-                    <h3 className={`font-montserrat font-bold text-lg transition-colors duration-500 ${
-                      showCalendly ? 'text-white' : 'text-dark-400'
-                    }`}>
-                      Step 2: Schedule Call
-                    </h3>
-                    <p className="text-dark-400 text-sm">
-                      {showCalendly ? 'Pick your time' : 'Complete Step 1'}
-                    </p>
-                  </div>
+                      ? 'w-full bg-gradient-to-r from-primary-500 to-secondary-500' 
+                      : 'w-0 bg-dark-700'
+                  }`}></div>
                 </div>
               </div>
             </div>
