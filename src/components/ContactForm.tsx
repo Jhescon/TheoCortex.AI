@@ -647,12 +647,18 @@ export const ContactForm: React.FC = () => {
 
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
-                  <div className="bg-dark-800/30 rounded-xl overflow-hidden border border-dark-700/50">
+                  <div className="calendly-fullscreen-container">
                     {/* Calendly inline widget begin */}
                     <div 
                       className="calendly-inline-widget" 
-                      data-url="https://calendly.com/jhescon-theocortex/30min" 
-                      style={{minWidth: '320px', height: '700px', borderRadius: '12px'}}
+                      data-url="https://calendly.com/jhescon-theocortex/30min"
+                      style={{
+                        minWidth: '100%',
+                        height: '80vh',
+                        border: 'none',
+                        borderRadius: '12px',
+                        overflow: 'hidden'
+                      }}
                     ></div>
                     {/* Calendly inline widget end */}
                   </div>
