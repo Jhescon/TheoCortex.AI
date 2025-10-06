@@ -258,7 +258,7 @@ function App() {
     },
     {
       question: "How do I get started?",
-      answer: "Click \"Book a Free Strategy Call,\" choose a time, and we'll meet on Zoom to explore how TheoCortex.AI can help you grow."
+      answer: "Click \"Book a Free Strategy Call,\" choose a time, and we'll meet on Google Meet to explore how TheoCortex.AI can help you grow."
     }
   ];
 
