@@ -34,7 +34,7 @@ export const BookCall: React.FC = () => {
     {
       icon: <Clock className="w-8 h-8" />,
       title: "15-30 Min Strategy Session",
-      description: "Quick, focused call over Zoom to understand your goals and challenges"
+      description: "Quick, focused call over Google Meet to understand your goals and challenges"
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
@@ -242,7 +242,7 @@ export const BookCall: React.FC = () => {
                 CHOOSE YOUR <span className="text-gradient">PREFERRED TIME</span>
               </h2>
               <p className="text-xl text-dark-300 max-w-3xl mx-auto font-light">
-                Select a time that works for you. We'll send you a Zoom link and calendar invite immediately.
+                Select a time that works for you. We'll send you a Google Meet link and calendar invite immediately.
               </p>
             </div>
           </ScrollReveal>
