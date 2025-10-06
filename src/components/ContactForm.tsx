@@ -722,7 +722,7 @@ export const ContactForm: React.FC = () => {
                   <div className="mt-4 p-4 bg-primary-900/20 border border-primary-500/30 rounded-xl">
                     <div className="flex items-center justify-center space-x-2 text-primary-400">
                       <Clock className="w-5 h-5" />
-                      <span className="font-medium">30-minute strategy session via Zoom</span>
+                      <span className="font-medium">30-minute strategy session via Google Meet</span>
                     </div>
                   </div>
                 </div>
@@ -760,7 +760,7 @@ export const ContactForm: React.FC = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                        <span className="text-green-300">Zoom meeting link</span>
+                        <span className="text-green-300">Google Meet link</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
