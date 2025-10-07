@@ -932,7 +932,7 @@ function App() {
                 <div className="glass-card group cursor-pointer mb-12">
                   <p className="text-xl text-dark-300 leading-relaxed font-light mb-6 group-hover:text-white transition-colors duration-300">
                     <span className="font-montserrat font-semibold text-lg">
-                      Book a Free Strategy Call and see how TheoCortex.AI can automate your growth without adding complexity
+                    Click "Book a Free Strategy Call," choose a time, and we'll meet on Google Meet to explore how
                     </span>
                   </p>
                 </div>
