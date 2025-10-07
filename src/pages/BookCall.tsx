@@ -362,7 +362,7 @@ export const BookCall: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-8">
-              <a href="https://www.instagram.com/realjhescon/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
+              <a href="https://www.instagram.com/theocortex.ai/" target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
               </a>
               <a href="#" className="text-dark-400 hover:text-primary-400 transition-all duration-300 hover:scale-110 transform" aria-label="X (formerly Twitter)">
