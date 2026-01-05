@@ -53,6 +53,12 @@ export const ContactForm: React.FC = () => {
   const [showCalendly, setShowCalendly] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+  const [appointmentBooked, setAppointmentBooked] = useState(false);
+  const [appointmentDetails, setAppointmentDetails] = useState<{
+    eventName?: string;
+    startTime?: string;
+    endTime?: string;
+  } | null>(null);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -65,6 +71,7 @@ export const ContactForm: React.FC = () => {
       // Check if Calendly is already loaded
       if (window.Calendly) {
         setCalendlyLoaded(true);
+        setupCalendlyEventListeners();
         return;
       }
 
@@ -91,13 +98,15 @@ export const ContactForm: React.FC = () => {
       script.async = true;
       script.onload = () => {
         setCalendlyLoaded(true);
+        setupCalendlyEventListeners();
         // Initialize widget after script loads
         setTimeout(() => {
           if (window.Calendly) {
             const widgetElement = document.querySelector('.calendly-inline-widget');
             if (widgetElement && !widgetElement.innerHTML) {
+              const calendlyUrl = buildCalendlyUrl();
               window.Calendly.initInlineWidget({
-                url: 'https://calendly.com/jhescon-theocortex/30min',
+                url: calendlyUrl,
                 parentElement: widgetElement
               });
             }
@@ -122,8 +131,9 @@ export const ContactForm: React.FC = () => {
       setTimeout(() => {
         const widgetElement = document.querySelector('.calendly-inline-widget');
         if (widgetElement && !widgetElement.innerHTML) {
+          const calendlyUrl = buildCalendlyUrl();
           window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/jhescon-theocortex/30min',
+            url: calendlyUrl,
             parentElement: widgetElement
           });
         }
@@ -216,6 +226,66 @@ export const ContactForm: React.FC = () => {
   const generateCSRFToken = (): string => {
     return Math.random().toString(36).substring(2, 15) + 
            Math.random().toString(36).substring(2, 15);
+  };
+
+  // Build Calendly URL with pre-filled user information
+  const buildCalendlyUrl = (): string => {
+    const baseUrl = 'https://calendly.com/jhescon-theocortex/30min';
+    const params = new URLSearchParams();
+    
+    // Pre-fill name and email from form data
+    if (formData.fullName.trim()) {
+      params.append('name', formData.fullName.trim());
+    }
+    if (formData.email.trim()) {
+      params.append('email', formData.email.trim());
+    }
+    
+    // Add additional context
+    if (formData.companyName.trim()) {
+      params.append('a1', formData.companyName.trim()); // Custom field for company
+    }
+    if (formData.serviceSelection) {
+      params.append('a2', formData.serviceSelection); // Custom field for service
+    }
+    
+    return `${baseUrl}?${params.toString()}`;
+  };
+
+  // Setup Calendly event listeners for booking confirmation
+  const setupCalendlyEventListeners = () => {
+    if (!window.Calendly) return;
+
+    // Listen for successful booking events
+    window.Calendly.initEventListener({
+      onEventScheduled: (e: any) => {
+        console.log('Calendly event scheduled:', e);
+        
+        // Extract appointment details
+        const eventDetails = {
+          eventName: e.data?.event?.name || 'Strategy Call',
+          startTime: e.data?.event?.start_time,
+          endTime: e.data?.event?.end_time
+        };
+        
+        setAppointmentDetails(eventDetails);
+        setAppointmentBooked(true);
+        
+        // Scroll to confirmation message
+        setTimeout(() => {
+          const confirmationSection = document.getElementById('booking-confirmation');
+          if (confirmationSection) {
+            confirmationSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 500);
+      },
+      onEventTypeViewed: (e: any) => {
+        console.log('Calendly event type viewed:', e);
+      },
+      onDateAndTimeSelected: (e: any) => {
+        console.log('Calendly date and time selected:', e);
+      }
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -784,7 +854,7 @@ export const ContactForm: React.FC = () => {
                         {/* Calendly inline widget begin */}
                         <div 
                           className="calendly-inline-widget" 
-                          data-url="https://calendly.com/jhescon-theocortex/30min"
+                          data-url={buildCalendlyUrl()}
                           style={{
                             minWidth: '100%',
                             height: '80vh',
@@ -824,6 +894,95 @@ export const ContactForm: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Booking Confirmation Section */}
+            {appointmentBooked && (
+              <div 
+                id="booking-confirmation"
+                className="mt-12 animate-fade-in-up opacity-0"
+                style={{
+                  animation: 'fadeInUp 1s ease-out 0.3s forwards'
+                }}
+              >
+                <div className="glass-card bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-500/50">
+                  <div className="text-center">
+                    {/* Success Icon */}
+                    <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+                      <CheckCircle className="w-10 h-10 text-white" />
+                    </div>
+                    
+                    {/* Success Message */}
+                    <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-green-400 mb-4">
+                      🎉 Your Appointment Has Been Successfully Scheduled!
+                    </h2>
+                    
+                    <p className="text-xl text-green-300 mb-8 leading-relaxed">
+                      Thank you for booking your strategy call with TheoCortex.AI
+                    </p>
+                    
+                    {/* Appointment Details */}
+                    {appointmentDetails && (
+                      <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-6 mb-8">
+                        <h3 className="font-montserrat font-bold text-lg text-green-400 mb-4">
+                          Appointment Details:
+                        </h3>
+                        <div className="space-y-2 text-green-300">
+                          <p><strong>Meeting:</strong> {appointmentDetails.eventName}</p>
+                          {appointmentDetails.startTime && (
+                            <p><strong>Date & Time:</strong> {new Date(appointmentDetails.startTime).toLocaleString()}</p>
+                          )}
+                          <p><strong>Duration:</strong> 30 minutes</p>
+                          <p><strong>Platform:</strong> Google Meet (link will be sent via email)</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Next Steps */}
+                    <div className="bg-primary-900/20 border border-primary-500/30 rounded-xl p-6">
+                      <h3 className="font-montserrat font-bold text-lg text-primary-400 mb-4">
+                        What Happens Next:
+                      </h3>
+                      <div className="grid md:grid-cols-3 gap-4 text-sm">
+                        <div className="flex items-start space-x-3">
+                          <Mail className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-semibold text-white">Email Confirmation</p>
+                            <p className="text-dark-300">You'll receive a confirmation email with all details</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                          <Calendar className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-semibold text-white">Calendar Invite</p>
+                            <p className="text-dark-300">Google Meet link and calendar reminder sent</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                          <MessageSquare className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-semibold text-white">Strategy Session</p>
+                            <p className="text-dark-300">We'll discuss your AI automation needs</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Contact Information */}
+                    <div className="mt-8 pt-6 border-t border-green-500/30">
+                      <p className="text-green-300 text-sm">
+                        Questions? Contact us at{' '}
+                        <a 
+                          href="mailto:theocortex.ai@gmail.com" 
+                          className="text-green-400 hover:text-green-300 underline transition-colors duration-300"
+                        >
+                          theocortex.ai@gmail.com
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           )}
         </div>
       </div>
