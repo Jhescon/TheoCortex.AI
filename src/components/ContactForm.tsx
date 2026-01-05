@@ -230,7 +230,7 @@ export const ContactForm: React.FC = () => {
 
   // Build Calendly URL with pre-filled user information
   const buildCalendlyUrl = (): string => {
-    const baseUrl = 'https://calendly.com/jhescon-theocortex/30min';
+    const baseUrl = 'https://calendly.com/acharon-jhescon/30min';
     const params = new URLSearchParams();
     
     // Pre-fill name and email from form data
