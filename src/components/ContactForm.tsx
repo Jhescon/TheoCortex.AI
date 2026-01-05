@@ -810,7 +810,8 @@ export const ContactForm: React.FC = () => {
 
           {/* Step 2: Calendly Section */}
           {showCalendly && (
-            <div 
+            <>
+            <div
               id="calendly-section"
               className="max-w-3xl mx-auto mt-16 animate-fade-in-up opacity-0"
               style={{
@@ -983,6 +984,7 @@ export const ContactForm: React.FC = () => {
                 </div>
               </div>
             )}
+            </>
           )}
         </div>
       </div>
