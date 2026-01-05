@@ -62,47 +62,89 @@ export const ContactForm: React.FC = () => {
   // Load Calendly script when showCalendly becomes true
   useEffect(() => {
     if (showCalendly && !calendlyLoaded) {
+      // Check if Calendly is already loaded
+      if (window.Calendly) {
+        setCalendlyLoaded(true);
+        return;
+      }
+
+      // Check if script is already being loaded
+      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (existingScript) {
+        existingScript.addEventListener('load', () => setCalendlyLoaded(true));
+        return;
+      }
+
       // Load Calendly CSS first
-      const cssLink = document.createElement('link');
-      cssLink.href = 'https://assets.calendly.com/assets/external/widget.css';
-      cssLink.rel = 'stylesheet';
-      cssLink.type = 'text/css';
-      document.head.appendChild(cssLink);
+      const existingCSS = document.querySelector('link[href="https://assets.calendly.com/assets/external/widget.css"]');
+      if (!existingCSS) {
+        const cssLink = document.createElement('link');
+        cssLink.href = 'https://assets.calendly.com/assets/external/widget.css';
+        cssLink.rel = 'stylesheet';
+        cssLink.type = 'text/css';
+        document.head.appendChild(cssLink);
+      }
       
       // Then load Calendly script
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
-      script.onload = () => setCalendlyLoaded(true);
+      script.onload = () => {
+        setCalendlyLoaded(true);
+        // Initialize widget after script loads
+        setTimeout(() => {
+          if (window.Calendly) {
+            const widgetElement = document.querySelector('.calendly-inline-widget');
+            if (widgetElement && !widgetElement.innerHTML) {
+              window.Calendly.initInlineWidget({
+                url: 'https://calendly.com/jhescon-theocortex/30min',
+                parentElement: widgetElement
+              });
+            }
+          }
+        }, 100);
+      };
+      script.onerror = () => {
+        console.error('Failed to load Calendly script');
+        setCalendlyLoaded(false);
+      };
       document.head.appendChild(script);
       
       return () => {
-        // Cleanup script and CSS if component unmounts
-        const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-        if (existingScript) {
-          document.head.removeChild(existingScript);
-        }
-        const existingCSS = document.querySelector('link[href="https://assets.calendly.com/assets/external/widget.css"]');
-        if (existingCSS) {
-          document.head.removeChild(existingCSS);
-        }
+        // Don't remove scripts on cleanup as they might be used elsewhere
       };
     }
   }, [showCalendly, calendlyLoaded]);
-  // Handle form submission success - show Calendly instead of redirect
+
+  // Initialize Calendly widget when it becomes available
+  useEffect(() => {
+    if (showCalendly && calendlyLoaded && window.Calendly) {
+      setTimeout(() => {
+        const widgetElement = document.querySelector('.calendly-inline-widget');
+        if (widgetElement && !widgetElement.innerHTML) {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/jhescon-theocortex/30min',
+            parentElement: widgetElement
+          });
+        }
+      }, 200);
+    }
+  }, [showCalendly, calendlyLoaded]);
+
+  // Handle form submission success - show Calendly section
   useEffect(() => {
     if (isSubmitted) {
       // Smooth transition to show Calendly section
       setTimeout(() => {
         setShowCalendly(true);
         // Scroll to Calendly section smoothly
-        setTimeout(() => {
+        setTimeout(() => { 
           const calendlySection = document.getElementById('calendly-section');
           if (calendlySection) {
             calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 300);
-      }, 500);
+        }, 800);
+      }, 1000);
     }
   }, [isSubmitted]);
 
@@ -730,19 +772,30 @@ export const ContactForm: React.FC = () => {
                 {/* Calendly Embed */}
                 <div className="calendly-embed-container">
                   <div className="calendly-fullscreen-container">
-                    {/* Calendly inline widget begin */}
-                    <div 
-                      className="calendly-inline-widget" 
-                      data-url="https://calendly.com/jhescon-theocortex/30min"
-                      style={{
-                        minWidth: '100%',
-                        height: '80vh',
-                        border: 'none',
-                        borderRadius: '12px',
-                        overflow: 'hidden'
-                      }}
-                    ></div>
-                    {/* Calendly inline widget end */}
+                    {!calendlyLoaded ? (
+                      <div className="flex items-center justify-center h-96 bg-dark-800/30 rounded-xl">
+                        <div className="text-center">
+                          <div className="w-12 h-12 border-4 border-primary-500/20 border-t-primary-500 rounded-full animate-spin mx-auto mb-4"></div>
+                          <p className="text-dark-300">Loading calendar...</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Calendly inline widget begin */}
+                        <div 
+                          className="calendly-inline-widget" 
+                          data-url="https://calendly.com/jhescon-theocortex/30min"
+                          style={{
+                            minWidth: '100%',
+                            height: '80vh',
+                            border: 'none',
+                            borderRadius: '12px',
+                            overflow: 'hidden'
+                          }}
+                        ></div>
+                        {/* Calendly inline widget end */}
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="mt-8 p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl">
